@@ -5,9 +5,12 @@ const Home = () => {
     const [title, setTitle] = useState();
 
     useEffect(() => {
-        fetch("http://localhost:8080/home")
-            .then(response => response.json())
-            .then(data => setTitle(data));
+        async function fetchData() {
+            const response = await fetch("http://localhost:8080/home");
+            const data = await response.json();
+            setTitle(data);
+        }
+        fetchData();
     }, []);
 
     return (
