@@ -2,12 +2,12 @@ import {useEffect, useState} from "react";
 
 
 const Home = () => {
-    const [title, setTitle] = useState();
+    const [message, setMessage] = useState();
     useEffect(() => {
         async function fetchData() {
             const response = await fetch("http://localhost:8080/home");
             const data = await response.json();
-            setTitle(data);
+            setMessage(data);
         }
 
         fetchData();
@@ -15,7 +15,7 @@ const Home = () => {
     return (
         <div className="home">
             <h1>TravelCool</h1>
-            <h2>{title}</h2>
+            <h2>{message}</h2>
         </div>
     );
 }
