@@ -1,4 +1,4 @@
-import Logo from "../assets/TravelCool-Logo.png";
+import logo from "../assets/logo.png";
 
 const NavBar = () => {
     const registration = "/registration";
@@ -6,7 +6,7 @@ const NavBar = () => {
 
     return (<nav className="navbar">
             <div>
-                <img src={Logo} alt="logo" width="350"/>
+                <img src={logo} alt="logo" width="350"/>
             </div>
             <div className="links">
                 <a href={registration}>Registration</a>
