@@ -1,4 +1,4 @@
-import Logo from "../assests/TravelCool-Logo.png";
+import Logo from "../assets/TravelCool-Logo.png";
 
 const NavBar = () => {
     const registration = "/registration";
@@ -12,8 +12,6 @@ const NavBar = () => {
                 <a href={registration}>Registration</a>
                 <a href={login}>Login</a>
             </div>
-
-
         </nav>);
 }
 
