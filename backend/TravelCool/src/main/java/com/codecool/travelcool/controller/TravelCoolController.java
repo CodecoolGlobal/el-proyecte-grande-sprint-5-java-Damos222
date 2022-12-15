@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TravelCoolController {
     @GetMapping("/home")
     public String index() {
-        return "\"TravelCool\"";
+        return "\"Book your perfect holiday!\"";
     }
 }
