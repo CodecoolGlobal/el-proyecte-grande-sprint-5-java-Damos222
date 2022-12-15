@@ -1,33 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
-
-import { useState, useEffect } from "react";
-
+import Home from "./components/Home";
+import NavBar from "./components/NavBar";
 
 function App() {
-  return (
-    <div className="App">
-        <button id="clickButton" onClick={handleClick}>Click me!</button>
-        <p>Message:</p>
-    </div>
-  );
+    return (
+        <div className="App">
+            <NavBar />
+            <div className="content">
+                <Home />
+            </div>
+        </div>
+    );
 }
 
-let handleClick = async event =>{
-    let response = await fetch('hello',{
-        headers:{
-            "Content-Type": "text",
-        },
-        method: "get",
-    })
-    let user = await response.text()
-    createUser(user, event.target)
-}
-
-let createUser = function (user, button){
-    let body = button.parentElement
-    let userItem = document.createElement("h1")
-    userItem.innerText = user
-    body.prepend(button, userItem)
-}
 export default App;
