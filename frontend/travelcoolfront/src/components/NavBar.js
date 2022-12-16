@@ -9,8 +9,17 @@ const NavBar = () => {
                 <img src={logo} alt="logo" width="350"/>
             </div>
             <div className="links">
-                <a href={registration}>Registration</a>
-                <a href={login}>Login</a>
+
+                <a href={registration} >
+                    <button role="link"
+                            id="sign-up-button"
+                    >Sign up</button>
+                </a>
+
+                <a href={login} >
+                    <button role="link"
+                    id="log-in-button">Log in</button>
+                </a>
             </div>
         </nav>);
 }

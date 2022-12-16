@@ -2,33 +2,84 @@
 
 /* base styles */
 * {
-  margin: 0;
-  font-family: "Murecho", serif;
-  color: #333;
-}
-.navbar {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  max-width: 1600px;
-  background-color: #c2c29d;
-  border-bottom: 1px solid #f2f2f2;
+    margin: 0;
+    font-family: "Murecho", serif;
+    color: #333;
 }
 
+.navbar {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1600px;
+    background-color: #c2c29d;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+#intro-text {
+    font-family: "Murecho", serif;
+    width:380px; }
+
 .navbar .links {
-  margin-left: auto;
+    margin-left: auto;
 }
+
 .navbar a {
-  margin-left: 16px;
-  text-decoration: none;
-  padding: 6px;
+    margin-left: 16px;
+    text-decoration: none;
+    padding: 6px;
 }
+
 .navbar a:hover {
-  color: white;
+    color: white;
 }
+
 .content {
-  max-width: 1600px;
-  margin: 40px auto;
-  padding: 20px;
+    max-width: 1600px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+#sign-up-button {
+    left: 1030px;
+    right: 29px;
+    width: 117px;
+    height: 36px;
+    font-family: "Murecho", serif;
+    font-size: 16px;
+    background-color: #444444;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+}
+
+#log-in-button {
+    left: 1030px;
+    right: 29px;
+    width: 117px;
+    height: 36px;
+    font-family: "Murecho", serif;
+    font-size: 16px;
+    background-color: #edf0f4;
+    color: #444444;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+}
+
+#journey-button {
+    left: 80px;
+    right: 599px;
+    width: 228px;
+    height: 48px;
+    font-family: "Murecho", serif;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #444444;
+    color: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
 }

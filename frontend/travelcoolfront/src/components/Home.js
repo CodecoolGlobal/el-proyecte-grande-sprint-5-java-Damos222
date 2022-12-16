@@ -2,20 +2,25 @@ import {useEffect, useState} from "react";
 
 
 const Home = () => {
-    const [message, setMessage] = useState();
-    useEffect(() => {
-        async function fetchData() {
-            const response = await fetch("http://localhost:8080/home");
-            const data = await response.json();
-            setMessage(data);
-        }
+    const [message, setMessage] = useState([]);
 
+    const fetchData = () => {
+        return fetch("http://localhost:8080/home")
+            .then((response) => response.json())
+            .then((data) => setMessage(data.message));
+    }
+
+    useEffect(() => {
         fetchData();
-    }, []);
+    },[])
+
     return (
         <div className="home">
-            <h1>TravelCool</h1>
-            <h2>{message}</h2>
+            <h1>Book your perfect holiday!</h1>
+             <p id="intro-text">{message}</p>
+
+            <button id="journey-button">START YOUR JOURNEY</button>
+
         </div>
     );
 }
