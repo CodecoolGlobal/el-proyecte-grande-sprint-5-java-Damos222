@@ -1,10 +1,12 @@
 package com.codecool.travelcool.service;
 
 import com.codecool.travelcool.model.Accommodation;
+import com.codecool.travelcool.model.AccommodationType;
 import com.codecool.travelcool.repository.AccommodationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,5 +31,19 @@ public class AccommodationService {
         return accommodationRepository.findAccommodationsByHost_Id(hostId);
     }
 
+    public List<Accommodation> findByCountry(String country) {
+        return accommodationRepository.findAccommodationsByAddress_Country(country);
+    }
 
+    public List<Accommodation> findByMinimumCapacity(int minCapacity) {
+        return accommodationRepository.findAccommodationsByCapacityGreaterThanEqual(minCapacity);
+    }
+
+    public List<Accommodation> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice) {
+        return accommodationRepository.findAccommodationsByPricePerNightBetween(minPrice, maxPrice);
+    }
+
+    public List<Accommodation> findByType(AccommodationType type) {
+        return accommodationRepository.findAccommodationsByType(type);
+    }
 }

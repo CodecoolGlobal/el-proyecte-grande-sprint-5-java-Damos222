@@ -18,7 +18,6 @@ public class Booking {
     private LocalDate startDate;
     private LocalDate endDate;
     @ManyToOne
-    @JoinColumn(name = "booker_id")
     private Account booker;
     private int adults;
     private int children;

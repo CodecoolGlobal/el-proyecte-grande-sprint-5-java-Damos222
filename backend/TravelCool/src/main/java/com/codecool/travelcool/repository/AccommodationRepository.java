@@ -1,13 +1,11 @@
 package com.codecool.travelcool.repository;
 
 import com.codecool.travelcool.model.Accommodation;
-import com.codecool.travelcool.model.AccommodationFeatures;
 import com.codecool.travelcool.model.AccommodationType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -18,13 +16,9 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
 
     List<Accommodation> findAccommodationsByCapacityGreaterThanEqual(int capacity);
 
-    List<Accommodation> findAccommodationsByCapacityLessThanEqual(int capacity);
+    List<Accommodation> findAccommodationsByCapacityGreaterThanEqualAndCapacityGreaterThanEqual(int min, int max);
 
     List<Accommodation> findAccommodationsByPricePerNightBetween(BigDecimal min, BigDecimal max);
-
-    List<Accommodation> findAccommodationsByPricePerNightLessThanEqual(BigDecimal max);
-
-    List<Accommodation> findAccommodationsByPricePerNightIsGreaterThanEqual (BigDecimal min);
 
     List<Accommodation> findAccommodationsByType(AccommodationType type);
 }
