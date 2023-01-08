@@ -19,6 +19,12 @@
 .navbar .links {
   margin-left: auto;
 }
+
+.navbar .links button {
+  padding: 5px;
+  margin-right: 5px;
+}
+
 .navbar a {
   margin-left: 16px;
   text-decoration: none;
@@ -31,4 +37,34 @@
   max-width: 1600px;
   margin: 40px auto;
   padding: 20px;
+}
+
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFF;
+  padding: 50px;
+  z-index: 1000;
+}
+
+.modal input {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.submitButton {
+  width: 100%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
 }
