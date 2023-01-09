@@ -7,61 +7,55 @@ import "react-datepicker/dist/react-datepicker.css";
 const Home = () => {
     const [message, setMessage] = useState([]);
 
-        const [startDate, setStartDate] = useState(new Date());
-        const fetchData = () => {
-            return fetch("http://localhost:8080/home")
-                .then((response) => response.json())
-                .then(data => data.message)
-                .then(message => {
-                    message = message.split("\n")
-                    setMessage(message);
-                })
-        }
+    const [startDate, setStartDate] = useState(new Date());
+    const fetchData = () => {
+        return fetch("http://localhost:8080/home")
+            .then((response) => response.json())
+            .then(data => data.message)
+            .then(message => {
+                message = message.split("\n")
+                setMessage(message);
+            })
+    }
 
-        useEffect(() => {
-            fetchData();
-        }, [])
+    useEffect(() => {
+        fetchData();
+    }, [])
 
-        return (
+    return (
 
-            <div className="home">
-                <div className="combo-box-1">
-
-                    <input
+        <div className="home">
+            <div className="combo-box-1">
+                <div><input
                     className="search-input-1"
                     type="text"
-                    placeholder="Search" />
+                    placeholder="Search"/></div>
 
-                    <DatePicker
-                        className="start-date"
-                        selected={startDate}
-                        onChange={(date) =>
-                            setStartDate(date)}/>
-
-                    <DatePicker
-                        className="end-date"
-                        selected={startDate}
-                        onChange={(date) =>
-                            setStartDate(date)}/>
+                <div><DatePicker
+                    className="start-date"
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}/>
                 </div>
-
-
-                <h1 className="book-your-perfect-holiday">Book your perfect holiday!</h1>
-                <p className="intro-text">
-                    {message.map(line => {
-                            return (
-                                <>{line}
-                                    <br/>
-                                </>
-                            )
-                        }
-                    )}
-                </p>
-
-                <button className="journey-button">START YOUR JOURNEY</button>
+                <div><DatePicker
+                    className="end-date"
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}/></div>
 
             </div>
-        );
+
+
+            <h1 className="book-your-perfect-holiday">Book your perfect holiday!</h1>
+            <p className="intro-text">
+                {message.map(line => {
+                    return (<>{line}
+                            <br/>
+                        </>)
+                })}
+            </p>
+
+            <button className="journey-button">START YOUR JOURNEY</button>
+
+        </div>);
 
 }
 

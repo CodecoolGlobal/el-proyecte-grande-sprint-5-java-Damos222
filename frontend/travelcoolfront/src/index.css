@@ -119,9 +119,7 @@
 }
 
 .combo-box-1 {
-    /*display: flex; */
-    top: 245px;
-    left: 211px;
+    display: inline-flex;
     width: 822px;
     height: 32px;
     padding: 4px 8px 4px 8px;
@@ -131,10 +129,13 @@
     border-width: 1px;
     border-style: solid;
     border-radius: 4px 4px 4px 4px;
-}.search-input-1 {
-     /* flex: 1; */
-     left: 245px;
-     top: 211px;
+    align-items: center;
+}
+.combo-box-1 div {
+    max-width: 200px;
+    margin-right: 20px;
+}
+.search-input-1 {
      width: 180px;
      height: 32px;
      background: #ffffff;
@@ -149,9 +150,6 @@
      text-align: left;
  }
 .start-date {
-    /* flex: 2; */
-    left: 459px;
-    top: 211px;
     width: 180px;
     height: 32px;
     padding: 4px 8px 4px 8px;
@@ -167,9 +165,6 @@
     text-align: left;
 }
 .end-date {
-    /* flex: 3; */
-    left: 673px;
-    top: 211px;
     width: 180px;
     height: 32px;
     padding: 4px 8px 4px 8px;
