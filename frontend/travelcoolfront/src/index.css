@@ -103,9 +103,10 @@
 }
 
 .navbar a {
-  margin-left: 16px;
-  text-decoration: none;
-  padding: 6px;
+    margin-left: 16px;
+    text-decoration: none;
+    padding: 6px;
+}
 .intro-text {
     width: 368px;
     height: 82px;

@@ -12,8 +12,8 @@ const NavBar = () => {
                 <img src={logo} alt="logo" width="350" />
             </div>
             <div className="links">
-                <button onClick={() => setShowLoginModal(true)}>Login</button>
-                <button onClick={() => setShowRegistrationModal(true)}>Registration</button>
+                < button className="log-in-button" onClick={() => setShowLoginModal(true)}>Login</button>
+                <button className="sign-up-button" onClick={() => setShowRegistrationModal(true)}>Registration</button>
             </div>
             <Modal open={showLoginModal} onClose={() => setShowLoginModal(false)}>
                 <div className='accountDataForm'>
