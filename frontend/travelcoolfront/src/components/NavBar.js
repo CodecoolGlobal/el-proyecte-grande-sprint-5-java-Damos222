@@ -12,13 +12,13 @@ const NavBar = () => {
 
                 <a href={registration} >
                     <button role="link"
-                            id="sign-up-button"
+                            className="sign-up-button"
                     >Sign up</button>
                 </a>
 
                 <a href={login} >
                     <button role="link"
-                    id="log-in-button">Log in</button>
+                    className="log-in-button">Log in</button>
                 </a>
             </div>
         </nav>);

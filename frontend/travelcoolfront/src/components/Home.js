@@ -1,28 +1,68 @@
 import {useEffect, useState} from "react";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 
 const Home = () => {
     const [message, setMessage] = useState([]);
 
-    const fetchData = () => {
-        return fetch("http://localhost:8080/home")
-            .then((response) => response.json())
-            .then((data) => setMessage(data.message));
-    }
+        const [startDate, setStartDate] = useState(new Date());
+        const fetchData = () => {
+            return fetch("http://localhost:8080/home")
+                .then((response) => response.json())
+                .then(data => data.message)
+                .then(message => {
+                    message = message.split("\n")
+                    setMessage(message);
+                })
+        }
 
-    useEffect(() => {
-        fetchData();
-    },[])
+        useEffect(() => {
+            fetchData();
+        }, [])
 
-    return (
-        <div className="home">
-            <h1>Book your perfect holiday!</h1>
-             <p id="intro-text">{message}</p>
+        return (
 
-            <button id="journey-button">START YOUR JOURNEY</button>
+            <div className="home">
+                <div className="combo-box-1">
 
-        </div>
-    );
+                    <input
+                    className="search-input-1"
+                    type="text"
+                    placeholder="Search" />
+
+                    <DatePicker
+                        className="start-date"
+                        selected={startDate}
+                        onChange={(date) =>
+                            setStartDate(date)}/>
+
+                    <DatePicker
+                        className="end-date"
+                        selected={startDate}
+                        onChange={(date) =>
+                            setStartDate(date)}/>
+                </div>
+
+
+                <h1 className="book-your-perfect-holiday">Book your perfect holiday!</h1>
+                <p className="intro-text">
+                    {message.map(line => {
+                            return (
+                                <>{line}
+                                    <br/>
+                                </>
+                            )
+                        }
+                    )}
+                </p>
+
+                <button className="journey-button">START YOUR JOURNEY</button>
+
+            </div>
+        );
+
 }
 
 export default Home;

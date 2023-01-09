@@ -1,85 +1,176 @@
 @import url("https://fonts.googleapis.com/css?family=Murecho");
 
-/* base styles */
-* {
-    margin: 0;
-    font-family: "Murecho", serif;
-    color: #333;
-}
-
 .navbar {
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    max-width: 1600px;
-    background-color: #c2c29d;
-    border-bottom: 1px solid #f2f2f2;
+    width: 1361px;
+    height: 139px;
+    padding: 8px 8px 8px 8px;
+    background: #c2c29d;
+    border-color: #edf0f4;
+    border-width: 1px;
+    border-style: solid;
+    align-items: flex-end;
+
 }
-
-#intro-text {
-    font-family: "Murecho", serif;
-    width:380px; }
-
-.navbar .links {
-    margin-left: auto;
-}
-
-.navbar a {
-    margin-left: 16px;
-    text-decoration: none;
-    padding: 6px;
-}
-
-.navbar a:hover {
-    color: white;
-}
-
-.content {
-    max-width: 1600px;
-    margin: 40px auto;
-    padding: 20px;
-}
-
-#sign-up-button {
+.sign-up-button {
+    position: absolute;
     left: 1030px;
-    right: 29px;
+    top: 29px;
     width: 117px;
     height: 36px;
-    font-family: "Murecho", serif;
+    padding: 0px 10px 0px 10px;
+    background: #444444;
+    color: #ffffff;
+    border-color: #444444;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    font-family: "Source Sans 3";
+    font-weight: 600;
     font-size: 16px;
-    background-color: #444444;
-    color: white;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
+    text-align: center;
 }
-
-#log-in-button {
-    left: 1030px;
-    right: 29px;
+.log-in-button {
+    position: absolute;
+    left: 1159px;
+    top: 29px;
     width: 117px;
     height: 36px;
-    font-family: "Murecho", serif;
-    font-size: 16px;
-    background-color: #edf0f4;
+    padding: 0px 10px 0px 10px;
+    background: #edf0f4;
     color: #444444;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
+    border-color: #444444;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    font-family: "Murecho";
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
 }
-
-#journey-button {
-    left: 80px;
-    right: 599px;
+.zipliner {
+    width: 80px;
+    height: 93px;
+}
+.book-your-perfect-holiday {
+    width: 419px;
+    height: 89px;
+    color: #444444;
+    font-family: "Murecho";
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 1.2;
+    text-align: left;
+}
+.keyboard-arrow-right-icon-1 {
+    width: 49px;
+    height: 49px;
+    background: #000000;
+}
+.keyboard-arrow-right-icon-2 {
+    width: 49px;
+    height: 49px;
+    transform: rotate(179deg);
+    background: #444444;
+}
+.image-placeholder-7 {
+    width: 617px;
+    height: 395px;
+    border-radius: 20px 20px 20px 20px;
+}
+.surfer {
+    width: 89px;
+    height: 93px;
+}
+.journey-button {
     width: 228px;
     height: 48px;
-    font-family: "Murecho", serif;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #444444;
+    padding: 0px 10px 0px 10px;
+    background: #444444;
     color: #ffffff;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
+    border-color: #444444;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    font-family: "Murecho";
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
 }
+.intro-text {
+    width: 368px;
+    height: 82px;
+    color: #929292;
+    font-family: "Murecho";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.combo-box-1 {
+    /*display: flex; */
+    top: 245px;
+    left: 211px;
+    width: 822px;
+    height: 32px;
+    padding: 4px 8px 4px 8px;
+    background: #ebebeb;
+    color: #232323;
+    border-color: #232323;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px 4px 4px 4px;
+}.search-input-1 {
+     /* flex: 1; */
+     left: 245px;
+     top: 211px;
+     width: 180px;
+     height: 32px;
+     background: #ffffff;
+     color: #7a7a7a;
+     border-color: #232323;
+     border-width: 1px;
+     border-style: solid;
+     border-radius: 32px 32px 32px 32px;
+     font-family: "Murecho";
+     font-weight: 400;
+     font-size: 14px;
+     text-align: left;
+ }
+.start-date {
+    /* flex: 2; */
+    left: 459px;
+    top: 211px;
+    width: 180px;
+    height: 32px;
+    padding: 4px 8px 4px 8px;
+    background: #ebebeb;
+    color: #232323;
+    border-color: #232323;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px 3px 3px 3px;
+    font-family: "Murecho";
+    font-weight: 400;
+    font-size: 14px;
+    text-align: left;
+}
+.end-date {
+    /* flex: 3; */
+    left: 673px;
+    top: 211px;
+    width: 180px;
+    height: 32px;
+    padding: 4px 8px 4px 8px;
+    background: #ebebeb;
+    color: #232323;
+    border-color: #232323;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px 3px 3px 3px;
+    font-family: "Murecho";
+    font-weight: 400;
+    font-size: 14px;
+    text-align: left;
+}
+
