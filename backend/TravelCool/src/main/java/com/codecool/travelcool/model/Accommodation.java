@@ -16,6 +16,8 @@ public class Accommodation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int capacity;
+    private String name;
+    private String description;
     @OneToOne
     private AccommodationFeatures features;
     private BigDecimal pricePerNight;
