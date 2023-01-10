@@ -46,4 +46,8 @@ public class AccommodationService {
     public List<Accommodation> findByType(AccommodationType type) {
         return accommodationRepository.findAccommodationsByType(type);
     }
+
+//    public void saveAll(List<Accommodation> accommodations) {
+//        accommodationRepository.saveAll(accommodations);
+//    }
 }

@@ -2,11 +2,12 @@ package com.codecool.travelcool.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
+@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -15,12 +16,17 @@ public class Accommodation {
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int capacity;
+    @NonNull
+    private Integer capacity;
+    @NonNull
     private String name;
+    @NonNull
     private String description;
     @OneToOne
     private AccommodationFeatures features;
+    @NonNull
     private BigDecimal pricePerNight;
+    @NonNull
     private AccommodationType type;
     @ManyToOne
     private Account host;

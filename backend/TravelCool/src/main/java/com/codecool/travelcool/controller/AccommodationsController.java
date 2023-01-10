@@ -18,7 +18,7 @@ public class AccommodationsController {
         this.accommodationService = accommodationService;
     }
 
-    @GetMapping("/accommodations")
+    @GetMapping("/all")
     public List<Accommodation> findAll() {
         return accommodationService.findAll();
     }
@@ -28,7 +28,7 @@ public class AccommodationsController {
         return accommodationService.findByPriceBetween(BigDecimal.valueOf(min), BigDecimal.valueOf(max));
     }
 
-    @GetMapping("/accommodations/{id}")
+    @GetMapping("/{id}")
     public Accommodation findById(@PathVariable Long id) {
         return accommodationService.findById(id).orElse(null);
     }

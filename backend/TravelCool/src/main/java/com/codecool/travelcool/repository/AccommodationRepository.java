@@ -21,4 +21,5 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
     List<Accommodation> findAccommodationsByPricePerNightBetween(BigDecimal min, BigDecimal max);
 
     List<Accommodation> findAccommodationsByType(AccommodationType type);
+//    void saveAll(List<Accommodation> accommodations);
 }
