@@ -16,10 +16,10 @@ const AllAccommodations = () => {
 
 
     return (
-        <div>
+        <div className="all-accommodations">
             <h1>Accommodations</h1>
             {accommodations.map(accommodation => (
-                <div>
+                <div className="list-accommodations">
                     <p key={accommodation.id}>{accommodation.name}</p>
                 </div>
             ))}

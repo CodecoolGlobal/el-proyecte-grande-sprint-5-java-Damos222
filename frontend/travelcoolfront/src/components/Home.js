@@ -44,17 +44,24 @@ const Home = () => {
             </div>
 
 
-            <h1 className="book-your-perfect-holiday">Book your perfect holiday!</h1>
-            <p className="intro-text">
-                {message.map(line => {
-                    return (<>{line}
-                            <br/>
-                        test
-                        </>)
-                })}
-            </p>
+            <div className="travel-suggestions">
+                <div className="suggestions-text">
+                    <h1 className="book-your-perfect-holiday">Book your perfect holiday!</h1>
+                    <p className="intro-text">
+                        {message.map(line => {
+                            return (<>{line}
+                                <br/>
+                                test
+                            </>)
+                        })}
+                    </p>
 
-            <button className="journey-button">START YOUR JOURNEY</button>
+                    <button className="journey-button">START YOUR JOURNEY</button>
+                </div>
+                <div className="suggestions-image">
+                    <img src="/images/maldives.jpg" width="640" alt="Beach in the Maldives"/>
+                </div>
+            </div>
 
         </div>);
 
