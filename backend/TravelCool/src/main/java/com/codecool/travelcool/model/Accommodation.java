@@ -22,6 +22,9 @@ public class Accommodation {
     private String name;
     @NonNull
     private String description;
+    @Lob
+    @NonNull
+    private byte [] image;
     @OneToOne
     private AccommodationFeatures features;
     @NonNull

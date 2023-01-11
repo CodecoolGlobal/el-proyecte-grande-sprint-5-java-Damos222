@@ -245,7 +245,9 @@
 
 .list-accommodations {
     display: flex;
-    border: 1px solid black;
-    margin: 25px;
+    flex-direction: column;
+    background-color: #EBEBEB;
+    border-radius: 5px;
+    margin: 25px 0 25px 0;
     padding: 25px;
 }
