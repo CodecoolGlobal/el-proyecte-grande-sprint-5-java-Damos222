@@ -1,14 +1,13 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 const AllAccommodations = () => {
-    // const [accommodations, setAccommodations] = useState();
+    const [accommodations, setAccommodations] = useState([]);
 
     const fetchData = () => {
-        return fetch("http://localhost:8080/accommodations")
+        return fetch("http://localhost:8080/accommodation/all")
             .then((response) => response.json())
-            .then(data => data.message)
-            .then(accommodations => {
-                console.log(accommodations);
+            .then(data => {
+                setAccommodations(data);
             })
     }
     useEffect(() => {
@@ -19,6 +18,11 @@ const AllAccommodations = () => {
     return (
         <div>
             <h1>Accommodations</h1>
+            {accommodations.map(accommodation => (
+                <div>
+                    <p key={accommodation.id}>{accommodation.name}</p>
+                </div>
+            ))}
         </div>
     );
 }

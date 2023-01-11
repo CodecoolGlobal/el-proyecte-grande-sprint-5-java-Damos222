@@ -1,4 +1,4 @@
-package test.java.com.codecool.travelcool;
+package com.codecool.travelcool;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

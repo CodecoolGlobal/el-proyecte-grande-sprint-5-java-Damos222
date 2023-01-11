@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin    // TODO: remove this in all Controllers when security is added
 @RequestMapping("/account")
 public class AccountController {
     private final AccountService accountService;
