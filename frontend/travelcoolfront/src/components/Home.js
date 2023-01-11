@@ -25,22 +25,23 @@ const Home = () => {
     return (
 
         <div className="home">
-            <div className="combo-box-1">
-                <div><input
-                    className="search-input-1"
-                    type="text"
-                    placeholder="Search"/></div>
+            <div className="flex-filter-box">
+                <div className="combo-box-1">
+                    <div><input
+                        className="search-input-1"
+                        type="text"
+                        placeholder="Search"/></div>
 
-                <div><DatePicker
-                    className="start-date"
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}/>
+                    <div><DatePicker
+                        className="start-date"
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}/>
+                    </div>
+                    <div><DatePicker
+                        className="end-date"
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}/></div>
                 </div>
-                <div><DatePicker
-                    className="end-date"
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}/></div>
-
             </div>
 
 
@@ -51,7 +52,6 @@ const Home = () => {
                         {message.map(line => {
                             return (<>{line}
                                 <br/>
-                                test
                             </>)
                         })}
                     </p>

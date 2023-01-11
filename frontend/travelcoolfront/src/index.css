@@ -48,7 +48,7 @@
     border-color: #444444;
     border-width: 2px;
     border-style: solid;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 5px;
     font-family: "Source Sans 3", sans-serif;
     font-weight: 600;
     font-size: 16px;
@@ -67,7 +67,7 @@
     border-color: #444444;
     border-width: 2px;
     border-style: solid;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 5px;
     font-family: "Murecho", sans-serif;
     font-weight: 600;
     font-size: 16px;
@@ -106,7 +106,7 @@
 .image-placeholder-7 {
     width: 617px;
     height: 395px;
-    border-radius: 20px 20px 20px 20px;
+    border-radius: 5px;
 }
 
 .surfer {
@@ -123,11 +123,12 @@
     border-color: #444444;
     border-width: 1px;
     border-style: solid;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 5px;
     font-family: "Murecho", sans-serif;
     font-weight: 700;
     font-size: 16px;
     text-align: center;
+    margin-top: 0;
 }
 
 .navbar .links button {
@@ -152,21 +153,22 @@
     text-align: left;
 }
 
-.combo-box-1 {
-    display: inline-flex;
-    width: 822px;
-    height: 32px;
-    padding: 4px 8px 4px 8px;
-    background: #ebebeb;
-    color: #232323;
-    border-color: #232323;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 4px 4px 4px 4px;
-    align-items: center;
+.flex-filter-box {
+    display: flex;
+    justify-content: center;
 }
 
-.combo-box-1 div {
+.combo-box-1 {
+    display: inline-flex;
+    width: 100%;
+    padding: 25px;
+    background: #ebebeb;
+    color: #232323;
+    border-radius: 5px;
+    justify-content: center;
+}
+
+ .combo-box-1 div {
     max-width: 200px;
     margin-right: 20px;
 }
@@ -179,43 +181,29 @@
     border-color: #232323;
     border-width: 1px;
     border-style: solid;
-    border-radius: 32px 32px 32px 32px;
+    border-radius: 25px;
     font-family: "Murecho", sans-serif;
     font-weight: 400;
     font-size: 14px;
     text-align: left;
+    padding: 8px;
 }
 
-.start-date {
+.start-date, .end-date {
     width: 180px;
     height: 32px;
-    padding: 4px 8px 4px 8px;
+    padding: 8px;
     background: #ebebeb;
     color: #232323;
     border-color: #232323;
     border-width: 1px;
     border-style: solid;
-    border-radius: 3px 3px 3px 3px;
+    border-radius: 5px;
     font-family: "Murecho", sans-serif;
     font-weight: 400;
     font-size: 14px;
     text-align: left;
-}
-
-.end-date {
-    width: 180px;
-    height: 32px;
-    padding: 4px 8px 4px 8px;
-    background: #ebebeb;
-    color: #232323;
-    border-color: #232323;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 3px 3px 3px 3px;
-    font-family: "Murecho", sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    text-align: left;
+    cursor: pointer;
 }
 
 
