@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 @Entity
 public class Accommodation {
     @Id
-    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
