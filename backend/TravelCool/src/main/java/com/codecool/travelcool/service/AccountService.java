@@ -21,4 +21,16 @@ public class AccountService {
     public boolean emailAvailable(String email) {
         return !accountRepository.existsAccountByEmail(email);
     }
+
+    public void register(String email, String password) {
+        Account account = new Account();
+        account.setEmail(email);
+        account.setPassword(password);
+        save(account);
+        System.out.println("account with email " + email + "password " + password + "registered");
+    }
+
+    public boolean checkEmailAndPassword(String email, String password) {
+        return accountRepository.existsAccountByEmailAndPassword(email, password);
+    }
 }

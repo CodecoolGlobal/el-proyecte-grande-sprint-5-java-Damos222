@@ -12,6 +12,10 @@ import lombok.Setter;
 @Setter
 @Entity
 public class AccommodationFeatures {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
+    private long id;
     boolean parking;
     boolean pool;
     boolean bedSheets;
@@ -19,8 +23,5 @@ public class AccommodationFeatures {
     boolean hairDryer;
     boolean kitchen;
     boolean sauna;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
-    private Long id;
+
 }

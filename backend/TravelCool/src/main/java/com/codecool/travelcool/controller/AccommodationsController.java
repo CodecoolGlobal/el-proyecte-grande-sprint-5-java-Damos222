@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/accommodation")
+@RequestMapping("/accommodations")
 public class AccommodationsController {
     private final AccommodationService accommodationService;
 
@@ -19,7 +19,7 @@ public class AccommodationsController {
         this.accommodationService = accommodationService;
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public List<Accommodation> findAll() {
         return accommodationService.findAll();
     }

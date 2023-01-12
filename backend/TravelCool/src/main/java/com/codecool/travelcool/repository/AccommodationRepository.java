@@ -16,7 +16,7 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
 
     List<Accommodation> findAccommodationsByCapacityGreaterThanEqual(int capacity);
 
-    List<Accommodation> findAccommodationsByCapacityGreaterThanEqualAndCapacityGreaterThanEqual(int min, int max);
+    List<Accommodation> findAccommodationsByCapacityLessThanEqualAndCapacityGreaterThanEqual(int min, int max);
 
     List<Accommodation> findAccommodationsByPricePerNightBetween(BigDecimal min, BigDecimal max);
 
