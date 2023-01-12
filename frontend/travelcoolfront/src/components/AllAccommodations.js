@@ -4,7 +4,7 @@ const AllAccommodations = () => {
     const [accommodations, setAccommodations] = useState([]);
 
     const fetchData = () => {
-        return fetch("http://localhost:8080/accommodation/all")
+        return fetch("http://localhost:8080/accommodations")
             .then((response) => response.json())
             .then(data => {
                 setAccommodations(data);
