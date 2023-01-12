@@ -15,7 +15,7 @@ public class Address {
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String country;
     private int zipCode;
     private String City;

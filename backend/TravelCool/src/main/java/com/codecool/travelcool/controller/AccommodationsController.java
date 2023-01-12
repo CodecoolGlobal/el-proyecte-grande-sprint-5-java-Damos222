@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3030")
 @RequestMapping("/accommodations")
 public class AccommodationsController {
     private final AccommodationService accommodationService;
@@ -19,7 +19,7 @@ public class AccommodationsController {
         this.accommodationService = accommodationService;
     }
 
-    @GetMapping()
+    @GetMapping("/all")
     public List<Accommodation> findAll() {
         return accommodationService.findAll();
     }

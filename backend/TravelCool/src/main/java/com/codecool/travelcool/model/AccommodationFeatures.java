@@ -15,7 +15,7 @@ public class AccommodationFeatures {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
-    private long id;
+    private Long id;
     boolean parking;
     boolean pool;
     boolean bedSheets;

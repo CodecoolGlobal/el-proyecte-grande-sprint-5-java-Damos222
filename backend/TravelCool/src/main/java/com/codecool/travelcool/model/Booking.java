@@ -16,7 +16,7 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
-    private long id;
+    private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
     @Temporal(value = TemporalType.TIMESTAMP)

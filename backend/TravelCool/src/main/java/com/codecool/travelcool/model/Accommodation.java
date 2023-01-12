@@ -15,7 +15,7 @@ public class Accommodation {
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @NonNull
     private int capacity;
     @NonNull
