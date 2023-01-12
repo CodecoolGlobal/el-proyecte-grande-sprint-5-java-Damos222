@@ -273,20 +273,17 @@
     border-radius: 5px;
 }
 
-.image {
-    border: 1px solid black;
+.accommodation-details > img {
     border-radius: 5px;
-    padding: 200px;
 }
 
-.accommodation-info {
-    border: 1px solid black;
+.details-info {
     border-radius: 5px;
-    padding: 100px 100px 100px 50px;
+    align-self: center;
+    margin-left: 50px;
 }
 
-.accommodation-features {
-    border: 1px solid black;
+.details-features {
     border-radius: 5px;
     padding: 100px 100px 100px 50px;
     flex: 1;

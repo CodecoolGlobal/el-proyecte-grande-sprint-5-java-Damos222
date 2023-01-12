@@ -26,16 +26,16 @@ export default function AccommodationDetails() {
             <div className="all-accommodations">
                 <h1>{name}</h1>
                 <div className="accommodation-details">
-                    <div className="image">
-                        <img src={source} style={{width: "250px"}} alt={name + "Image"}/>
-                    </div>
-                    <div className="accommodation-info">
+                    <img src={source} style={{width: "500px"}} alt={name + "Image"}/>
+                    <div className="details-info">
                         <p>{accommodation && accommodation.description}</p>
                         <p>Capacity: {accommodation && accommodation.capacity} people</p>
                         <p>Type: {accommodation && accommodation.type}</p>
                         <p>Price per night: <strong>{accommodation && accommodation.pricePerNight} €</strong></p>
                     </div>
-                    <div className="accommodation-features">
+                </div>
+                <div className="accommodation-details">
+                    <div className="details-features">
                         <p>Features</p>
                     </div>
                 </div>
