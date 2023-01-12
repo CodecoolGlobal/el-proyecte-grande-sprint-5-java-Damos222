@@ -29,8 +29,8 @@ public class AccommodationsController {
         return accommodationService.findByPriceBetween(BigDecimal.valueOf(min), BigDecimal.valueOf(max));
     }
 
-    @GetMapping
-    public Accommodation findById(@RequestParam Long id) {
+    @GetMapping("/{id}")
+    public Accommodation findById(@PathVariable Long id) {
         return accommodationService.findById(id).orElse(null);
     }
 
