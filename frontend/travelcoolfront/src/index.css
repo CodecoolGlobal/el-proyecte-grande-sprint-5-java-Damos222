@@ -136,6 +136,10 @@
     margin-right: 5px;
 }
 
+.navbar .links button:hover {
+    cursor: pointer;
+}
+
 .navbar a {
     margin-left: 16px;
     text-decoration: none;
