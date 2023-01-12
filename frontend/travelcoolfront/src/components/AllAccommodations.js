@@ -4,7 +4,7 @@ export default function AllAccommodations() {
     const [accommodations, setAccommodations] = useState([]);
 
     const fetchData = () => {
-        return fetch("http://localhost:8080/accommodations")
+        return fetch("http://localhost:8080/accommodations/all")
             .then((response) => response.json())
             .then(data => {
                 setAccommodations(data);
