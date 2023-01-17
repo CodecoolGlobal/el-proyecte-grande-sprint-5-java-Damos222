@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@CrossOrigin
-@RequestMapping("/accommodation")
+@CrossOrigin(origins = "http://localhost:3030")
+@RequestMapping("/accommodations")
 public class AccommodationsController {
     private final AccommodationService accommodationService;
 

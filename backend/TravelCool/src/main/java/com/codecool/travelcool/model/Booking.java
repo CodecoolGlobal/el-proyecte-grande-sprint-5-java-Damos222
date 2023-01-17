@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -17,6 +19,9 @@ public class Booking {
     private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
+    @Temporal(value = TemporalType.TIMESTAMP)
+    @GeneratedValue
+    private Timestamp timestamp;
     @ManyToOne
     private Account booker;
     private int adults;

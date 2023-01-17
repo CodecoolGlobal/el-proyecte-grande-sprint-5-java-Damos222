@@ -16,7 +16,7 @@ public class Accommodation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
-    private Integer capacity;
+    private int capacity;
     @NonNull
     private String name;
     @NonNull

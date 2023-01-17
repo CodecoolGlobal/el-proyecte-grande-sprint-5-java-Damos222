@@ -5,7 +5,7 @@ export default function AccommodationDetails() {
     const [accommodation, setAccommodation] = useState(null);
     const {id} = useParams();
     const fetchData = () => {
-        fetch("http://localhost:8080/accommodation/" + id)
+        fetch("http://localhost:8080/accommodations/" + id)
             .then((response) => response.json())
             .then(data => {
                 setAccommodation(data);

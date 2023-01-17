@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin    // TODO: remove this in all Controllers when security is added
-@RequestMapping("/account")
+@RequestMapping("/accounts")
 public class AccountController {
     private final AccountService accountService;
 
@@ -16,16 +16,18 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/register")
     public void registerAccount(@RequestParam String email, @RequestParam String password) {
-        Account account = new Account();
-        account.setEmail(email);
-        account.setPassword(password);
-        accountService.save(account);
+        accountService.register(email, password);
     }
 
-    @GetMapping("/emailAvailable")
+    @GetMapping ("/emailAvailable")
     public boolean emailAvailable(@RequestParam String email) {
         return accountService.emailAvailable(email);
+    }
+
+    @GetMapping("/checkLoginData")
+    public boolean login(@RequestParam String email, @RequestParam String password) {
+        return accountService.checkEmailAndPassword(email, password);
     }
 }

@@ -136,6 +136,10 @@
     margin-right: 5px;
 }
 
+.navbar .links button:hover {
+    cursor: pointer;
+}
+
 .navbar a {
     margin-left: 16px;
     text-decoration: none;
@@ -208,6 +212,7 @@
 
 
 .modal {
+    font-family: "Murecho", "sans-serif";
     position: fixed;
     top: 50%;
     left: 50%;
@@ -215,12 +220,14 @@
     background-color: #FFF;
     padding: 50px;
     z-index: 1000;
+    border-radius: 5px;
 }
 
 .modal input {
     margin-bottom: 1rem;
     width: 100%;
 }
+
 
 .submitButton {
     width: 100%;

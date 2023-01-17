@@ -10,13 +10,13 @@ import java.util.List;
 
 @Repository
 public interface AccommodationRepository extends JpaRepository<Accommodation, Long> {
-    List<Accommodation> findAccommodationsByHost_Id(Long hostId);
+    List<Accommodation> findAccommodationsByHost_Id(long hostId);
 
     List<Accommodation> findAccommodationsByAddress_Country(String country);
 
     List<Accommodation> findAccommodationsByCapacityGreaterThanEqual(int capacity);
 
-    List<Accommodation> findAccommodationsByCapacityGreaterThanEqualAndCapacityGreaterThanEqual(int min, int max);
+    List<Accommodation> findAccommodationsByCapacityLessThanEqualAndCapacityGreaterThanEqual(int min, int max);
 
     List<Accommodation> findAccommodationsByPricePerNightBetween(BigDecimal min, BigDecimal max);
 
