@@ -36,7 +36,7 @@ export default function AllAccommodations() {
                                 </p>
                             </div>
                             <div className="accommodation-button">
-                                <a href={"http://localhost:3000/accommodation/" + accommodation.id}>
+                                <a href={"http://localhost:3000/accommodations/" + accommodation.id}>
                                     <button className="journey-button">See details</button>
                                 </a>
                             </div>

@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 export default function AccommodationDetails() {
     const [accommodation, setAccommodation] = useState(null);
     const {id} = useParams();
+
     const fetchData = () => {
         fetch("http://localhost:8080/accommodations/" + id)
             .then((response) => response.json())
@@ -11,6 +12,7 @@ export default function AccommodationDetails() {
                 setAccommodation(data);
             });
     }
+
     useEffect(() => {
         fetchData();
     }, [])
