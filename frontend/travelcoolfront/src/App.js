@@ -16,7 +16,6 @@ function App() {
                         <Route path="/accommodations/:id" exact element={<AccommodationDetails/>}/>
                     </Routes>
                 </div>
-                <p> Test</p>
             </div>
         </Router>
     );
