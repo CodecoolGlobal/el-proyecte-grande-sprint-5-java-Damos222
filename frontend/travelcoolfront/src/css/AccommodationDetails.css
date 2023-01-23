@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Murecho");
-.accommodation-details {
+.accommodation-details, .reserve {
     display: flex;
     background-color: #EBEBEB;
     padding: 25px;
@@ -17,8 +17,22 @@
     margin-left: 50px;
 }
 
-.details-features {
-    border-radius: 5px;
-    padding: 100px 100px 100px 50px;
-    flex: 1;
+.reserve {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.datepicker {
+    display: inline-flex;
+    width: fit-content;
+}
+
+.accommodation-button {
+    margin-left: auto;
+    align-self: flex-end;
+    margin-top: 25px;
+}
+
+.accommodation-button button {
+    cursor: pointer;
 }

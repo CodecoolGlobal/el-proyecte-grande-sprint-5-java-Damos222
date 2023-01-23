@@ -4,29 +4,21 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import AllAccommodations from "./AllAccommodations";
+import {useLocation} from "react-router-dom";
+import {test} from "./global";
 
 
-const Home = () => {
-    const [message, setMessage] = useState([]);
-
+export default function Home() {
     const [startDate, setStartDate] = useState(new Date());
-    const fetchData = () => {
-        return fetch("http://localhost:8080/home")
-            .then((response) => response.json())
-            .then(data => data.message)
-            .then(message => {
-                message = message.split("\n")
-                setMessage(message);
-            })
-    }
-
-    useEffect(() => {
-        fetchData();
-    }, [])
+    const [endDate, setEndDate] = useState(new Date());
+    const {state: {fromDate, toDate}} = useLocation();
 
     return (
 
         <div className="home">
+            <h2>Start Date: {fromDate}</h2>
+            <h2>End Date: {toDate}</h2>
+            <h2>TEST: {test.data}</h2>
             <div className="flex-filter-box">
                 <div className="combo-box-1">
                     <div><input
@@ -36,13 +28,15 @@ const Home = () => {
 
                     <div><DatePicker
                         className="start-date"
+                        dateFormat="dd/MM/yyyy"
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}/>
                     </div>
                     <div><DatePicker
                         className="end-date"
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}/></div>
+                        dateFormat="dd/MM/yyyy"
+                        selected={endDate}
+                        onChange={(date) => setEndDate(date)}/></div>
                 </div>
             </div>
 
@@ -51,5 +45,3 @@ const Home = () => {
         </div>);
 
 }
-
-export default Home;

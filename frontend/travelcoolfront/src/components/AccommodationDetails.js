@@ -1,10 +1,31 @@
 import '../css/AccommodationDetails.css';
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import DatePicker from "react-datepicker";
+import {useNavigate} from "react-router-dom";
+import {test} from "./global";
+
 
 export default function AccommodationDetails() {
     const [accommodation, setAccommodation] = useState(null);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(addDays(5));
     const {id} = useParams();
+    const navigate = useNavigate();
+
+    function addDays(days) {
+        return new Date(Date.now() + 864e5 * days);     // 864e5: number of milliseconds in a 24-hour day
+    }
+
+    function navigateToHome() {
+        navigate("/", {
+            state: {
+                fromDate: startDate.toLocaleDateString("en-GB"),
+                toDate: endDate.toLocaleDateString("en-GB")
+            }
+        });
+    }
+
 
     const fetchData = () => {
         fetch("http://localhost:8080/accommodations/" + id)
@@ -16,6 +37,7 @@ export default function AccommodationDetails() {
 
     useEffect(() => {
         fetchData();
+        test.data = "foo";
     }, [])
 
     if (accommodation == null) {
@@ -37,9 +59,23 @@ export default function AccommodationDetails() {
                         <p>Price per night: <strong>{accommodation && accommodation.pricePerNight} €</strong></p>
                     </div>
                 </div>
-                <div className="accommodation-details">
-                    <div className="details-features">
-                        <p>Features</p>
+                <div className="reserve">
+                    <h2>Book this accommodation</h2>
+                    <div className="datepicker">
+                        <DatePicker
+                            className="start-date"
+                            dateFormat="dd/MM/yyyy"
+                            selected={startDate}
+                            onChange={(date) => setStartDate(date)}/>
+                        <DatePicker
+                            className="end-date"
+                            dateFormat="dd/MM/yyyy"
+                            selected={endDate}
+                            onChange={(date) => setEndDate(date)}/>
+                    </div>
+
+                    <div className="accommodation-button">
+                        <button className="see-details" onClick={() => navigateToHome()}>Reserve</button>
                     </div>
                 </div>
             </div>
