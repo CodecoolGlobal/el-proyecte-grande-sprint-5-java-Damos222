@@ -1,3 +1,4 @@
+import '../css/AllAccommodations.css';
 import {useEffect, useState} from "react";
 
 export default function AllAccommodations() {
@@ -37,7 +38,7 @@ export default function AllAccommodations() {
                             </div>
                             <div className="accommodation-button">
                                 <a href={"http://localhost:3000/accommodations/" + accommodation.id}>
-                                    <button className="journey-button">See details</button>
+                                    <button className="see-details">See details</button>
                                 </a>
                             </div>
                         </div>

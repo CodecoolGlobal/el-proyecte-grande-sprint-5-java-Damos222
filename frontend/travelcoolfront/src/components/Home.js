@@ -1,3 +1,4 @@
+import '../css/Home.css';
 import {useEffect, useState} from "react";
 import DatePicker from "react-datepicker";
 
@@ -56,7 +57,7 @@ const Home = () => {
                         })}
                     </p>
 
-                    <button className="journey-button">START YOUR JOURNEY</button>
+                    <button className="see-details">START YOUR JOURNEY</button>
                 </div>
                 <div className="suggestions-image">
                     <img src="/images/maldives.jpg" width="640" alt="Beach in the Maldives"/>

@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css?family=Murecho");
+.accommodation-details {
+    display: flex;
+    background-color: #EBEBEB;
+    padding: 25px;
+    margin: 25px 0 25px 0;
+    border-radius: 5px;
+}
+
+.accommodation-details > img {
+    border-radius: 5px;
+}
+
+.details-info {
+    border-radius: 5px;
+    align-self: center;
+    margin-left: 50px;
+}
+
+.details-features {
+    border-radius: 5px;
+    padding: 100px 100px 100px 50px;
+    flex: 1;
+}
