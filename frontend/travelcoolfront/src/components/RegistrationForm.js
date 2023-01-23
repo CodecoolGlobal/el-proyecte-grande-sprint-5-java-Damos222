@@ -1,3 +1,4 @@
+import '../css/RegistrationForm.css';
 import React from 'react'
 
 const RegistrationForm = () => {

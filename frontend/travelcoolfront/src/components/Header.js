@@ -1,15 +1,16 @@
+import '../css/Header.css';
 import logo from "../assets/logo.png";
 import { useState } from "react";
 import Modal from "./Modal";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
 
-const NavBar = () => {
+const Header = () => {
     const [showLoginModal, setShowLoginModal] = useState(false)
     const [showRegistrationModal, setShowRegistrationModal] = useState(false)
 
     return (
-        <nav className="navbar">
+        <nav className="header">
             <div>
                 <img src={logo} alt="logo" width="350" />
             </div>
@@ -26,4 +27,4 @@ const NavBar = () => {
         </nav >);
 }
 
-export default NavBar;
+export default Header;

@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css?family=Murecho");
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.home, .all-accommodations {
+    margin: 50px;
+    font-family: "Murecho", "sans-serif";
+}
