@@ -2,7 +2,6 @@ import '../css/AccommodationDetails.css';
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import DatePicker from "react-datepicker";
-import {test} from "./global";
 
 
 export default function AccommodationDetails({setFromDate, setToDate}) {
@@ -33,7 +32,6 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
 
     useEffect(() => {
         fetchData();
-        test.data = "foo";
     }, [])
 
     if (accommodation == null) {
