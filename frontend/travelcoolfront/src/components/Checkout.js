@@ -1,11 +1,12 @@
-import '../css/Home.css';
-import {useEffect, useState} from "react";
-import DatePicker from "react-datepicker";
-
-import "react-datepicker/dist/react-datepicker.css";
-import AllAccommodations from "./AllAccommodations";
+import '../css/Checkout.css';
 
 
-export default function Checkout() {
+export default function Checkout({fromDate, toDate}) {
 
+    return (
+        <>
+            <h2>Start Date: {fromDate}</h2>
+            <h2>End Date: {toDate}</h2>
+        </>
+    );
 }

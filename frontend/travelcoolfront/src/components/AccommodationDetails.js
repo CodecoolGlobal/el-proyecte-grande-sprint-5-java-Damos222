@@ -1,12 +1,11 @@
 import '../css/AccommodationDetails.css';
-import {useContext, useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import DatePicker from "react-datepicker";
-import {useNavigate} from "react-router-dom";
 import {test} from "./global";
 
 
-export default function AccommodationDetails() {
+export default function AccommodationDetails({setFromDate, setToDate}) {
     const [accommodation, setAccommodation] = useState(null);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(addDays(5));
@@ -17,13 +16,10 @@ export default function AccommodationDetails() {
         return new Date(Date.now() + 864e5 * days);     // 864e5: number of milliseconds in a 24-hour day
     }
 
-    function navigateToHome() {
-        navigate("/", {
-            state: {
-                fromDate: startDate.toLocaleDateString("en-GB"),
-                toDate: endDate.toLocaleDateString("en-GB")
-            }
-        });
+    function navigateToCheckout() {
+        setFromDate(startDate.toLocaleDateString("en-GB"));
+        setToDate(endDate.toLocaleDateString("en-GB"));
+        navigate("/accommodations/checkout");
     }
 
 
@@ -75,7 +71,7 @@ export default function AccommodationDetails() {
                     </div>
 
                     <div className="accommodation-button">
-                        <button className="see-details" onClick={() => navigateToHome()}>Reserve</button>
+                        <button className="see-details" onClick={() => navigateToCheckout()}>Reserve</button>
                     </div>
                 </div>
             </div>
