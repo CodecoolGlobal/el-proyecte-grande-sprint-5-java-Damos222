@@ -9,6 +9,7 @@ import AllAccommodations from "./AllAccommodations";
 export default function Home() {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const [search, setSearch] = useState("");
 
     return (
         <div className="home">
@@ -17,6 +18,7 @@ export default function Home() {
             </div>
             <div className="flex-filter-box">
                 <input
+                    onChange={(event) => setSearch(event.target.value)}
                     className="search-input"
                     type="text"
                     placeholder="Search"/>
@@ -34,7 +36,7 @@ export default function Home() {
                         onChange={(date) => setEndDate(date)}/>
                 </div>
             </div>
-            <AllAccommodations/>
+            <AllAccommodations search={search}/>
         </div>
     );
 

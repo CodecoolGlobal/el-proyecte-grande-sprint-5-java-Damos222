@@ -1,7 +1,7 @@
 import '../css/AllAccommodations.css';
 import {useEffect, useState} from "react";
 
-export default function AllAccommodations() {
+export default function AllAccommodations({search}) {
     const [accommodations, setAccommodations] = useState([]);
 
     const fetchData = () => {
@@ -20,7 +20,11 @@ export default function AllAccommodations() {
         <>
             <div className="all-accommodations">
                 <h1>All Accommodations</h1>
-                {accommodations.map((accommodation) => {
+                {accommodations.filter((accommodation => {
+                    return search.toLowerCase() === ""
+                        ? accommodation
+                        : accommodation.name.toLowerCase().includes(search)
+                })).map((accommodation) => {
                     const source = "data:image/jpg;base64," + accommodation.image;
                     return (
                         <div className="list-accommodations" key={accommodation.id}>
