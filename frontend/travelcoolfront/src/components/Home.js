@@ -12,6 +12,9 @@ export default function Home() {
 
     return (
         <div className="home">
+            <div className="filter-box-label">
+                <h1>Find your perfect holiday accommodation</h1>
+            </div>
             <div className="flex-filter-box">
                 <input
                     className="search-input"
