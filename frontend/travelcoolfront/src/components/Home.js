@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import AllAccommodations from "./AllAccommodations";
 
 
 const Home = () => {
@@ -45,24 +46,7 @@ const Home = () => {
                 </div>
             </div>
 
-
-            <div className="travel-suggestions">
-                <div className="suggestions-text">
-                    <h1 className="book-your-perfect-holiday">Book your perfect holiday!</h1>
-                    <p className="intro-text">
-                        {message.map(line => {
-                            return (<>{line}
-                                <br/>
-                            </>)
-                        })}
-                    </p>
-
-                    <button className="see-details">START YOUR JOURNEY</button>
-                </div>
-                <div className="suggestions-image">
-                    <img src="/images/maldives.jpg" width="640" alt="Beach in the Maldives"/>
-                </div>
-            </div>
+            <AllAccommodations />
 
         </div>);
 
