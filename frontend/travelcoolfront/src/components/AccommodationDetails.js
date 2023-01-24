@@ -32,7 +32,7 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
 
     useEffect(() => {
         fetchData();
-    }, [])
+    })
 
     if (accommodation == null) {
         return <h1>Loading...</h1>;
