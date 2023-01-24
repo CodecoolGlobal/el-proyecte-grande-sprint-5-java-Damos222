@@ -48,7 +48,7 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
                     <img src={source} style={{width: "500px"}} alt={name + "Image"}/>
                     <div className="details-info">
                         <p>{accommodation && accommodation.description}</p>
-                        <p>Capacity: {accommodation && accommodation.capacity} people</p>
+                        <p>Capacity: {accommodation && accommodation.capacity} person(s)</p>
                         <p>Type: {accommodation && accommodation.type}</p>
                         <p>Price per night: <strong>{accommodation && accommodation.pricePerNight} €</strong></p>
                     </div>

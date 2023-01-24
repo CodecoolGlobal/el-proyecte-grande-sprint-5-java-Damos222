@@ -30,7 +30,7 @@ export default function AllAccommodations() {
                             <div className="accommodation-info">
                                 <p><strong>{accommodation.name}</strong></p>
                                 <p>{accommodation.description}</p>
-                                <p>Capacity: {accommodation.capacity} people</p>
+                                <p>Capacity: {accommodation.capacity} person(s)</p>
                                 <p>Type: {accommodation.type}</p>
                                 <p>
                                     Price per night: <strong>{accommodation.pricePerNight} €</strong>
