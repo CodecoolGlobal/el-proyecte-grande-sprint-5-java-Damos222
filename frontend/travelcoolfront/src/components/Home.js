@@ -13,23 +13,22 @@ export default function Home() {
     return (
         <div className="home">
             <div className="flex-filter-box">
-                <div className="combo-box-1">
-                    <div><input
-                        className="search-input-1"
-                        type="text"
-                        placeholder="Search"/></div>
-
-                    <div><DatePicker
+                <input
+                    className="search-input"
+                    type="text"
+                    placeholder="Search"/>
+                <div className="datepicker">
+                    <DatePicker
                         className="start-date"
                         dateFormat="dd/MM/yyyy"
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}/>
-                    </div>
-                    <div><DatePicker
+
+                    <DatePicker
                         className="end-date"
                         dateFormat="dd/MM/yyyy"
                         selected={endDate}
-                        onChange={(date) => setEndDate(date)}/></div>
+                        onChange={(date) => setEndDate(date)}/>
                 </div>
             </div>
             <AllAccommodations/>
