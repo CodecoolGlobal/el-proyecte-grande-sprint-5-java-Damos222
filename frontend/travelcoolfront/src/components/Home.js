@@ -1,31 +1,16 @@
 import '../css/Home.css';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import AllAccommodations from "./AllAccommodations";
 
 
-const Home = () => {
-    const [message, setMessage] = useState([]);
-
+export default function Home() {
     const [startDate, setStartDate] = useState(new Date());
-    const fetchData = () => {
-        return fetch("http://localhost:8080/home")
-            .then((response) => response.json())
-            .then(data => data.message)
-            .then(message => {
-                message = message.split("\n")
-                setMessage(message);
-            })
-    }
-
-    useEffect(() => {
-        fetchData();
-    }, [])
+    const [endDate, setEndDate] = useState(new Date());
 
     return (
-
         <div className="home">
             <div className="flex-filter-box">
                 <div className="combo-box-1">
@@ -36,20 +21,19 @@ const Home = () => {
 
                     <div><DatePicker
                         className="start-date"
+                        dateFormat="dd/MM/yyyy"
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}/>
                     </div>
                     <div><DatePicker
                         className="end-date"
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}/></div>
+                        dateFormat="dd/MM/yyyy"
+                        selected={endDate}
+                        onChange={(date) => setEndDate(date)}/></div>
                 </div>
             </div>
-
-            <AllAccommodations />
-
-        </div>);
+            <AllAccommodations/>
+        </div>
+    );
 
 }
-
-export default Home;
