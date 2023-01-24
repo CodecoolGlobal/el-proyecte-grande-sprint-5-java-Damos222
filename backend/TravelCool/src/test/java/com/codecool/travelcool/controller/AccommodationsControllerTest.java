@@ -21,45 +21,45 @@ class AccommodationsControllerTest {
     @MockBean
     AccommodationService accommodationService;
 
-    void checkIfStatusIsOk(String url) throws Exception {
+    void checkIfURLStatusIsOk(String url) throws Exception {
         mvc.perform(MockMvcRequestBuilders
                         .get(url))
                 .andExpect(status().isOk())
         ;}
 
     @Test
-    void findAll() throws Exception{
-        checkIfStatusIsOk("/accommodations/all");
+    void testGetAllAccommodations() throws Exception{
+        checkIfURLStatusIsOk("/accommodations/all");
         verify(accommodationService).findAll();
     }
 
     @Test
-    void findBetweenPrices() throws Exception{
-        checkIfStatusIsOk("/priceBetween/?min=1&max=10");
+    void testGetAccommodationsBetweenPrices() throws Exception{
+        checkIfURLStatusIsOk("/priceBetween/?min=1&max=10");
         verify(accommodationService).findByPriceBetween(BigDecimal.ONE, BigDecimal.TEN);
     }
 
     @Test
-    void findById() throws Exception{
-        checkIfStatusIsOk("/accommodations/1");
+    void testGetAccommodationById() throws Exception{
+        checkIfURLStatusIsOk("/accommodations/1");
         verify(accommodationService).findById(1L);
     }
 
     @Test
-    void findByHost() throws Exception{
-        checkIfStatusIsOk("/accommodations/host/1");
+    void testGetAccommodationByHost() throws Exception{
+        checkIfURLStatusIsOk("/accommodations/host/1");
         verify(accommodationService).findByHost(1L);
     }
 
     @Test
-    void findByCountry() throws Exception{
-        checkIfStatusIsOk("/accommodations/filterByCountry/england");
+    void testGetAccommodationByCountry() throws Exception{
+        checkIfURLStatusIsOk("/accommodations/filterByCountry/england");
         verify(accommodationService).findByCountry("england");
     }
 
     @Test
-    void findByMinCapacity() throws Exception{
-        checkIfStatusIsOk("/accommodations/capacity/1");
+    void testGetAccommodationByMinCapacity() throws Exception{
+        checkIfURLStatusIsOk("/accommodations/capacity/1");
         verify(accommodationService).findByMinimumCapacity(1);
     }
 }
