@@ -16,7 +16,7 @@ export default function AccommodationDetails() {
 
     useEffect(() => {
         fetchData();
-    }, [])
+    })
 
     if (accommodation == null) {
         return <h1>Loading...</h1>;
