@@ -12,6 +12,10 @@
     padding: 25px;
 }
 
+.list-accommodations p, span {
+    margin: 10px 0 10px 0;
+}
+
 .accommodation-image {
     margin: 0 25px 0 0;
 }

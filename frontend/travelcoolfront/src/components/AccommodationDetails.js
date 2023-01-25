@@ -16,8 +16,8 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
     }
 
     function navigateToCheckout() {
-        setFromDate(startDate.toLocaleDateString("en-GB"));
-        setToDate(endDate.toLocaleDateString("en-GB"));
+        setFromDate(startDate.toLocaleDateString("en-CA"));
+        setToDate(endDate.toLocaleDateString("en-CA"));
         navigate("/accommodations/checkout");
     }
 
@@ -47,6 +47,7 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
                 <div className="accommodation-details">
                     <img src={source} style={{width: "500px"}} alt={name + "Image"}/>
                     <div className="details-info">
+                        <span><strong>{accommodation.address.street} {accommodation.address.houseNumber}, {accommodation.address.zipCode} {accommodation.address.city}, {accommodation.address.country}</strong></span>
                         <p>{accommodation && accommodation.description}</p>
                         <p>Capacity: {accommodation && accommodation.capacity} person(s)</p>
                         <p>Type: {accommodation && accommodation.type}</p>
@@ -58,19 +59,16 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
                     <div className="datepicker">
                         <DatePicker
                             className="start-date"
-                            dateFormat="dd/MM/yyyy"
+                            dateFormat="yyyy-MM-dd"
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}/>
                         <DatePicker
                             className="end-date"
-                            dateFormat="dd/MM/yyyy"
+                            dateFormat="yyyy-MM-dd"
                             selected={endDate}
                             onChange={(date) => setEndDate(date)}/>
                     </div>
-
-                    <div className="accommodation-button">
-                        <button className="see-details" onClick={() => navigateToCheckout()}>Reserve</button>
-                    </div>
+                    <button id="book-button" className="see-details" onClick={() => navigateToCheckout()}>Reserve</button>
                 </div>
             </div>
         </>
