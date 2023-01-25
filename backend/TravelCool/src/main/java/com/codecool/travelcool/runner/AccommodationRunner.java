@@ -29,7 +29,7 @@ public class AccommodationRunner implements CommandLineRunner {
 
     public void createAddresses() {
         addresses = List.of(
-                new Address("Spain", 2343, "Cadiz", "Main Street", 2),
+                new Address("Spain", 2343, "Cádiz", "C. Baleares", 2),
                 new Address("France", 1234, "Marseille", "Rue Lafon", 1),
                 new Address("Germany", 4332, "Berlin", "Emser Straße", 55),
                 new Address("Portugal", 6443, "Nazaré", "R. da Paz", 91)
