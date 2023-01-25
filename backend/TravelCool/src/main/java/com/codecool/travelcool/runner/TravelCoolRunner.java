@@ -13,7 +13,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,10 +37,19 @@ public class TravelCoolRunner implements CommandLineRunner {
     }
 
     public void createBookings() {
-        LocalDate startDate1 = LocalDate.of(2023, 2, 1);
-        LocalDate endDate1 = LocalDate.of(2023, 2, 5);
+        List<LocalDate> startDates = List.of(
+                LocalDate.of(2023, 2, 1),
+                LocalDate.of(2023, 3, 10)
+        );
+
+        List<LocalDate> endDates = List.of(
+                LocalDate.of(2023, 2, 5),
+                LocalDate.of(2023, 3, 20)
+        );
+
         bookings = List.of(
-                new Booking(startDate1, endDate1, accommodations.get(0))
+                new Booking(startDates.get(0), endDates.get(0), new Timestamp(System.currentTimeMillis()), accommodations.get(0)),
+                new Booking(startDates.get(1), endDates.get(1), new Timestamp(System.currentTimeMillis()), accommodations.get(1))
         );
 
         bookingRepository.saveAll(bookings);

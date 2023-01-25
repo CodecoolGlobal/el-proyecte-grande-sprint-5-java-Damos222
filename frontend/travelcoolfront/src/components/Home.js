@@ -1,9 +1,10 @@
 import '../css/Home.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import AllAccommodations from "./AllAccommodations";
+import {useParams} from "react-router-dom";
 
 
 export default function Home() {
@@ -11,9 +12,14 @@ export default function Home() {
     const [endDate, setEndDate] = useState(addDays(5));
     const [search, setSearch] = useState("");
 
+    // console.log(startDate.toLocaleDateString('en-CA'));
+
     function addDays(days) {
         return new Date(Date.now() + 864e5 * days);     // 864e5: number of milliseconds in a 24-hour day
     }
+
+    useEffect(() => {
+    }, [startDate, endDate])
 
     return (
         <div className="home">
@@ -29,19 +35,21 @@ export default function Home() {
                 <div className="datepicker">
                     <DatePicker
                         className="start-date"
-                        dateFormat="dd/MM/yyyy"
+                        dateFormat="yyyy-MM-dd"
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}/>
 
                     <DatePicker
                         className="end-date"
-                        dateFormat="dd/MM/yyyy"
+                        dateFormat="yyyy-MM-dd"
                         selected={endDate}
                         onChange={(date) => setEndDate(date)}/>
                 </div>
-                    <button id="date-button" className="see-details">Search for date span</button>
+                <button id="date-button" className="see-details">Search for date span</button>
             </div>
-            <AllAccommodations search={search}/>
+            <AllAccommodations search={search}
+                               startDate={startDate.toLocaleDateString('en-CA')}
+                               endDate={endDate.toLocaleDateString('en-CA')}/>
         </div>
     );
 

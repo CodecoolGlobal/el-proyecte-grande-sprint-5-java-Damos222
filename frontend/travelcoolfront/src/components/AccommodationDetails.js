@@ -16,8 +16,8 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
     }
 
     function navigateToCheckout() {
-        setFromDate(startDate.toLocaleDateString("en-GB"));
-        setToDate(endDate.toLocaleDateString("en-GB"));
+        setFromDate(startDate.toLocaleDateString("en-CA"));
+        setToDate(endDate.toLocaleDateString("en-CA"));
         navigate("/accommodations/checkout");
     }
 
@@ -59,12 +59,12 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
                     <div className="datepicker">
                         <DatePicker
                             className="start-date"
-                            dateFormat="dd/MM/yyyy"
+                            dateFormat="yyyy-MM-dd"
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}/>
                         <DatePicker
                             className="end-date"
-                            dateFormat="dd/MM/yyyy"
+                            dateFormat="yyyy-MM-dd"
                             selected={endDate}
                             onChange={(date) => setEndDate(date)}/>
                     </div>

@@ -1,29 +1,44 @@
 import '../css/AllAccommodations.css';
 import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
-export default function AllAccommodations({search}) {
+export default function AllAccommodations({search, startDate, endDate}) {
     const [accommodations, setAccommodations] = useState([]);
+    const [bookings, setBookings] = useState([]);
+    console.log(startDate);
+    console.log(endDate);
 
-    const fetchData = () => {
+    const fetchAccommodations = () => {
         return fetch("http://localhost:8080/accommodations/all")
             .then((response) => response.json())
             .then(data => {
                 setAccommodations(data);
             })
     }
-    useEffect(() => {
-        fetchData();
-    }, [])
 
+    const fetchBookings = () => {
+        return fetch("http://localhost:8080/bookings/all")
+            .then((response) => response.json())
+            .then(data => {
+                setBookings(data);
+            })
+    }
+
+    useEffect(() => {
+        fetchAccommodations();
+        fetchBookings();
+    }, [])
 
     return (
         <>
             <div className="all-accommodations">
-                <h1>All Accommodations</h1>
+                <h1>Accommodations</h1>
                 {accommodations.filter((accommodation => {
-                    return search.toLowerCase() === ""
-                        ? accommodation
-                        : accommodation.address.country.toLowerCase().includes(search);
+                    if (search.toLowerCase() === "") {
+                        return accommodation;
+                    } else {
+                        return accommodation.address.country.toLowerCase().includes(search);
+                    }
                 })).map((accommodation) => {
                     const source = "data:image/jpg;base64," + accommodation.image;
                     return (

@@ -21,6 +21,7 @@ public class Booking {
     private LocalDate startDate;
     @NonNull
     private LocalDate endDate;
+    @NonNull
     @Temporal(value = TemporalType.TIMESTAMP)
     @GeneratedValue
     private Timestamp timestamp;
