@@ -1,9 +1,10 @@
 import '../css/Header.css';
 import logo from "../assets/logo.png";
-import { useState } from "react";
+import {useState} from "react";
 import Modal from "./Modal";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
+import {Link} from "react-router-dom";
 
 const Header = () => {
     const [showLoginModal, setShowLoginModal] = useState(false)
@@ -12,19 +13,21 @@ const Header = () => {
     return (
         <nav className="header">
             <div>
-                <img src={logo} alt="logo" width="350" />
+                <Link to="/">
+                    <img src={logo} alt="logo" width="350"/>
+                </Link>
             </div>
             <div className="links">
                 <button className="log-in-button" onClick={() => setShowLoginModal(true)}>Login</button>
                 <button className="sign-up-button" onClick={() => setShowRegistrationModal(true)}>Sign Up</button>
             </div>
             <Modal open={showLoginModal} onClose={() => setShowLoginModal(false)}>
-                <LoginForm />
+                <LoginForm/>
             </Modal>
             <Modal open={showRegistrationModal} onClose={() => setShowRegistrationModal(false)}>
-                <RegistrationForm />
+                <RegistrationForm/>
             </Modal>
-        </nav >);
+        </nav>);
 }
 
 export default Header;

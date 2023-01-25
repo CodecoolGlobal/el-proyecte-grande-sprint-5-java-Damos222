@@ -4,15 +4,12 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import AllAccommodations from "./AllAccommodations";
-import {useParams} from "react-router-dom";
 
 
 export default function Home() {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(addDays(5));
     const [search, setSearch] = useState("");
-
-    // console.log(startDate.toLocaleDateString('en-CA'));
 
     function addDays(days) {
         return new Date(Date.now() + 864e5 * days);     // 864e5: number of milliseconds in a 24-hour day

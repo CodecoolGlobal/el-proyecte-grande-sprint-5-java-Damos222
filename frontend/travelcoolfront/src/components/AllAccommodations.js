@@ -5,8 +5,6 @@ import {useParams} from "react-router-dom";
 export default function AllAccommodations({search, startDate, endDate}) {
     const [accommodations, setAccommodations] = useState([]);
     const [bookings, setBookings] = useState([]);
-    console.log(startDate);
-    console.log(endDate);
 
     const fetchAccommodations = () => {
         return fetch("http://localhost:8080/accommodations/all")
