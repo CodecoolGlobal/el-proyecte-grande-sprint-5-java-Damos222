@@ -18,4 +18,16 @@ public class Account {
     private Long id;
     private String email;
     private String password;
+
+    public Account(int i, String john_doe, String s) {
+
+    }
+
+    public Account() {
+
+    }
+
+    public Account(String s) {
+
+    }
 }
