@@ -17,8 +17,4 @@ public class BookingService {
     public List<Booking> findAll() {
         return bookingRepository.findAll();
     }
-
-    public List<Booking> findAfterStartDateAndBeforeEndDate(LocalDate startDate, LocalDate endDate) {
-        return bookingRepository.findBookingsByStartDateAfterAndEndDateBefore(startDate, endDate);
-    }
 }

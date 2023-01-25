@@ -5,9 +5,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -35,21 +39,7 @@ public class Accommodation {
     @NonNull
     @ManyToOne
     private Address address;
-
-    public Accommodation(@NonNull String name, Account host) {
-        this.name = name;
-        this.host = host;
-    }
-
-    public Accommodation(Long id, @NonNull String name, @NonNull String description, @NonNull byte[] image, @NonNull BigDecimal pricePerNight, @NonNull AccommodationType type) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.image = image;
-        this.pricePerNight = pricePerNight;
-        this.type = type;
-    }
-
-    public Accommodation(int i, String rose_apartment, String luxury_apartment, byte[] byteArrayOfImage, BigDecimal bigDecimal, AccommodationType room) {
-    }
+    @NonNull
+    @OneToMany(mappedBy = "accommodation")
+    private Set<Booking> bookings = new HashSet<>();
 }

@@ -15,9 +15,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Configuration
 @RequiredArgsConstructor
@@ -53,6 +51,9 @@ public class TravelCoolRunner implements CommandLineRunner {
         );
 
         bookingRepository.saveAll(bookings);
+        accommodations.get(0).getBookings().add(bookings.get(0));
+        accommodations.get(1).setBookings(Set.of(bookings.get(1)));
+
     }
 
     public void createAddresses() {
