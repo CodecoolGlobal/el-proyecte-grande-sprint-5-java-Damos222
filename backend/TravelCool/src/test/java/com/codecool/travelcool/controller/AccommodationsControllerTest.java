@@ -1,4 +1,5 @@
 package com.codecool.travelcool.controller;
+import com.codecool.travelcool.controller.AccommodationsController;
 import com.codecool.travelcool.service.AccommodationService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,36 +31,42 @@ class AccommodationsControllerTest {
     @Test
     void testGetAllAccommodations() throws Exception{
         checkIfURLStatusIsOk("/accommodations/all");
+
         verify(accommodationService).findAll();
     }
 
     @Test
     void testGetAccommodationsBetweenPrices() throws Exception{
         checkIfURLStatusIsOk("/priceBetween/?min=1&max=10");
+
         verify(accommodationService).findByPriceBetween(BigDecimal.ONE, BigDecimal.TEN);
     }
 
     @Test
     void testGetAccommodationById() throws Exception{
         checkIfURLStatusIsOk("/accommodations/1");
+
         verify(accommodationService).findById(1L);
     }
 
     @Test
     void testGetAccommodationByHost() throws Exception{
         checkIfURLStatusIsOk("/accommodations/host/1");
+
         verify(accommodationService).findByHost(1L);
     }
 
     @Test
     void testGetAccommodationByCountry() throws Exception{
         checkIfURLStatusIsOk("/accommodations/filterByCountry/england");
+
         verify(accommodationService).findByCountry("england");
     }
 
     @Test
     void testGetAccommodationByMinCapacity() throws Exception{
         checkIfURLStatusIsOk("/accommodations/capacity/1");
+
         verify(accommodationService).findByMinimumCapacity(1);
     }
 }
