@@ -39,6 +39,7 @@ export default function Home() {
                         selected={endDate}
                         onChange={(date) => setEndDate(date)}/>
                 </div>
+                    <button id="date-button" className="see-details">Search for date span</button>
             </div>
             <AllAccommodations search={search}/>
         </div>

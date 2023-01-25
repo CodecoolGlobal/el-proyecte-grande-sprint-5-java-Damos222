@@ -68,10 +68,7 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
                             selected={endDate}
                             onChange={(date) => setEndDate(date)}/>
                     </div>
-
-                    <div className="accommodation-button">
-                        <button className="see-details" onClick={() => navigateToCheckout()}>Reserve</button>
-                    </div>
+                    <button id="book-button" className="see-details" onClick={() => navigateToCheckout()}>Reserve</button>
                 </div>
             </div>
         </>
