@@ -8,8 +8,12 @@ import AllAccommodations from "./AllAccommodations";
 
 export default function Home() {
     const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(addDays(5));
     const [search, setSearch] = useState("");
+
+    function addDays(days) {
+        return new Date(Date.now() + 864e5 * days);     // 864e5: number of milliseconds in a 24-hour day
+    }
 
     return (
         <div className="home">
@@ -21,7 +25,7 @@ export default function Home() {
                     onChange={(event) => setSearch(event.target.value)}
                     className="search-input"
                     type="text"
-                    placeholder="Search"/>
+                    placeholder="Search for country"/>
                 <div className="datepicker">
                     <DatePicker
                         className="start-date"

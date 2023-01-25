@@ -23,7 +23,7 @@ export default function AllAccommodations({search}) {
                 {accommodations.filter((accommodation => {
                     return search.toLowerCase() === ""
                         ? accommodation
-                        : accommodation.address.street.toLowerCase().includes(search);
+                        : accommodation.address.country.toLowerCase().includes(search);
                 })).map((accommodation) => {
                     const source = "data:image/jpg;base64," + accommodation.image;
                     return (
