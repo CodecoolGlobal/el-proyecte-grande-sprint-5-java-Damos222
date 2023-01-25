@@ -2,7 +2,9 @@ package com.codecool.travelcool.runner;
 
 import com.codecool.travelcool.model.Accommodation;
 import com.codecool.travelcool.model.AccommodationType;
+import com.codecool.travelcool.model.Address;
 import com.codecool.travelcool.repository.AccommodationRepository;
+import com.codecool.travelcool.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -16,14 +18,32 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class AccommodationRunner implements CommandLineRunner {
     private final AccommodationRepository accommodationRepository;
+    private final AddressRepository addressRepository;
+    private List<Address> addresses;
 
     @Override
     public void run(String... args) throws IOException {
+        createAddresses();
+        createAccommodations();
+    }
+
+    public void createAddresses() {
+        addresses = List.of(
+                new Address("Spain", 2343, "Cadiz", "Main Street", 2),
+                new Address("France", 1234, "Marseille", "Rue Lafon", 1),
+                new Address("Germany", 4332, "Berlin", "Emser Straße", 55),
+                new Address("Portugal", 6443, "Nazaré", "R. da Paz", 91)
+        );
+
+        addressRepository.saveAll(List.of(addresses.get(0), addresses.get(1), addresses.get(2), addresses.get(3)));
+    }
+
+    public void createAccommodations() throws IOException {
         accommodationRepository.saveAll(List.of(
-                new Accommodation(2, "Rose Apartment", "Luxury apartment", getByteArrayOfImage("images/bedroom-1.jpg"), new BigDecimal(500), AccommodationType.ROOM),
-                new Accommodation(4, "Cozy Room", "Near the beach", getByteArrayOfImage("images/bedroom-2.jpg"), new BigDecimal(100), AccommodationType.APARTMENT),
-                new Accommodation(5, "City Apartment", "Apartment in the city center", getByteArrayOfImage("images/bedroom-3.jpg"), new BigDecimal(600), AccommodationType.APARTMENT),
-                new Accommodation(1, "Sunny room", "Sunny single room for adventurous travellers", getByteArrayOfImage("images/bedroom-4.jpg"), new BigDecimal(50), AccommodationType.ROOM)
+                new Accommodation(2, "Rose Apartment", "Luxury apartment", getByteArrayOfImage("images/bedroom-1.jpg"), new BigDecimal(500), AccommodationType.APARTMENT, addresses.get(0)),
+                new Accommodation(4, "Cozy Room", "Near the beach", getByteArrayOfImage("images/bedroom-2.jpg"), new BigDecimal(100), AccommodationType.ROOM, addresses.get(1)),
+                new Accommodation(5, "City Apartment", "Apartment in the city center", getByteArrayOfImage("images/bedroom-3.jpg"), new BigDecimal(600), AccommodationType.APARTMENT, addresses.get(2)),
+                new Accommodation(1, "Sunny room", "Sunny single room for adventurous travellers", getByteArrayOfImage("images/bedroom-4.jpg"), new BigDecimal(50), AccommodationType.ROOM, addresses.get(3))
         ));
     }
 

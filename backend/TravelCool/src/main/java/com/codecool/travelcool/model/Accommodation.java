@@ -32,6 +32,7 @@ public class Accommodation {
     private AccommodationType type;
     @ManyToOne
     private Account host;
+    @NonNull
     @ManyToOne
     private Address address;
 }

@@ -5,20 +5,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Address {
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NonNull
     private String country;
+    @NonNull
     private int zipCode;
+    @NonNull
     private String City;
+    @NonNull
     private String street;
-    private String houseNumber;
+    @NonNull
+    private int houseNumber;
 }
