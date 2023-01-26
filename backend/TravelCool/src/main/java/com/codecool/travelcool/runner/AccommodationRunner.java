@@ -19,10 +19,11 @@ public class AccommodationRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws IOException {
-        accommodationRepository.saveAll(List.of(
-                new Accommodation(2, "Rose Apartment", "Luxury apartment", getByteArrayOfImage("images/bedroom-1.jpg"), new BigDecimal(500), AccommodationType.ROOM),
-                new Accommodation(4, "Cozy Room", "Near the beach", getByteArrayOfImage("images/bedroom-2.jpg"), new BigDecimal(100), AccommodationType.APARTMENT)
-        ));
+        Accommodation accommodation1 = new Accommodation(2, "Rose Apartment", "Luxury apartment", new BigDecimal(500), AccommodationType.ROOM);
+        accommodation1.setImage(getByteArrayOfImage("images/bedroom-1.jpg"));
+        Accommodation accommodation2 = new Accommodation(4, "Cozy Room", "Near the beach", new BigDecimal(100), AccommodationType.APARTMENT);
+        accommodation2.setImage(getByteArrayOfImage("images/bedroom-2.jpg"));
+        accommodationRepository.saveAll(List.of(accommodation1, accommodation2));
     }
 
     public byte[] getByteArrayOfImage(String imagePath) throws IOException {

@@ -1,20 +1,22 @@
-package com.codecool.travelcool.incomingRequestData;
+package com.codecool.travelcool.dto;
 
 import com.codecool.travelcool.model.Accommodation;
 import com.codecool.travelcool.model.AccommodationFeatures;
 import com.codecool.travelcool.model.AccommodationType;
 import com.codecool.travelcool.model.Address;
+import com.codecool.travelcool.service.AddressService;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.awt.*;
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.List;
+import java.util.Optional;
 
+@Component
 @Data
-public class AddAccommodationFormData {
+@NoArgsConstructor
+public class AccommodationDto {
     private String title;
     private String country;
     private String city;
@@ -33,33 +35,8 @@ public class AddAccommodationFormData {
     private Double pricePerNight;
     private AccommodationType type;
 
-    public Accommodation getAccommodation(List<MultipartFile> images) {
+    public Accommodation getAccommodation() {
         Accommodation accommodation = new Accommodation();
-        Address address = new Address();
-        AccommodationFeatures features = new AccommodationFeatures();
-
-        //build address
-        address.setCity(city);
-        address.setStreet(street);
-        address.setCountry(country);
-        address.setZipCode(zipCode);
-        address.setHouseNumber(houseNumber);
-
-        //build features
-        features.setPool(pool);
-        features.setParking(parking);
-        features.setSauna(sauna);
-        features.setTowels(towels);
-        features.setKitchen(kitchen);
-        features.setBedSheets(bedSheets);
-        features.setHairDryer(hairDryer);
-
-        accommodation.setAddress(address);
-        accommodation.setFeatures(features);
-
-        //set rest
-        accommodation.setHost(null);//todo
-        //todo accommodation.setImage(images);
         accommodation.setName(title);
         accommodation.setCapacity(capacity);
         accommodation.setDescription(description);
@@ -67,5 +44,27 @@ public class AddAccommodationFormData {
         accommodation.setPricePerNight(BigDecimal.valueOf(pricePerNight));
 
         return accommodation;
+    }
+
+    public Address getAddress() {
+        Address address = new Address();
+        address.setHouseNumber(houseNumber);
+        address.setCity(city);
+        address.setStreet(street);
+        address.setZipCode(zipCode);
+        address.setCountry(country);
+        return address;
+    }
+
+    public AccommodationFeatures getFeatures() {
+        AccommodationFeatures features = new AccommodationFeatures();
+        features.setHairDryer(hairDryer);
+        features.setPool(pool);
+        features.setParking(parking);
+        features.setSauna(sauna);
+        features.setTowels(towels);
+        features.setKitchen(kitchen);
+        features.setBedSheets(bedSheets);
+        return features;
     }
 }

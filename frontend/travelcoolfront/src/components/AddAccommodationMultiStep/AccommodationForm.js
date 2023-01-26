@@ -8,13 +8,33 @@ import AddressForm from './AddressForm'
 import FeaturesForm from './FeaturesForm'
 import FotosForm from './FotosForm'
 import OverviewAndConfirm from './OverviewAndConfirm'
-import TitleForm from './TitleForm'
+import '../../css/AccommodationForm.css'
+
+const INITIAL_DATA = {
+    title: '',
+    country: '',
+    street: '',
+    zipCode: '',
+    houseNumber: '',
+    city: '',
+    capacity: '',
+    description: '',
+    pricePerNight: '',
+    type: '',
+    parking: '',
+    pool: '',
+    towels: '',
+    bedSheets: '',
+    hairDryer: '',
+    kitchen: '',
+    sauna: '',
+}
 
 const AccommodationForm = () => {
     const navigate = useNavigate()
     const [images, setImages] = useState([])
-    const [data, setData] = useState(new FormData())
-    const FOTOS_FORM_INDEX = 1
+    const [files, setFiles] = useState()
+    const [data, setData] = useState(INITIAL_DATA)
 
     function updateImages(newFiles) {
         const newImages = []
@@ -26,37 +46,37 @@ const AccommodationForm = () => {
         }))
     }
 
-    function fuseOldAndNewImages(fields) {
-        let imageList = new DataTransfer()
-        for (let file of fields.images) {
-            imageList.items.add(file)
+    function updateFiles(newFiles) {
+        if (!files) {
+            setFiles(newFiles)
+            return
         }
-        for (let file of data.images) {
-            imageList.items.add(file)
+        let imageDataTransfer = new DataTransfer()
+        for (let file of newFiles) {
+            imageDataTransfer.items.add(file)
         }
-        return { images: imageList.files }
+        for (let file of files) {
+            imageDataTransfer.items.add(file)
+        }
+        setFiles(imageDataTransfer.files)
+        console.log(files)
     }
 
     function updateData(fields) {
-        if (fields.images && data.images) {
-            fields = fuseOldAndNewImages(fields)
-        }
         setData(prev => {
             return { ...prev, ...fields }
         })
         console.log("data: ", data)
+        console.log('files: ', files)
     }
 
     const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } = useMultipartForm([
-        <FotosForm data={data} updateData={updateData} updateImages={updateImages} images={images} ></FotosForm>,
-        <TitleForm data={data} updateData={updateData}></TitleForm>,
         <AddressForm data={data} updateData={updateData}></AddressForm>,
+        <FotosForm files={files} updateImages={updateImages} images={images} updateFiles={updateFiles}></FotosForm>,
         <AccommodationDetailsForm data={data} updateData={updateData}></AccommodationDetailsForm>,
         <FeaturesForm data={data} updateData={updateData}></FeaturesForm>,
-        <OverviewAndConfirm data={data} updateData={updateData}></OverviewAndConfirm>
+        <OverviewAndConfirm data={data} updateData={updateData} images={images}></OverviewAndConfirm>
     ])
-
-    let currentIndexIsFotosForm = FOTOS_FORM_INDEX === step
 
     async function onSubmit(e) {
         e.preventDefault()
@@ -67,21 +87,20 @@ const AccommodationForm = () => {
     }
 
     async function uploadRest() {
-        delete data.images
         console.log(data)
-        const formData = new FormData()
-
-        Object.keys(data).forEach(key => formData.append(key, data[key]))
 
         try {
             let res = await fetch("http://localhost:8080/accommodations/add", {
                 method: 'POST',
-                body: formData,
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',  
+                }
             })
             if (res.status === 200) {
                 alert("You successfully published your accommodation!")
             } else {
-                alert(`Error ${res.status}`)
+                alert(`Error (${res.status})`)
             }
         } catch (err) {
             console.log(err)
@@ -90,12 +109,10 @@ const AccommodationForm = () => {
 
     async function uploadFiles() {
         const formData = new FormData()
-        for (let i = 0; i < data.images.length; i++) {
-            formData.append(`image-${i}`, data.images[i], data.images.name)   
+        for (let i = 0; i < files.length; i++) {
+            formData.append(`image-${i}`, files[i], files[i].name)   
         }
 
-
-        console.log(data.images.length)
         console.log(formData.get('image-0'))
 
         try {
@@ -114,7 +131,7 @@ const AccommodationForm = () => {
 
 
     return (
-        <div className='multiPartForm'>
+        <div className='multiPartFormContainer'>
             <form onSubmit={onSubmit}>
                 <div className='progressIndicator'>
                     {currentStepIndex + 1} / {steps.length}
@@ -122,7 +139,7 @@ const AccommodationForm = () => {
                 {step}
                 <div className='multipartFormButtonContainer'>
                     {!isFirstStep && (<button type='button' onClick={back}>Back</button>)}
-                    <button disabled={currentIndexIsFotosForm && images.length > 0} type='submit'>{isLastStep ? 'Finish' : 'Next'}</button>
+                    <button type='submit'>{isLastStep ? 'Finish' : 'Next'}</button>
                 </div>
             </form>
         </div>
