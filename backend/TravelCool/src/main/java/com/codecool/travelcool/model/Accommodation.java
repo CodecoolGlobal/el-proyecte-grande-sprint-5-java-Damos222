@@ -1,6 +1,5 @@
 package com.codecool.travelcool.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,14 +15,12 @@ public class Accommodation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
     private int capacity;
     @NonNull
     private String name;
     @NonNull
     private String description;
     @Lob
-    @NonNull
     private byte [] image;
     @OneToOne
     private AccommodationFeatures features;
@@ -52,5 +49,15 @@ public class Accommodation {
     }
 
     public Accommodation(int i, String rose_apartment, String luxury_apartment, byte[] byteArrayOfImage, BigDecimal bigDecimal, AccommodationType room) {
+    }
+
+    public Accommodation(int capacity, @NonNull String name, @NonNull String description, byte[] image, @NonNull BigDecimal pricePerNight, @NonNull AccommodationType type, @NonNull Address address) {
+        this.capacity = capacity;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.pricePerNight = pricePerNight;
+        this.type = type;
+        this.address = address;
     }
 }

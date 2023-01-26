@@ -1,0 +1,12 @@
+.formWrapper {
+    display: grid;
+    gap:1rem .5rem;
+    justify-content: flex-start;
+    grid-template-columns: auto minmax(auto, 600px);
+}
+
+h2 {
+    text-align: center;
+    margin: 0;
+    margin-Bottom: 2rem;
+}

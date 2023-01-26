@@ -1,6 +1,5 @@
 import '../css/AllAccommodations.css';
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
 
 export default function AllAccommodations({search, startDate, endDate}) {
     const [accommodations, setAccommodations] = useState([]);

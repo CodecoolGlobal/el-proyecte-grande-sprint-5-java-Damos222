@@ -1,5 +1,5 @@
 import '../css/Home.css';
-import {useEffect, useState} from "react";
+import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -28,26 +28,25 @@ export default function Home() {
                     onChange={(event) => setSearch(event.target.value)}
                     className="search-input"
                     type="text"
-                    placeholder="Search for country"/>
+                    placeholder="Search for country" />
                 <div className="datepicker">
                     <DatePicker
                         className="start-date"
                         dateFormat="yyyy-MM-dd"
                         selected={startDate}
-                        onChange={(date) => setStartDate(date)}/>
+                        onChange={(date) => setStartDate(date)} />
 
                     <DatePicker
                         className="end-date"
                         dateFormat="yyyy-MM-dd"
                         selected={endDate}
-                        onChange={(date) => setEndDate(date)}/>
+                        onChange={(date) => setEndDate(date)} />
                 </div>
                 <button id="date-button" className="see-details">Search for date span</button>
             </div>
             <AllAccommodations search={search}
-                               startDate={startDate.toLocaleDateString('en-CA')}
-                               endDate={endDate.toLocaleDateString('en-CA')}/>
+                startDate={startDate.toLocaleDateString('en-CA')}
+                endDate={endDate.toLocaleDateString('en-CA')} />
         </div>
     );
-
 }
