@@ -40,7 +40,7 @@ export default function AllAccommodations() {
             </div>
             <div className="flex-filter-box">
                 <input
-                    onChange={(event) => setSearchTerm(event.target.value)}
+                    onChange={(event) => setSearchTerm(event.target.value.toLowerCase())}
                     className="search-input"
                     type="text"
                     placeholder="Search for country"/>
