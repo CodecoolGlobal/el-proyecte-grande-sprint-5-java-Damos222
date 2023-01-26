@@ -21,13 +21,13 @@ const INITIAL_DATA = {
     description: '',
     pricePerNight: '',
     type: '',
-    parking: '',
-    pool: '',
-    towels: '',
-    bedSheets: '',
-    hairDryer: '',
-    kitchen: '',
-    sauna: '',
+    parking: false,
+    pool: false,
+    towels: false,
+    bedSheets: false,
+    hairDryer: false,
+    kitchen: false,
+    sauna: false,
 }
 
 const AccommodationForm = () => {
@@ -66,8 +66,6 @@ const AccommodationForm = () => {
         setData(prev => {
             return { ...prev, ...fields }
         })
-        console.log("data: ", data)
-        console.log('files: ', files)
     }
 
     const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } = useMultipartForm([

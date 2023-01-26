@@ -1,12 +1,12 @@
 import React from 'react'
-import AccommodationFormWrapper from './AccommodationFormWrapper'
+import FormWrapper from '../FormWrapper'
 import "../../css/FotosForm.css"
 
 const FotosForm = (props) => {
 
     return (
         <>
-            <AccommodationFormWrapper title="Fotos">
+            <FormWrapper title="Fotos">
                 <label>
                     Add fotos:
                     <input type='file' id='images' name='images' multiple
@@ -16,7 +16,7 @@ const FotosForm = (props) => {
                         }} required={props.images.length === 0} accept="image/*"></input>
                 </label>
                 <br></br>
-            </AccommodationFormWrapper>
+            </FormWrapper>
             <div id='gallery'>
                 {props.images && props.images.map((image, i) => {
                     return (

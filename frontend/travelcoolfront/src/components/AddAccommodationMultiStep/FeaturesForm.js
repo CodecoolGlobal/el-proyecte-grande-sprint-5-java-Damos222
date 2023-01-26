@@ -1,9 +1,9 @@
 import React from 'react'
-import AccommodationFormWrapper from './AccommodationFormWrapper'
+import FormWrapper from '../FormWrapper'
 
 const FeaturesForm = (props) => {
     return (
-        <AccommodationFormWrapper title="Features">
+        <FormWrapper title="Features">
             <label>Parking:</label>
             <input type="checkbox" checked={props.data.parking || ''} 
             onChange={(e) => props.updateData({parking: e.target.checked})} 
@@ -33,7 +33,7 @@ const FeaturesForm = (props) => {
             <input type="checkbox" checked={props.data.sauna || ''} 
             onChange={(e) => props.updateData({sauna: e.target.checked})} 
             name="sauna" />
-        </AccommodationFormWrapper>
+        </FormWrapper>
     )
 }
 

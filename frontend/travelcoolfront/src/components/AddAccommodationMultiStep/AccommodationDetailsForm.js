@@ -1,9 +1,9 @@
 import React from 'react'
-import AccommodationFormWrapper from './AccommodationFormWrapper'
+import FormWrapper from '../FormWrapper'
 
 const AccommodationDetailsForm = (props) => {
     return (
-        <AccommodationFormWrapper title="Accommodation Details">
+        <FormWrapper title="Accommodation Details">
             <label>
                 Title:
             </label>
@@ -45,7 +45,7 @@ const AccommodationDetailsForm = (props) => {
                 onChange={(e) => props.updateData({ description: e.target.value })}
                 required style={{ height: '150px' }}
             ></textarea>
-        </AccommodationFormWrapper>
+        </FormWrapper>
     )
 }
 
