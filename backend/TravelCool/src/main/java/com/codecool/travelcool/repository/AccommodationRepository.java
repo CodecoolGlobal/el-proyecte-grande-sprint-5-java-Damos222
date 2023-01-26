@@ -24,7 +24,9 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
 
     List<Accommodation> findAccommodationsByType(AccommodationType type);
 
-    @Query("SELECT a from Accommodation a JOIN a.bookings b WHERE (b.startDate NOT BETWEEN ?1 AND ?2) AND (b.endDate NOT BETWEEN ?1 AND ?2)")
+    @Query("SELECT a from Accommodation a LEFT JOIN a.bookings b " +
+            "WHERE (b.startDate NOT BETWEEN ?1 AND ?2) AND (b.endDate NOT BETWEEN ?1 AND ?2) " +
+            "OR b.accommodation IS NULL")
     List<Accommodation> findByBookingsStartDateAfterAndEndDateBefore(LocalDate startDate, LocalDate endDate);
 
 
