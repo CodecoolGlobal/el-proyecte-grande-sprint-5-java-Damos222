@@ -21,7 +21,7 @@ const Header = () => {
                 <button className="log-in-button" onClick={() => setShowLoginModal(true)}>Login</button>
                 <button className="sign-up-button" onClick={() => setShowRegistrationModal(true)}>Sign Up</button>
                 <a href={"http://localhost:3000/addAccommodation/"}>
-                    <button>Add accommodation</button>
+                    <button className="see-details">Add accommodation</button>
                 </a>
             </div>
             <Modal open={showLoginModal} onClose={() => setShowLoginModal(false)}>
