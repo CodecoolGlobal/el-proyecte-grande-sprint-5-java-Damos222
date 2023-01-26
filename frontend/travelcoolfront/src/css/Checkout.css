@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css?family=Murecho");
+
+* {
+    font-family: "Murecho", sans-serif;
+}
+
+.checkout-area {
+    display: flex;
+    flex-direction: column;
+    background-color: #EBEBEB;
+    padding: 25px;
+    border-radius: 5px;
+    margin: 50px;
+}
+
+.date-area {
+    display: flex;
+}
+
+.date-area h3 {
+    margin-right: 25px;
+}

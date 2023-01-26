@@ -51,7 +51,7 @@ public class AccommodationService {
         accommodationRepository.save(accommodation);
     }
 
-//    public void saveAll(List<Accommodation> accommodations) {
-//        accommodationRepository.saveAll(accommodations);
-//    }
+    public void saveAll(List<Accommodation> accommodations) {
+        accommodationRepository.saveAll(accommodations);
+    }
 }

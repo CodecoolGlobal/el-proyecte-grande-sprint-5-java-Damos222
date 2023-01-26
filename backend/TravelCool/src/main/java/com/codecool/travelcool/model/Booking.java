@@ -2,23 +2,26 @@ package com.codecool.travelcool.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
+    @NonNull
     private LocalDate startDate;
+    @NonNull
     private LocalDate endDate;
+    @NonNull
     @Temporal(value = TemporalType.TIMESTAMP)
     @GeneratedValue
     private Timestamp timestamp;
@@ -26,6 +29,7 @@ public class Booking {
     private Account booker;
     private int adults;
     private int children;
+    @NonNull
     @ManyToOne
     private Accommodation accommodation;
 }

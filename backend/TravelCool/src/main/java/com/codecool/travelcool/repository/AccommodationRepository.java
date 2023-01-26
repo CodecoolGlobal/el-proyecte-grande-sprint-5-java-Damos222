@@ -22,4 +22,5 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
 
     List<Accommodation> findAccommodationsByType(AccommodationType type);
 //    void saveAll(List<Accommodation> accommodations);
+
 }
