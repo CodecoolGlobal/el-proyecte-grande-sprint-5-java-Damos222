@@ -25,7 +25,7 @@ export default function Home() {
             </div>
             <div className="flex-filter-box">
                 <input
-                    onChange={(event) => setSearch(event.target.value)}
+                    onChange={(event) => setSearch(event.target.value.toLowerCase())}
                     className="search-input"
                     type="text"
                     placeholder="Search for country" />
