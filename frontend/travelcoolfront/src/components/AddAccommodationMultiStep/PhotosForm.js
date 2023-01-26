@@ -2,7 +2,7 @@ import React from 'react'
 import AccommodationFormWrapper from './AccommodationFormWrapper'
 import "../../css/FotosForm.css"
 
-const FotosForm = (props) => {
+const PhotosForm = (props) => {
 
     return (
         <>
@@ -20,9 +20,9 @@ const FotosForm = (props) => {
             <div id='gallery'>
                 {props.images && props.images.map((image, i) => {
                     return (
-                        <figure key={i + 1}>
-                            <img key={(i + 1) * 3} className='singleImage' src={image} alt='' style={{ width: "100px" }}></img>
-                            <figcaption key={(i + 1) * 2}>{props.files[i].name}</figcaption>
+                        <figure key={i}>
+                            <img  className='singleImage' src={image} alt='' style={{ width: "100px" }}></img>
+                            <figcaption >{props.files[i].name}</figcaption>
                         </figure>
                     )
                 })}
@@ -31,4 +31,4 @@ const FotosForm = (props) => {
     )
 }
 
-export default FotosForm
+export default PhotosForm
