@@ -9,7 +9,6 @@ const FormWrapper = (props) => {
                 {props.children}
             </div>
         </>
-
     )
 }
 

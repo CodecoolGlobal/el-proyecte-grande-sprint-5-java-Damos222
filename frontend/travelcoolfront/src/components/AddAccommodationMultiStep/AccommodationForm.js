@@ -6,7 +6,7 @@ import useMultipartForm from '../useMultistepForm'
 import AccommodationDetailsForm from './AccommodationDetailsForm'
 import AddressForm from './AddressForm'
 import FeaturesForm from './FeaturesForm'
-import FotosForm from './FotosForm'
+import PhotosForm from './PhotosForm'
 import OverviewAndConfirm from './OverviewAndConfirm'
 import '../../css/AccommodationForm.css'
 
@@ -70,10 +70,10 @@ const AccommodationForm = () => {
 
     const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } = useMultipartForm([
         <AddressForm data={data} updateData={updateData}></AddressForm>,
-        <FotosForm files={files} updateImages={updateImages} images={images} updateFiles={updateFiles}></FotosForm>,
+        <PhotosForm files={files} updateImages={updateImages} images={images} updateFiles={updateFiles}></PhotosForm>,
         <AccommodationDetailsForm data={data} updateData={updateData}></AccommodationDetailsForm>,
         <FeaturesForm data={data} updateData={updateData}></FeaturesForm>,
-        <OverviewAndConfirm data={data} updateData={updateData} images={images}></OverviewAndConfirm>
+        <OverviewAndConfirm data={data} updateData={updateData} images={images} files={files}></OverviewAndConfirm>
     ])
 
     async function onSubmit(e) {
