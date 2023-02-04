@@ -62,9 +62,9 @@ const AccommodationForm = () => {
         console.log(files)
     }
 
-    function updateData(fields) {
+    function updateData(newInput) {
         setData(prev => {
-            return { ...prev, ...fields }
+            return { ...prev, ...newInput }
         })
     }
 
