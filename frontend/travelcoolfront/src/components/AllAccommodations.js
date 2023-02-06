@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import DatePicker from "react-datepicker";
 
+
 export default function AllAccommodations() {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(addDays(5));

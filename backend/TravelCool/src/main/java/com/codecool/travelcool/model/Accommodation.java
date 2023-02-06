@@ -1,6 +1,5 @@
 package com.codecool.travelcool.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,14 +18,12 @@ public class Accommodation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
     private int capacity;
     @NonNull
     private String name;
     @NonNull
     private String description;
     @Lob
-    @NonNull
     private byte [] image;
     @OneToOne
     private AccommodationFeatures features;
@@ -42,4 +39,5 @@ public class Accommodation {
     @NonNull
     @OneToMany(mappedBy = "accommodation")
     private Set<Booking> bookings = new HashSet<>();
+
 }

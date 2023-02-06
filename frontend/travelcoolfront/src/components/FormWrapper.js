@@ -1,15 +1,15 @@
 import React from 'react'
+import '../css/FormWrapper.css'
 
-const AccommodationFormWrapper = (props) => {
+const FormWrapper = (props) => {
     return (
         <>
             <h2>{props.title}</h2>
-            <div className='accommodationFormWrapper'>
+            <div className='formWrapper'>
                 {props.children}
             </div>
         </>
-
     )
 }
 
-export default AccommodationFormWrapper
+export default FormWrapper

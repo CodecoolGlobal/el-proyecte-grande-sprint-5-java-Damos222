@@ -5,6 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.*;
 
 @Getter
@@ -26,5 +30,5 @@ public class Address {
     @NonNull
     private String street;
     @NonNull
-    private int houseNumber;
+    private String houseNumber;
 }

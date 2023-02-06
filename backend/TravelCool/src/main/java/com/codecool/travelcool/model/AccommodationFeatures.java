@@ -23,5 +23,4 @@ public class AccommodationFeatures {
     boolean hairDryer;
     boolean kitchen;
     boolean sauna;
-
 }

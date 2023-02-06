@@ -5,6 +5,8 @@ import com.codecool.travelcool.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AccountService {
     private final AccountRepository accountRepository;
@@ -32,5 +34,9 @@ public class AccountService {
 
     public boolean checkEmailAndPassword(String email, String password) {
         return accountRepository.existsAccountByEmailAndPassword(email, password);
+    }
+
+    public Optional<Account> findById(long id) {
+        return accountRepository.findById(id);
     }
 }
