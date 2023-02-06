@@ -31,5 +31,7 @@ public class Booking {
     private int children;
     @NonNull
     @ManyToOne
+    @JoinColumn(name = "accommodation_id")
+    @JsonIgnore
     private Accommodation accommodation;
 }
