@@ -1,0 +1,34 @@
+.multiPartFormContainer {
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+    background: white;
+    border: 0.1px none black;
+    padding: 2rem;
+    margin: 1rem;
+    border-radius: .5rem;
+    font-family: Arial;
+    align-self: center;
+    max-width: 800px;
+    background-color: #EBEBEB;
+}
+
+.multipartFormButtonContainer {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    justify-content: right;
+}
+
+.multipartFormButtonContainer button {
+    margin: 5px;
+}
+
+.progressIndicator {
+    position: relative;
+    left: 100%;
+    transform: translateX(-50%);
+    padding-right: 10%;
+    width: max-content;
+}
+

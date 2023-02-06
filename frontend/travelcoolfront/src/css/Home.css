@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css?family=Murecho");
+
+body {
+    margin: 0;
+}
+
+.travel-suggestions {
+    margin: 25px 0 25px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.suggestions-text > * {
+    margin: 20px;
+}
+
+.suggestions-image > img {
+    border-radius: 5px;
+}
+
+.see-details {
+    width: 228px;
+    height: 48px;
+    padding: 0 10px 0 10px;
+    background: #444444;
+    color: #ffffff;
+    border-color: #444444;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    font-family: "Murecho", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 0;
+    cursor: pointer;
+}
+
+.flex-filter-box {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    background-color: #ebebeb;
+}
+
+#date-button {
+    margin-top: 0;
+}
+
+.search-input {
+    border-color: dimgrey;
+    border-width: 2px;
+    height: 16px;
+    border-style: solid;
+    border-radius: 25px;
+    font-family: "Murecho", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: left;
+    padding: 15px;
+    margin-right: 25px;
+}
+
+.start-date, .end-date {
+    padding: 13px;
+    color: dimgrey;
+    border-color: dimgrey;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px;
+    font-family: "Murecho", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    margin-right: 25px;
+}
+
+.filter-box-label {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    background-color: #ebebeb;
+}
