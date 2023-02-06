@@ -1,9 +1,9 @@
 import React from 'react'
-import AccommodationFormWrapper from './AccommodationFormWrapper'
+import FormWrapper from '../FormWrapper'
 
 const AddressForm = (props) => {
     return (
-        <AccommodationFormWrapper title="Address">
+        <FormWrapper title="Address">
             <label>
                 Country:
             </label>
@@ -40,7 +40,7 @@ const AddressForm = (props) => {
                 value={props.data.houseNumber || ''}
                 onChange={(e) => props.updateData({ houseNumber: e.target.value })}
                 required></input>
-        </AccommodationFormWrapper>
+        </FormWrapper>
     )
 }
 

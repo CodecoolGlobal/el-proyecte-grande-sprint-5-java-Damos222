@@ -48,6 +48,11 @@ public class AccommodationService {
         return accommodationRepository.findAccommodationsByType(type);
     }
 
+
+    public List<Accommodation> findByBookingsStartDateAfterAndEndDateBefore(LocalDate startDate, LocalDate endDate) {
+        return accommodationRepository.findByBookingsStartDateAfterAndEndDateBefore(startDate, endDate);
+    }
+
     public void save(Accommodation accommodation) {
         accommodationRepository.save(accommodation);
     }

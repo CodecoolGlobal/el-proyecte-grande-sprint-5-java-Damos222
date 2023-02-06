@@ -1,7 +1,7 @@
 import React from 'react'
-import '../../css/FormWrapper.css'
+import '../css/FormWrapper.css'
 
-const AccommodationFormWrapper = (props) => {
+const FormWrapper = (props) => {
     return (
         <>
             <h2>{props.title}</h2>
@@ -9,8 +9,7 @@ const AccommodationFormWrapper = (props) => {
                 {props.children}
             </div>
         </>
-
     )
 }
 
-export default AccommodationFormWrapper
+export default FormWrapper

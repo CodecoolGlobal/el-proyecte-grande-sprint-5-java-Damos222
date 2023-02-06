@@ -45,6 +45,16 @@ public class AccommodationsController {
         return accommodationService.findAll();
     }
 
+    @GetMapping("/byDate")
+    public List<Accommodation> findByDate(@RequestParam Long startDate, @RequestParam Long endDate) {
+        System.out.println(startDate + " " + endDate);
+        LocalDate fromDate = Instant.ofEpochMilli(startDate).atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate toDate = Instant.ofEpochMilli(endDate).atZone(ZoneId.systemDefault()).toLocalDate();
+        List<Accommodation> a = accommodationService.findByBookingsStartDateAfterAndEndDateBefore(fromDate, toDate);
+        System.out.println(a);
+        return a;
+    }
+
     @GetMapping("/priceBetween")
     public List<Accommodation> findBetweenPrices(@RequestParam double min, @RequestParam double max) {
         return accommodationService.findByPriceBetween(BigDecimal.valueOf(min), BigDecimal.valueOf(max));
@@ -105,15 +115,5 @@ public class AccommodationsController {
         accommodation.setHost(account);
 
         accommodationService.save(accommodation);
-    }
-
-    @GetMapping("/byDate")
-    public List<Accommodation> findByDate(@RequestParam Long startDate, @RequestParam Long endDate) {
-        System.out.println(startDate + " " + endDate);
-        LocalDate fromDate = Instant.ofEpochMilli(startDate).atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate toDate = Instant.ofEpochMilli(endDate).atZone(ZoneId.systemDefault()).toLocalDate();
-        List<Accommodation> a = accommodationService.findByBookingsStartDateAfterAndEndDateBefore(fromDate, toDate);
-//        System.out.println(a);
-        return a;
     }
 }

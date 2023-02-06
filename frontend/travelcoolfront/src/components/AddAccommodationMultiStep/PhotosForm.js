@@ -1,14 +1,14 @@
 import React from 'react'
-import AccommodationFormWrapper from './AccommodationFormWrapper'
-import "../../css/FotosForm.css"
+import FormWrapper from '../FormWrapper'
+import Gallery from '../Gallery'
 
 const PhotosForm = (props) => {
 
     return (
         <>
-            <AccommodationFormWrapper title="Fotos">
+            <FormWrapper title="Photos">
                 <label>
-                    Add fotos:
+                    Add photos:
                     <input type='file' id='images' name='images' multiple
                         onChange={(e) => {
                             props.updateImages(e.target.files)
@@ -16,17 +16,8 @@ const PhotosForm = (props) => {
                         }} required={props.images.length === 0} accept="image/*"></input>
                 </label>
                 <br></br>
-            </AccommodationFormWrapper>
-            <div id='gallery'>
-                {props.images && props.images.map((image, i) => {
-                    return (
-                        <figure key={i}>
-                            <img  className='singleImage' src={image} alt='' style={{ width: "100px" }}></img>
-                            <figcaption >{props.files[i].name}</figcaption>
-                        </figure>
-                    )
-                })}
-            </div>
+            </FormWrapper>
+            <Gallery images={props.images} files={props.files} />
         </>
     )
 }

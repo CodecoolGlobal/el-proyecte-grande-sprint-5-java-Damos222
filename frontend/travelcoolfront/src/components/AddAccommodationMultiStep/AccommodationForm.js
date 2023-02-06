@@ -21,13 +21,13 @@ const INITIAL_DATA = {
     description: '',
     pricePerNight: '',
     type: '',
-    parking: '',
-    pool: '',
-    towels: '',
-    bedSheets: '',
-    hairDryer: '',
-    kitchen: '',
-    sauna: '',
+    parking: false,
+    pool: false,
+    towels: false,
+    bedSheets: false,
+    hairDryer: false,
+    kitchen: false,
+    sauna: false,
 }
 
 const AccommodationForm = () => {
@@ -66,8 +66,6 @@ const AccommodationForm = () => {
         setData(prev => {
             return { ...prev, ...newInput }
         })
-        console.log("data: ", data)
-        console.log('files: ', files)
     }
 
     const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } = useMultipartForm([
@@ -75,7 +73,7 @@ const AccommodationForm = () => {
         <PhotosForm files={files} updateImages={updateImages} images={images} updateFiles={updateFiles}></PhotosForm>,
         <AccommodationDetailsForm data={data} updateData={updateData}></AccommodationDetailsForm>,
         <FeaturesForm data={data} updateData={updateData}></FeaturesForm>,
-        <OverviewAndConfirm data={data} updateData={updateData} images={images}></OverviewAndConfirm>
+        <OverviewAndConfirm data={data} updateData={updateData} images={images} files={files}></OverviewAndConfirm>
     ])
 
     async function onSubmit(e) {
