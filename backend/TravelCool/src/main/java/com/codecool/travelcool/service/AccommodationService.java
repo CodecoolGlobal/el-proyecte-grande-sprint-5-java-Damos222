@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,11 @@ public class AccommodationService {
 
     public List<Accommodation> findByType(AccommodationType type) {
         return accommodationRepository.findAccommodationsByType(type);
+    }
+
+
+    public List<Accommodation> findByBookingsStartDateAfterAndEndDateBefore(LocalDate startDate, LocalDate endDate) {
+        return accommodationRepository.findByBookingsStartDateAfterAndEndDateBefore(startDate, endDate);
     }
 
     public void save(Accommodation accommodation) {

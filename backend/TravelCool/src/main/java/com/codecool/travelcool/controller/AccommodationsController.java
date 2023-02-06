@@ -16,6 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List
 import java.util.*;
 
 @RestController
@@ -40,6 +44,16 @@ public class AccommodationsController {
     @GetMapping("/all")
     public List<Accommodation> findAll() {
         return accommodationService.findAll();
+    }
+
+    @GetMapping("/byDate")
+    public List<Accommodation> findByDate(@RequestParam Long startDate, @RequestParam Long endDate) {
+        System.out.println(startDate + " " + endDate);
+        LocalDate fromDate = Instant.ofEpochMilli(startDate).atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate toDate = Instant.ofEpochMilli(endDate).atZone(ZoneId.systemDefault()).toLocalDate();
+        List<Accommodation> a = accommodationService.findByBookingsStartDateAfterAndEndDateBefore(fromDate, toDate);
+        System.out.println(a);
+        return a;
     }
 
     @GetMapping("/priceBetween")
