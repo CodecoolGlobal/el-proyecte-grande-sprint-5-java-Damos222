@@ -22,7 +22,6 @@ import java.time.ZoneId;
 import java.util.*;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/accommodations")
 public class AccommodationsController {
     private final AccommodationService accommodationService;
@@ -102,7 +101,7 @@ public class AccommodationsController {
         accommodation.setFeatures(features);
         accommodation.setAddress(address);
 
-        //todo: find better solution
+        //todo: find better solution to save all images
         accommodation.setImage(images.get(0));
 
         images.clear();
