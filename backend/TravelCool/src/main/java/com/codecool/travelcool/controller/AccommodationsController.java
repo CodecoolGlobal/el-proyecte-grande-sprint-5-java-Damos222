@@ -22,7 +22,7 @@ import java.time.ZoneId;
 import java.util.*;
 
 @RestController
-@CrossOrigin
+@CrossOrigin // TODO: remove this in all Controllers when security is added
 @RequestMapping("/accommodations")
 public class AccommodationsController {
     private final AccommodationService accommodationService;
