@@ -42,7 +42,6 @@ public class AccommodationDto {
         accommodation.setDescription(description);
         accommodation.setType(type);
         accommodation.setPricePerNight(BigDecimal.valueOf(pricePerNight));
-
         return accommodation;
     }
 

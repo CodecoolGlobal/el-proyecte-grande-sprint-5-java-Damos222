@@ -13,22 +13,18 @@ import lombok.*;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class Address {
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
     private String country;
-    @NonNull
     private int zipCode;
-    @NonNull
     private String City;
-    @NonNull
     private String street;
-    @NonNull
     private String houseNumber;
 }

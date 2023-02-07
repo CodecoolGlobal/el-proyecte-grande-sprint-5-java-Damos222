@@ -40,8 +40,8 @@ class AccommodationRepositoryFindByHostIdTest {
     void before() {
         Stream.of("host-1", "host2", "host-3")
                 .map(Account::new)
-                .map(account -> accountRepository.save(account))
-                .forEach(account -> accounts.add(account));
+                .map(account -> accountRepository.save((Account) account))
+                .forEach(account -> accounts.add((Account) account));
 
         Accommodation accommodation1 = new Accommodation("accommodation-1", accounts.get(1));
         accommodationRepository.save(accommodation1);

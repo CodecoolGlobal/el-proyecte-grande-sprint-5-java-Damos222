@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Component
 @Data
 @NoArgsConstructor
-public class CheckoutDto {
+public class BookingDto {
     private String title;
     private int capacity;
     private String description;
@@ -33,6 +33,7 @@ public class CheckoutDto {
     private String password;
     private String firstName;
     private String lastName;
+    private Address address;
 
 
     public Accommodation getAccommodation() {
@@ -60,8 +61,6 @@ public class CheckoutDto {
         booking.setStartDate(startDate);
         booking.setEndDate(endDate);
         booking.setTimestamp(timestamp);
-        booking.setBooker(getAccount());
-        booking.setAccommodation(getAccommodation());
         return booking;
     }
 

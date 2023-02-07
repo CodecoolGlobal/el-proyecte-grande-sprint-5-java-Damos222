@@ -1,16 +1,10 @@
 package com.codecool.travelcool.controller;
 
 import com.codecool.travelcool.dto.AccommodationDto;
-import com.codecool.travelcool.model.Accommodation;
-import com.codecool.travelcool.model.AccommodationFeatures;
-import com.codecool.travelcool.model.Account;
-import com.codecool.travelcool.model.Address;
-import com.codecool.travelcool.service.AccommodationService;
-import com.codecool.travelcool.service.AccountService;
-import com.codecool.travelcool.service.AddressService;
-import com.codecool.travelcool.service.FeaturesService;
+import com.codecool.travelcool.dto.BookingDto;
+import com.codecool.travelcool.model.*;
+import com.codecool.travelcool.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,14 +24,17 @@ public class AccommodationsController {
     private final AccountService accountService;
     private final FeaturesService featuresService;
     private final AddressService addressService;
+    private final BookingService bookingService;
 
 
     @Autowired
-    public AccommodationsController(AccommodationService accommodationService, AccountService accountService, FeaturesService featuresService, AddressService addressService) {
+    public AccommodationsController(AccommodationService accommodationService, AccountService accountService,
+                                    FeaturesService featuresService, AddressService addressService, BookingService bookingService) {
         this.accommodationService = accommodationService;
         this.accountService = accountService;
         this.featuresService = featuresService;
         this.addressService = addressService;
+        this.bookingService = bookingService;
     }
 
     @GetMapping("/all")
@@ -116,7 +113,18 @@ public class AccommodationsController {
     }
 
     @PostMapping("/checkout")
-    public void checkout(@RequestBody AccommodationDto formData) {
+    public void checkout(@RequestBody BookingDto formData) {
+        Accommodation accommodation = formData.getAccommodation();
+        Booking booking = formData.getBooking();
+        Account account = formData.getAccount();
+        Address accountAddress = formData.getAddress();
 
+        account.setAddress(accountAddress);
+        booking.setBooker(account);
+        booking.setAccommodation(accommodation);
+
+        accountService.save(account);
+        addressService.save(accountAddress);
+        bookingService.save(booking);
     }
 }

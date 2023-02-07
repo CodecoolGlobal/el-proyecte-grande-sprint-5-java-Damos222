@@ -7,10 +7,31 @@ import AccommodationDetailsForm from "../AddAccommodationMultiStep/Accommodation
 import FeaturesForm from "../AddAccommodationMultiStep/FeaturesForm";
 import OverviewAndConfirm from "../AddAccommodationMultiStep/OverviewAndConfirm";
 
+const INITIAL_DATA = {
+    title: '',
+    capacity: '',
+    description: '',
+    type: '',
+    pricePerNight: '',
+    houseNumber: '',
+    city: '',
+    street: '',
+    zipCode: '',
+    country: '',
+    startDate: '',
+    endDate: '',
+    timestamp: '',
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    address: ''
+}
+
 
 export default function CheckoutForm({fromDate, toDate}) {
     const navigate = useNavigate();
-    const [data, setData] = useState();
+    const [data, setData] = useState(INITIAL_DATA);
 
 
     function updateData(newInput) {
@@ -39,7 +60,7 @@ export default function CheckoutForm({fromDate, toDate}) {
         console.log(data);
 
         try {
-            let res = await fetch("http://localhost:8080/accommodations/add", {
+            let res = await fetch("http://localhost:8080/accommodations/checkout", {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {

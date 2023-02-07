@@ -9,25 +9,22 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
-    @NonNull
     private LocalDate startDate;
-    @NonNull
     private LocalDate endDate;
-    @NonNull
     @Temporal(value = TemporalType.TIMESTAMP)
     @GeneratedValue
     private Timestamp timestamp;
     @ManyToOne
     private Account booker;
-    @NonNull
     @ManyToOne
     @JoinColumn(name = "accommodation_id")
     @JsonIgnore
