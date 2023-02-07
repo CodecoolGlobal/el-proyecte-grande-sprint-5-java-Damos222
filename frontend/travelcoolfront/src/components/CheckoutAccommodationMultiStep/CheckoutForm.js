@@ -20,7 +20,6 @@ const INITIAL_DATA = {
     country: '',
     startDate: '',
     endDate: '',
-    timestamp: '',
     email: '',
     password: '',
     firstName: '',
@@ -60,7 +59,7 @@ export default function CheckoutForm({fromDate, toDate}) {
         console.log(data);
 
         try {
-            let res = await fetch("http://localhost:8080/accommodations/checkout", {
+            let res = await fetch("http://localhost:8080/bookings/checkout", {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {

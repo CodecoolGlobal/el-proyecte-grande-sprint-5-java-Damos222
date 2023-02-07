@@ -1,10 +1,7 @@
 package com.codecool.travelcool.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +19,14 @@ public class Address {
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String country;
+    @Column(nullable = false)
     private int zipCode;
-    private String City;
+    @Column(nullable = false)
+    private String city;
+    @Column(nullable = false)
     private String street;
+    @Column(nullable = false)
     private String houseNumber;
 }

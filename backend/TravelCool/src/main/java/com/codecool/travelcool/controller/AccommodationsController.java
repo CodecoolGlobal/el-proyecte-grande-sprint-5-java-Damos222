@@ -111,20 +111,4 @@ public class AccommodationsController {
 
         accommodationService.save(accommodation);
     }
-
-    @PostMapping("/checkout")
-    public void checkout(@RequestBody BookingDto formData) {
-        Accommodation accommodation = formData.getAccommodation();
-        Booking booking = formData.getBooking();
-        Account account = formData.getAccount();
-        Address accountAddress = formData.getAddress();
-
-        account.setAddress(accountAddress);
-        booking.setBooker(account);
-        booking.setAccommodation(accommodation);
-
-        accountService.save(account);
-        addressService.save(accountAddress);
-        bookingService.save(booking);
-    }
 }

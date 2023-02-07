@@ -21,7 +21,7 @@ function App() {
                         <Route path="/" exact element={<Home/>}/>
                         <Route path="/accommodations/all" exact element={<AllAccommodations/>}/>
                         <Route path="/accommodations/:id" exact element={<AccommodationDetails setFromDate={setFromDate} setToDate={setToDate}/>}/>
-                        <Route path="/accommodations/checkout" exact element={<CheckoutForm fromDate={fromDate} toDate={toDate}/>}/>
+                        <Route path="/bookings/checkout" exact element={<CheckoutForm fromDate={fromDate} toDate={toDate}/>}/>
                         <Route path="/addAccommodation" element={<AccommodationForm />} />
                     </Routes>
                 </div>

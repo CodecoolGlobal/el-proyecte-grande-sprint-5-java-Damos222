@@ -18,7 +18,7 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
     function navigateToCheckout() {
         setFromDate(startDate.toLocaleDateString("en-CA"));
         setToDate(endDate.toLocaleDateString("en-CA"));
-        navigate("/accommodations/checkout");
+        navigate("/bookings/checkout");
     }
 
 

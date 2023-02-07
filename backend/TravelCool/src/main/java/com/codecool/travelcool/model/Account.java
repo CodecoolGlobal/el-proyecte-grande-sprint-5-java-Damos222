@@ -1,5 +1,6 @@
 package com.codecool.travelcool.model;
 
+import com.codecool.travelcool.dto.AccountDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,7 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@RequiredArgsConstructor
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Account {
@@ -15,14 +16,23 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
-    @NonNull
+    @Column(nullable = false)
     private String email;
-    @NonNull
+    @Column(nullable = false)
     private String password;
-    @NonNull
+    @Column(nullable = false)
     private String firstName;
-    @NonNull
+    @Column(nullable = false)
     private String lastName;
     @ManyToOne
     private Address address;
+
+    public AccountDto getAccountDto() {
+        AccountDto accountDto = new AccountDto();
+        accountDto.setEmail(email);
+        accountDto.setPassword(password);
+        accountDto.setPassword(firstName);
+        accountDto.setPassword(lastName);
+        return accountDto;
+    }
 }

@@ -32,7 +32,7 @@ public class AccommodationDto {
     private boolean sauna;
     private int capacity;
     private String description;
-    private Double pricePerNight;
+    private BigDecimal pricePerNight;
     private AccommodationType type;
 
     public Accommodation getAccommodation() {
@@ -41,7 +41,7 @@ public class AccommodationDto {
         accommodation.setCapacity(capacity);
         accommodation.setDescription(description);
         accommodation.setType(type);
-        accommodation.setPricePerNight(BigDecimal.valueOf(pricePerNight));
+        accommodation.setPricePerNight(pricePerNight);
         return accommodation;
     }
 
