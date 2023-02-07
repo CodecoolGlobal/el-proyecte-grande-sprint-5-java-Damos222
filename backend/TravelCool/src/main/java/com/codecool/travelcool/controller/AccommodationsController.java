@@ -50,9 +50,7 @@ public class AccommodationsController {
         System.out.println(startDate + " " + endDate);
         LocalDate fromDate = Instant.ofEpochMilli(startDate).atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate toDate = Instant.ofEpochMilli(endDate).atZone(ZoneId.systemDefault()).toLocalDate();
-        List<Accommodation> a = accommodationService.findByBookingsStartDateAfterAndEndDateBefore(fromDate, toDate);
-        System.out.println(a);
-        return a;
+        return accommodationService.findByBookingsStartDateAfterAndEndDateBefore(fromDate, toDate);
     }
 
     @GetMapping("/priceBetween")
@@ -115,5 +113,10 @@ public class AccommodationsController {
         accommodation.setHost(account);
 
         accommodationService.save(accommodation);
+    }
+
+    @PostMapping("/checkout")
+    public void checkout(@RequestBody AccommodationDto formData) {
+
     }
 }

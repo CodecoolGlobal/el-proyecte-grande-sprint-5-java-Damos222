@@ -27,8 +27,6 @@ public class Booking {
     private Timestamp timestamp;
     @ManyToOne
     private Account booker;
-    private int adults;
-    private int children;
     @NonNull
     @ManyToOne
     @JoinColumn(name = "accommodation_id")
