@@ -9,12 +9,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
-import java.awt.print.Book;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Configuration
 @RequiredArgsConstructor
@@ -38,7 +39,12 @@ public class TravelCoolRunner implements CommandLineRunner {
 
     private void createAccount() {
         accounts = List.of(
-                Account.builder().email("example@gmail.com").password("password").firstName("Anna").lastName("Miller").address(addresses.get(0)).build()
+                Account.builder()
+                        .email("example@gmail.com")
+                        .password("password")
+                        .firstName("Anna")
+                        .lastName("Miller")
+                        .address(addresses.get(0)).build()
         );
         accountRepository.saveAll(accounts);
     }
@@ -55,8 +61,14 @@ public class TravelCoolRunner implements CommandLineRunner {
         );
 
         bookings = List.of(
-                Booking.builder().startDate(startDates.get(0)).endDate(endDates.get(0)).timestamp(new Timestamp(System.currentTimeMillis())).build(),
-                Booking.builder().startDate(startDates.get(1)).endDate(endDates.get(1)).timestamp(new Timestamp(System.currentTimeMillis())).build()
+                Booking.builder()
+                        .startDate(startDates.get(0))
+                        .endDate(endDates.get(0))
+                        .timestamp(new Timestamp(System.currentTimeMillis())).build(),
+                Booking.builder()
+                        .startDate(startDates.get(1))
+                        .endDate(endDates.get(1))
+                        .timestamp(new Timestamp(System.currentTimeMillis())).build()
         );
 
         bookingRepository.saveAll(bookings);
@@ -67,10 +79,30 @@ public class TravelCoolRunner implements CommandLineRunner {
 
     public void createAddresses() {
         addresses = List.of(
-                Address.builder().country("Spain").zipCode(2343).city("Cádiz").street("C. Baleares").houseNumber("2").build(),
-                Address.builder().country("France").zipCode(1234).city("Marseille").street("Rue Lafon").houseNumber("1").build(),
-                Address.builder().country("Germany").zipCode(4332).city("Berlin").street("Emser Straße").houseNumber("55").build(),
-                Address.builder().country("Portugal").zipCode(6443).city("Nazaré").street("R. da Paz").houseNumber("91").build()
+                Address.builder()
+                        .country("Spain")
+                        .zipCode(2343)
+                        .city("Cádiz")
+                        .street("C. Baleares")
+                        .houseNumber("2").build(),
+                Address.builder()
+                        .country("France")
+                        .zipCode(1234)
+                        .city("Marseille")
+                        .street("Rue Lafon")
+                        .houseNumber("1").build(),
+                Address.builder()
+                        .country("Germany")
+                        .zipCode(4332)
+                        .city("Berlin")
+                        .street("Emser Straße")
+                        .houseNumber("55").build(),
+                Address.builder()
+                        .country("Portugal")
+                        .zipCode(6443)
+                        .city("Nazaré")
+                        .street("R. da Paz")
+                        .houseNumber("91").build()
         );
 
         addressRepository.saveAll(addresses);
@@ -110,7 +142,7 @@ public class TravelCoolRunner implements CommandLineRunner {
                         .pricePerNight(new BigDecimal(50))
                         .type(AccommodationType.ROOM)
                         .address(addresses.get(3)).build()
-                );
+        );
 
         accommodationRepository.saveAll(accommodations);
     }
