@@ -78,12 +78,39 @@ public class TravelCoolRunner implements CommandLineRunner {
 
     public void createAccommodations() throws IOException {
         accommodations = List.of(
-                // TODO: use builder
-                new Accommodation(2, "Rose Apartment", "Luxury apartment", getByteArrayOfImage("images/bedroom-1.jpg"), new BigDecimal(500), AccommodationType.APARTMENT, addresses.get(0)),
-                new Accommodation(4, "Cozy Room", "Near the beach", getByteArrayOfImage("images/bedroom-2.jpg"), new BigDecimal(100), AccommodationType.ROOM, addresses.get(1)),
-                new Accommodation(5, "City Apartment", "Apartment in the city center", getByteArrayOfImage("images/bedroom-3.jpg"), new BigDecimal(600), AccommodationType.APARTMENT, addresses.get(2)),
-                new Accommodation(1, "Sunny room", "Sunny single room for adventurous travellers", getByteArrayOfImage("images/bedroom-4.jpg"), new BigDecimal(50), AccommodationType.ROOM, addresses.get(3))
-        );
+                Accommodation.builder()
+                        .capacity(2)
+                        .name("Rose Apartment")
+                        .description("Luxury apartment")
+                        .image(getByteArrayOfImage("images/bedroom-1.jpg"))
+                        .pricePerNight(new BigDecimal(500))
+                        .type(AccommodationType.APARTMENT)
+                        .address(addresses.get(0)).build(),
+                Accommodation.builder()
+                        .capacity(4)
+                        .name("Cozy Room")
+                        .description("Near the beach")
+                        .image(getByteArrayOfImage("images/bedroom-2.jpg"))
+                        .pricePerNight(new BigDecimal(100))
+                        .type(AccommodationType.ROOM)
+                        .address(addresses.get(1)).build(),
+                Accommodation.builder()
+                        .capacity(5)
+                        .name("City Apartment")
+                        .description("Apartment in the city center")
+                        .image(getByteArrayOfImage("images/bedroom-3.jpg"))
+                        .pricePerNight(new BigDecimal(600))
+                        .type(AccommodationType.APARTMENT)
+                        .address(addresses.get(2)).build(),
+                Accommodation.builder()
+                        .capacity(1)
+                        .name("Sunny room")
+                        .description("Sunny single room for adventurous travellers")
+                        .image(getByteArrayOfImage("images/bedroom-4.jpg"))
+                        .pricePerNight(new BigDecimal(50))
+                        .type(AccommodationType.ROOM)
+                        .address(addresses.get(3)).build()
+                );
 
         accommodationRepository.saveAll(accommodations);
     }
