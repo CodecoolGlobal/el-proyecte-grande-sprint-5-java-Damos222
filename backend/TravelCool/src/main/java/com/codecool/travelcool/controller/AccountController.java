@@ -4,6 +4,9 @@ import com.codecool.travelcool.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/accounts")
 public class AccountController {
@@ -19,9 +22,9 @@ public class AccountController {
         accountService.register(email, password);
     }
 
-    @GetMapping ("/emailAvailable")
-    public boolean emailAvailable(@RequestParam String email) {
-        return accountService.emailAvailable(email);
+    @GetMapping ("/emailAvailable/{email}")
+    public Map<String, Boolean> emailAvailable(@PathVariable String email) {
+        return Collections.singletonMap("emailAvailable", accountService.emailAvailable(email));
     }
 
     @GetMapping("/checkLoginData")

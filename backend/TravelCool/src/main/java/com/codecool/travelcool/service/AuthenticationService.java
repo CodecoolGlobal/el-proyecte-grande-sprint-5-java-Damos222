@@ -1,8 +1,8 @@
 package com.codecool.travelcool.service;
 
-import com.codecool.travelcool.dto.AuthenticationRequest;
-import com.codecool.travelcool.dto.AuthenticationResponse;
-import com.codecool.travelcool.dto.RegisterRequest;
+import com.codecool.travelcool.dto.AuthenticationRequestDto;
+import com.codecool.travelcool.dto.AuthenticationResponseDto;
+import com.codecool.travelcool.dto.RegisterRequestDto;
 import com.codecool.travelcool.model.Account;
 import com.codecool.travelcool.model.Role;
 import com.codecool.travelcool.repository.AccountRepository;
@@ -20,7 +20,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request) {
+    public AuthenticationResponseDto register(RegisterRequestDto request) {
         var account = Account.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
@@ -30,12 +30,12 @@ public class AuthenticationService {
                 .build();
         accountRepository.save(account);
         var jwtToken = jwtService.generateToken(account);
-        return AuthenticationResponse.builder()
+        return AuthenticationResponseDto.builder()
                 .token(jwtToken)
                 .build();
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponseDto authenticate(AuthenticationRequestDto request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -45,7 +45,7 @@ public class AuthenticationService {
         var account = accountRepository.findAccountByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(account);
-        return AuthenticationResponse.builder()
+        return AuthenticationResponseDto.builder()
                 .token(jwtToken)
                 .build();
     }
