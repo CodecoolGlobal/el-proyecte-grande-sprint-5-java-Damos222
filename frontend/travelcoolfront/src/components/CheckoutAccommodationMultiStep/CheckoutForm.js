@@ -8,23 +8,14 @@ import FeaturesForm from "../AddAccommodationMultiStep/FeaturesForm";
 import OverviewAndConfirm from "../AddAccommodationMultiStep/OverviewAndConfirm";
 
 const INITIAL_DATA = {
-    title: '',
-    capacity: '',
-    description: '',
-    type: '',
-    pricePerNight: '',
-    houseNumber: '',
-    city: '',
-    street: '',
-    zipCode: '',
-    country: '',
-    startDate: '',
-    endDate: '',
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    address: ''
+    accommodationDto: {
+        id: ""
+    },
+    startDate: "",
+    endDate: "",
+    booker: {
+        id: ""
+    }
 }
 
 
