@@ -1,5 +1,5 @@
 import '../css/AllAccommodations.css';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import DatePicker from "react-datepicker";
 
 export default function AllAccommodations() {
@@ -7,11 +7,13 @@ export default function AllAccommodations() {
     const [endDate, setEndDate] = useState(addDays(5));
     const [searchTerm, setSearchTerm] = useState("");
     const [accommodations, setAccommodations] = useState([]);
+    const [price, setPrice] = useState("10000");
+
 
     function addDays(days) {
         return new Date(Date.now() + 864e5 * days);     // 864e5: number of milliseconds in a 24-hour day
     }
-    
+
     const fetchAccommodations = () => {
         return fetch("http://localhost:8080/accommodations/all")
             .then((response) => response.json())
@@ -31,6 +33,7 @@ export default function AllAccommodations() {
     useEffect(() => {
         fetchAccommodations();
     }, [])
+
 
     return (
         <>
@@ -56,16 +59,30 @@ export default function AllAccommodations() {
                         selected={endDate}
                         onChange={(date) => setEndDate(date)}/>
                 </div>
+                    <input
+                        onChange={(e) => setPrice(e.target.value)}
+                        className="row"
+                        type="text"
+                        placeholder="max. price per night"
+                    />
+
+
                 <button id="date-button" className="see-details" onClick={() => fetchAccommodationsByDate()}>Search for date span</button>
             </div>
             <div className="all-accommodations">
                 <h1>Accommodations</h1>
                 {accommodations.filter((accommodation => {
                     if (searchTerm.toLowerCase() === "") {
-                        return accommodation;
+                        return accommodation.pricePerNight <= parseInt(price, 10);
                     } else {
-                        return accommodation.address.country.toLowerCase().includes(searchTerm);
+                        return (
+                            accommodation.address.country.toLowerCase().includes(searchTerm)
+                                || accommodation.address.city.toLowerCase().includes(searchTerm))
+                            && accommodation.pricePerNight <= parseInt(price, 10);
                     }
+
+
+
                 })).map((accommodation) => {
                     const source = "data:image/jpg;base64," + accommodation.image;
                     return (

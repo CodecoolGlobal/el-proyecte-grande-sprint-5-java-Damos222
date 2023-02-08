@@ -61,7 +61,7 @@ body {
     margin-right: 25px;
 }
 
-.start-date, .end-date {
+.start-date, .end-date, .row {
     padding: 13px;
     color: dimgrey;
     border-color: dimgrey;
