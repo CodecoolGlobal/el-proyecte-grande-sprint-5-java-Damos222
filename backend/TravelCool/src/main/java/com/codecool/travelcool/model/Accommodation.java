@@ -1,6 +1,7 @@
 package com.codecool.travelcool.model;
 
 import com.codecool.travelcool.dto.AccommodationDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,14 +35,14 @@ public class Accommodation {
     @Column(nullable = false)
     private AccommodationType type;
     @ManyToOne
+    @JsonIgnore
     private Account host;
-    @Column(nullable = false)
     @ManyToOne
     private Address address;
     @OneToMany(mappedBy = "accommodation")
     private Set<Booking> bookings = new HashSet<>();
 
-    public AccommodationDto getAccommodationDto() {
+    public AccommodationDto toAccommodationDto() {
         AccommodationDto accommodationDto = new AccommodationDto();
         accommodationDto.setTitle(name);
         accommodationDto.setCapacity(capacity);

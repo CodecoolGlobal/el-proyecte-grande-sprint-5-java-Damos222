@@ -20,28 +20,27 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
-    @NonNull
+    @Column(nullable = false)
     private LocalDate startDate;
-    @NonNull
+    @Column(nullable = false)
     private LocalDate endDate;
-    @NonNull
+    @Column(nullable = false)
     @Temporal(value = TemporalType.TIMESTAMP)
     @GeneratedValue
     private Timestamp timestamp;
     @ManyToOne
     private Account booker;
-    @NonNull
     @ManyToOne
-    @JoinColumn(name = "accommodation_id")
+    @JoinColumn(name = "accommodation_id", nullable = false)
     @JsonIgnore
     private Accommodation accommodation;
 
-    public BookingDto getBookingDto() {
+    public BookingDto toBookingDto() {
         BookingDto bookingDto = new BookingDto();
         bookingDto.setStartDate(startDate);
         bookingDto.setEndDate(endDate);
-        bookingDto.setBooker(booker.getAccountDto());
-        AccommodationDto accommodationDto = accommodation.getAccommodationDto();
+        bookingDto.setBooker(booker.toAccountDto());
+        AccommodationDto accommodationDto = accommodation.toAccommodationDto();
         bookingDto.setAccommodationDto(accommodationDto);
         return bookingDto;
     }

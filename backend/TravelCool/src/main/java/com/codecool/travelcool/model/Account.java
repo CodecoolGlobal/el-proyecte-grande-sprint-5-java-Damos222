@@ -1,7 +1,6 @@
 package com.codecool.travelcool.model;
 
 import com.codecool.travelcool.dto.AccountDto;
-import com.codecool.travelcool.dto.AddressDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,9 +25,10 @@ public class Account {
     @Column(nullable = false)
     private String lastName;
     @ManyToOne
+    @JsonIgnore
     private Address address;
 
-    public AccountDto getAccountDto() {
+    public AccountDto toAccountDto() {
         AccountDto accountDto = new AccountDto();
         accountDto.setEmail(email);
         accountDto.setPassword(password);

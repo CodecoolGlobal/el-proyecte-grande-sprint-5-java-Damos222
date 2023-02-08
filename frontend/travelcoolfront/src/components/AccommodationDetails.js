@@ -4,7 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import DatePicker from "react-datepicker";
 
 
-export default function AccommodationDetails({setFromDate, setToDate, setAccommodationId}) {
+export default function AccommodationDetails({setFromDate, setToDate, setAccommodationId, setAcc}) {
     const [accommodation, setAccommodation] = useState(null);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(addDays(5));

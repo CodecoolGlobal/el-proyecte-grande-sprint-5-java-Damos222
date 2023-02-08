@@ -64,15 +64,17 @@ public class TravelCoolRunner implements CommandLineRunner {
                 Booking.builder()
                         .startDate(startDates.get(0))
                         .endDate(endDates.get(0))
-                        .timestamp(new Timestamp(System.currentTimeMillis())).build(),
+                        .timestamp(new Timestamp(System.currentTimeMillis()))
+                        .accommodation(accommodations.get(0)).build(),
                 Booking.builder()
                         .startDate(startDates.get(1))
                         .endDate(endDates.get(1))
-                        .timestamp(new Timestamp(System.currentTimeMillis())).build()
+                        .timestamp(new Timestamp(System.currentTimeMillis()))
+                        .accommodation(accommodations.get(1)).build()
         );
 
         bookingRepository.saveAll(bookings);
-        accommodations.get(0).getBookings().add(bookings.get(0));
+        accommodations.get(0).setBookings(Set.of(bookings.get(0)));
         accommodations.get(1).setBookings(Set.of(bookings.get(1)));
 
     }

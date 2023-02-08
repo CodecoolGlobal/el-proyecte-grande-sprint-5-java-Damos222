@@ -26,14 +26,4 @@ public class Address {
     private String street;
     @Column(nullable = false)
     private String houseNumber;
-
-    public AddressDto getAddressDto() {
-        AddressDto addressDto = new AddressDto();
-        addressDto.setCountry(country);
-        addressDto.setZipCode(zipCode);
-        addressDto.setCity(city);
-        addressDto.setStreet(street);
-        addressDto.setHouseNumber(houseNumber);
-        return addressDto;
-    }
 }

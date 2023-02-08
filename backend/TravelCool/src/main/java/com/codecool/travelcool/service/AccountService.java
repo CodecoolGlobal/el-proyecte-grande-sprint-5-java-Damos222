@@ -1,10 +1,12 @@
 package com.codecool.travelcool.service;
 
+import com.codecool.travelcool.dto.AccountDto;
 import com.codecool.travelcool.model.Account;
 import com.codecool.travelcool.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +40,9 @@ public class AccountService {
 
     public Optional<Account> findById(long id) {
         return accountRepository.findById(id);
+    }
+
+    public List<AccountDto> findAll() {
+        return accountRepository.findAll().stream().map(Account::toAccountDto).toList();
     }
 }

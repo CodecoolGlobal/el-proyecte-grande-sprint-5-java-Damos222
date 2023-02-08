@@ -1,6 +1,5 @@
 package com.codecool.travelcool.service;
 
-import com.codecool.travelcool.dto.AccountDto;
 import com.codecool.travelcool.dto.BookingDto;
 import com.codecool.travelcool.model.Accommodation;
 import com.codecool.travelcool.model.Account;
@@ -9,11 +8,8 @@ import com.codecool.travelcool.repository.AccommodationRepository;
 import com.codecool.travelcool.repository.AccountRepository;
 import com.codecool.travelcool.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Book;
-import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -24,7 +20,7 @@ public class BookingService {
     private final AccountRepository accountRepository;
 
     public List<BookingDto> findAll() {
-        return bookingRepository.findAll().stream().map(Booking::getBookingDto).toList();
+        return bookingRepository.findAll().stream().map(Booking::toBookingDto).toList();
     }
 
     public void save(BookingDto bookingDto) {
