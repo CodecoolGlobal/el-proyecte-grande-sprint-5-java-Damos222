@@ -2,6 +2,7 @@ import '../css/LoginForm.css';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { areDayPropsEqual } from '@mui/x-date-pickers/PickersDay/PickersDay';
 
 const LoginForm = () => {
     const navigate = useNavigate()
@@ -12,17 +13,17 @@ const LoginForm = () => {
         console.log(data)
         const response = await fetch('http://localhost:8080/api/v1/auth/authenticate', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(data),
             mode: 'cors'
         })
         if (response.ok) {
             const json = await response.json()
             const token = json.token
+            localStorage.setItem('token', token)
             document.cookie('token', token)
             document.cookie('email', data.email)
-            document.cookie.
-            console.log(token)
+            props.setLoggedIn(true)
             navigate("/")
         } else {
             alert("Wrong username or password")

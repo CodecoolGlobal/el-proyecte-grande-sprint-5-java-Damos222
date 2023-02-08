@@ -25,7 +25,7 @@ const Header = () => {
                 </a>
             </div>
             <Modal open={showLoginModal} onClose={() => setShowLoginModal(false)}>
-                <LoginForm/>
+                <LoginForm setLoggedIn={props.setLoggedIn}/>
             </Modal>
             <Modal open={showRegistrationModal} onClose={() => setShowRegistrationModal(false)}>
                 <RegistrationForm/>
