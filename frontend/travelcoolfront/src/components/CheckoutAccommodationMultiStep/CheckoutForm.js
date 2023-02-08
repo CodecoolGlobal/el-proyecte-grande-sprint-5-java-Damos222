@@ -1,10 +1,6 @@
 import '../../css/Checkout.css';
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import useMultipartForm from "../useMultistepForm";
-import AddressForm from "../AddAccommodationMultiStep/AddressForm";
-import AccommodationDetailsForm from "../AddAccommodationMultiStep/AccommodationDetailsForm";
-import OverviewAndConfirm from "../AddAccommodationMultiStep/OverviewAndConfirm";
 
 const INITIAL_DATA = {
     accommodationDto: {
@@ -17,29 +13,13 @@ const INITIAL_DATA = {
     }
 }
 
-
-export default function CheckoutForm({fromDate, toDate}) {
+export default function CheckoutForm({fromDate, toDate, accommodationId}) {
     const navigate = useNavigate();
     const [data, setData] = useState(INITIAL_DATA);
 
 
-    function updateData(newInput) {
-        setData(prev => {
-            return {...prev, ...newInput}
-        })
-    }
-
-    const {steps, currentStepIndex, step, isFirstStep, isLastStep, back, next} = useMultipartForm([
-        <AddressForm data={data} updateData={updateData}></AddressForm>,
-        <AccommodationDetailsForm data={data} updateData={updateData}></AccommodationDetailsForm>,
-        <OverviewAndConfirm data={data} updateData={updateData}></OverviewAndConfirm>
-    ])
-
     async function onSubmit(e) {
         e.preventDefault();
-        if (!isLastStep) {
-            return next();
-        }
         uploadRest();
         navigate("/bookings/success");
     }
@@ -73,19 +53,7 @@ export default function CheckoutForm({fromDate, toDate}) {
                     <h3>Start Date: {fromDate}</h3>
                     <h3>End Date: {toDate}</h3>
                 </div>
-
-                <div className='multiPartFormContainer'>
-                    <form onSubmit={onSubmit}>
-                        <div className='progressIndicator'>
-                            {currentStepIndex + 1} / {steps.length}
-                        </div>
-                        {step}
-                        <div className='multipartFormButtonContainer'>
-                            {!isFirstStep && (<button type='button' onClick={back}>Back</button>)}
-                            <button type='submit'>{isLastStep ? 'Finish' : 'Next'}</button>
-                        </div>
-                    </form>
-                </div>
+                <button type=submit onSubmit={onSubmit}>Finish</button>
             </div>
         </>
     );

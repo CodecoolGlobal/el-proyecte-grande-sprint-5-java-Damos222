@@ -12,6 +12,7 @@ import BookingSuccess from "./components/BookingSuccess";
 function App() {
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
+    const [accommodationId, setAccommodationId] = useState(null);
 
     return (
         <Router>
@@ -21,8 +22,14 @@ function App() {
                     <Routes>
                         <Route path="/" exact element={<Home/>}/>
                         <Route path="/accommodations/all" exact element={<AllAccommodations/>}/>
-                        <Route path="/accommodations/:id" exact element={<AccommodationDetails setFromDate={setFromDate} setToDate={setToDate}/>}/>
-                        <Route path="/bookings/checkout" exact element={<CheckoutForm fromDate={fromDate} toDate={toDate}/>}/>
+                        <Route path="/accommodations/:id" exact element={<AccommodationDetails
+                            setFromDate={setFromDate}
+                            setToDate={setToDate}
+                            setAccommodationId={setAccommodationId}/>}/>
+                        <Route path="/bookings/checkout" exact element={<CheckoutForm
+                            fromDate={fromDate}
+                            toDate={toDate}
+                            accommodationId={accommodationId}/>}/>
                         <Route path="/bookings/success" exact element={<BookingSuccess/>}/>
                         <Route path="/addAccommodation" element={<AccommodationForm />} />
                     </Routes>

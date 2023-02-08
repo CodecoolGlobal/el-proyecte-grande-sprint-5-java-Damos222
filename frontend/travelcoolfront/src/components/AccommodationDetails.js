@@ -4,11 +4,12 @@ import {useNavigate, useParams} from "react-router-dom";
 import DatePicker from "react-datepicker";
 
 
-export default function AccommodationDetails({setFromDate, setToDate}) {
+export default function AccommodationDetails({setFromDate, setToDate, setAccommodationId}) {
     const [accommodation, setAccommodation] = useState(null);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(addDays(5));
     const {id} = useParams();
+    const [accId, setAccId] = useState(null);
     const navigate = useNavigate();
 
     function addDays(days) {
@@ -32,6 +33,8 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
 
     useEffect(() => {
         fetchData();
+        setAccId(parseInt(id));
+        setAccommodationId(accId);
     }, [])
 
     if (accommodation == null) {
