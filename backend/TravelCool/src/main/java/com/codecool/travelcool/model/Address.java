@@ -1,11 +1,8 @@
 package com.codecool.travelcool.model;
 
+import com.codecool.travelcool.dto.AddressDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.*;
 
 @Getter
@@ -29,4 +26,14 @@ public class Address {
     private String street;
     @Column(nullable = false)
     private String houseNumber;
+
+    public AddressDto getAddressDto() {
+        AddressDto addressDto = new AddressDto();
+        addressDto.setCountry(country);
+        addressDto.setZipCode(zipCode);
+        addressDto.setCity(city);
+        addressDto.setStreet(street);
+        addressDto.setHouseNumber(houseNumber);
+        return addressDto;
+    }
 }

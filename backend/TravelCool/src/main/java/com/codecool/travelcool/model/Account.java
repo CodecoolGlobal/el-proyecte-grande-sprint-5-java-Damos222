@@ -1,6 +1,7 @@
 package com.codecool.travelcool.model;
 
 import com.codecool.travelcool.dto.AccountDto;
+import com.codecool.travelcool.dto.AddressDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;

@@ -25,4 +25,9 @@ public class BookingController {
     public void checkout(@RequestBody BookingDto bookingDto) {
         bookingService.save(bookingDto);
     }
+
+    @GetMapping("/success")
+    public String getBookingSuccess() {
+        return "Your accommodation has been booked successfully!";
+    }
 }

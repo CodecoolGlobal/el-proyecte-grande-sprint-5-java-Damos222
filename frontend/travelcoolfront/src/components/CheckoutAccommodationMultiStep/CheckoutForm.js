@@ -4,7 +4,6 @@ import {useState} from "react";
 import useMultipartForm from "../useMultistepForm";
 import AddressForm from "../AddAccommodationMultiStep/AddressForm";
 import AccommodationDetailsForm from "../AddAccommodationMultiStep/AccommodationDetailsForm";
-import FeaturesForm from "../AddAccommodationMultiStep/FeaturesForm";
 import OverviewAndConfirm from "../AddAccommodationMultiStep/OverviewAndConfirm";
 
 const INITIAL_DATA = {
@@ -33,7 +32,6 @@ export default function CheckoutForm({fromDate, toDate}) {
     const {steps, currentStepIndex, step, isFirstStep, isLastStep, back, next} = useMultipartForm([
         <AddressForm data={data} updateData={updateData}></AddressForm>,
         <AccommodationDetailsForm data={data} updateData={updateData}></AccommodationDetailsForm>,
-        <FeaturesForm data={data} updateData={updateData}></FeaturesForm>,
         <OverviewAndConfirm data={data} updateData={updateData}></OverviewAndConfirm>
     ])
 
@@ -43,7 +41,7 @@ export default function CheckoutForm({fromDate, toDate}) {
             return next();
         }
         uploadRest();
-        navigate("/");
+        navigate("/bookings/success");
     }
 
     async function uploadRest() {
