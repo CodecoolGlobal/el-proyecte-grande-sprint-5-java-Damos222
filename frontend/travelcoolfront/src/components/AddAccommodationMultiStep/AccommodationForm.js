@@ -93,7 +93,8 @@ const AccommodationForm = () => {
                 body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json',  
-                }
+                },
+                mode: 'cors'
             })
             if (res.status === 200) {
                 alert("You successfully published your accommodation!")
@@ -117,6 +118,7 @@ const AccommodationForm = () => {
             let res = await fetch("http://localhost:8080/accommodations/addImages", {
                 method: 'POST',
                 body: formData,
+                mode: 'cors'
             })
             console.log(res.status)
             if (res.status !== 200) {

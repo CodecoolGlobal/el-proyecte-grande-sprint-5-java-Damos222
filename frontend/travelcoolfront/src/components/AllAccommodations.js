@@ -13,7 +13,9 @@ export default function AllAccommodations() {
     }
     
     const fetchAccommodations = () => {
-        return fetch("http://localhost:8080/accommodations/all")
+        return fetch("http://localhost:8080/accommodations/all", {
+            mode: 'cors'
+        })
             .then((response) => response.json())
             .then(data => {
                 setAccommodations(data);
@@ -21,7 +23,9 @@ export default function AllAccommodations() {
     }
 
     const fetchAccommodationsByDate = () => {
-        return fetch("http://localhost:8080/accommodations/byDate?startDate=" + startDate.getTime() + "&endDate=" + endDate.getTime())
+        return fetch("http://localhost:8080/accommodations/byDate?startDate=" + startDate.getTime() + "&endDate=" + endDate.getTime(), {
+            mode: 'cors'
+        })
             .then((response) => response.json())
             .then(data => {
                 setAccommodations(data);
