@@ -8,6 +8,7 @@ export default function AllAccommodations() {
     const [searchTerm, setSearchTerm] = useState("");
     const [accommodations, setAccommodations] = useState([]);
     const [price, setPrice] = useState("10000");
+    const [capacity, setCapacity] = useState(0);
 
 
     function addDays(days) {
@@ -34,6 +35,14 @@ export default function AllAccommodations() {
         fetchAccommodations();
     }, [])
 
+    const incrementCount = () =>{
+        setCapacity(capacity + 1);
+        console.log(capacity)
+    }
+    const decrementCount = () =>{
+        setCapacity(capacity - 1);
+        console.log(capacity)
+    }
 
     return (
         <>
@@ -60,27 +69,51 @@ export default function AllAccommodations() {
                         onChange={(date) => setEndDate(date)}/>
                 </div>
                     <input
+                        className="max-price-per-night"
                         onChange={(e) => setPrice(e.target.value)}
-                        className="row"
+
                         type="text"
                         placeholder="max. price per night"
                     />
+                <button
+                    className="add-substract-button"
+                    onClick={decrementCount}
+                >-</button>
+                <input
+                    className="capacity"
+                    value={capacity.toString()}
+                onChange={(e) => setCapacity(parseInt(e.target.value))}
+                />
+
+                <button
+                    className="add-substract-button"
+                    onClick={incrementCount}
+                >+</button>
 
 
                 <button id="date-button" className="see-details" onClick={() => fetchAccommodationsByDate()}>Search for date span</button>
             </div>
+
+
             <div className="all-accommodations">
                 <h1>Accommodations</h1>
                 {accommodations.filter((accommodation => {
                     if (searchTerm.toLowerCase() === "") {
-                        return accommodation.pricePerNight <= parseInt(price, 10);
+
+                        if (capacity === 0) {
+                            return accommodation.pricePerNight <= parseInt(price, 10);
+                        }
+
+                        return accommodation.pricePerNight <= parseInt(price, 10)
+                            && accommodation.capacity === capacity;
                     } else {
+
                         return (
                             accommodation.address.country.toLowerCase().includes(searchTerm)
                                 || accommodation.address.city.toLowerCase().includes(searchTerm))
-                            && accommodation.pricePerNight <= parseInt(price, 10);
+                            && accommodation.pricePerNight <= parseInt(price, 10)
+                            && accommodation.capacity === capacity;
                     }
-
 
 
                 })).map((accommodation) => {

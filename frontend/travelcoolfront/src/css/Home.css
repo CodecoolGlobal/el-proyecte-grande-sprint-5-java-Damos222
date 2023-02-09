@@ -33,6 +33,7 @@ body {
     font-size: 14px;
     text-align: center;
     margin-top: 0;
+    margin-left: 25px;
     cursor: pointer;
 }
 
@@ -61,7 +62,7 @@ body {
     margin-right: 25px;
 }
 
-.start-date, .end-date, .row {
+.start-date, .end-date , .max-price-per-night{
     padding: 13px;
     color: dimgrey;
     border-color: dimgrey;
@@ -76,9 +77,43 @@ body {
     margin-right: 25px;
 }
 
+.max-price-per-night {
+    width: 8%;
+}
+
 .filter-box-label {
     display: flex;
     justify-content: center;
     padding: 5px;
     background-color: #ebebeb;
+}
+.add-substract-button {
+    align-self: center;
+    width: 33px;
+    height: 32px;
+    background: #c2c29d;
+    border-color: dimgrey;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+.capacity {
+    width: 8px;
+    height: 8px;
+    padding: 13px;
+    color: dimgrey;
+    border-color: dimgrey;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px;
+    font-family: "Murecho", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    align-self: center;
+    cursor: pointer;
+
 }
