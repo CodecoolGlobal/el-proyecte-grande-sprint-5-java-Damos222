@@ -1,15 +1,15 @@
 package com.codecool.travelcool.runner;
 
-import com.codecool.travelcool.model.Accommodation;
-import com.codecool.travelcool.model.AccommodationType;
-import com.codecool.travelcool.model.Address;
-import com.codecool.travelcool.model.Booking;
+import com.codecool.travelcool.model.*;
 import com.codecool.travelcool.repository.AccommodationRepository;
+import com.codecool.travelcool.repository.AccountRepository;
 import com.codecool.travelcool.repository.AddressRepository;
 import com.codecool.travelcool.repository.BookingRepository;
+import com.codecool.travelcool.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -23,15 +23,19 @@ public class TravelCoolRunner implements CommandLineRunner {
     private final AccommodationRepository accommodationRepository;
     private final AddressRepository addressRepository;
     private final BookingRepository bookingRepository;
+    private final AccountRepository accountRepository;
+    private final AccountService accountService;
     private List<Accommodation> accommodations;
     private List<Address> addresses;
     private List<Booking> bookings;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws IOException {
         createAddresses();
         createAccommodations();
         createBookings();
+        createAccounts();
     }
 
     public void createBookings() {
@@ -76,6 +80,14 @@ public class TravelCoolRunner implements CommandLineRunner {
         );
 
         accommodationRepository.saveAll(accommodations);
+    }
+
+    public void createAccounts() {
+        accountService.save(Account.builder()
+                .email("hello@there.com")
+                .password(passwordEncoder.encode("helloThere1"))
+                .role(Role.USER)
+                .build());
     }
 
     public byte[] getByteArrayOfImage(String imagePath) throws IOException {

@@ -1,8 +1,6 @@
-package com.codecool.travelcool.config;
+package com.codecool.travelcool.security;
 
 import com.codecool.travelcool.repository.AccountRepository;
-import com.codecool.travelcool.security.Jwks;
-import com.codecool.travelcool.security.Jwks.Jwks;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -22,6 +20,8 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.ser
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
@@ -47,16 +47,17 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService) {
-        var authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        return new ProviderManager(authProvider);
-    }
-
-    @Bean
     public UserDetailsService userDetailsService() {
         return username -> accountRepository.findAccountByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username + "not found"));
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService) {
+        var authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return new ProviderManager(authProvider);
     }
 
     @Bean
@@ -73,17 +74,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
+                .cors(Customizer.withDefaults()) //should search for the bean named corsConfigurationSource
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/register", "/", "/accommodations/*")
-                        .permitAll()
-                        .requestMatchers("/accommodations/add", "/accommodations/addImages")
-                        .authenticated()
-                        .anyRequest()
-                        .authenticated())
+                        .requestMatchers( "/auth/**", "/accommodations/**").permitAll()
+                        .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-                .cors(Customizer.withDefaults()); //should search for the bean named corsConfigurationSource
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
         return httpSecurity.build();
     }
 
@@ -102,5 +99,10 @@ public class SecurityConfig {
     @Bean
     JwtDecoder jwtDecoder() throws JOSEException {
         return NimbusJwtDecoder.withPublicKey(rsaKey.toRSAPublicKey()).build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

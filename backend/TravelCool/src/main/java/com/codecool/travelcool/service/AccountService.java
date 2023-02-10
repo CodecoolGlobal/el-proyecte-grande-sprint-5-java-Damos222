@@ -20,8 +20,8 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public boolean emailAvailable(String email) {
-        return !accountRepository.existsAccountByEmail(email);
+    public boolean existsByEmail(String email) {
+        return accountRepository.existsAccountByEmail(email);
     }
 
     public void register(String email, String password) {
@@ -37,6 +37,6 @@ public class AccountService {
     }
 
     public Optional<Account> findById(long id) {
-        return accountRepository.findById(id);
+        return accountRepository.findAccountById(id);
     }
 }
