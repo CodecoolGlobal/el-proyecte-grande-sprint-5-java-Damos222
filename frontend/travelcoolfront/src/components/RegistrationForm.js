@@ -1,8 +1,8 @@
 import '../css/RegistrationForm.css';
 import React, { useState } from 'react'
-import { useNavigate } from'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-const RegistrationForm = () => {
+const RegistrationForm = (props) => {
     const INITIAL_DATA = {
         email: "default",
         password: "",
@@ -11,7 +11,7 @@ const RegistrationForm = () => {
     }
     const [formData, setFormData] = useState(INITIAL_DATA)
     const [confirmPassword, setConfirmPassword] = useState("")
-    const navigate = useNavigate()
+    const [emailTaken, setEmailTaken] = useState(true)
 
     function updateData(newInput) {
         setFormData({
@@ -24,27 +24,26 @@ const RegistrationForm = () => {
         setConfirmPassword(e.target.value)
     }
 
-    function onSubmit(e) {
+    async function onSubmit(e) {
         e.preventDefault()
+        updateEmailTaken()
         if (formData.password !== confirmPassword) {
             alert("Passwords do not match")
-        } else if (!emailAvailable()){
+        } else if (emailTaken) {
             alert("Account with this email already exists")
         } else {
             registerUser()
-            navigate("/")
         }
     }
 
-    async function emailAvailable() {
+    async function updateEmailTaken() {
         try {
-            let res = await fetch(`http://localhost:8080/accounts/emailAvailable/${formData.email}`, {
+            let res = await fetch(`http://localhost:8080/auth/emailTaken/${formData.email}`, {
                 method: "GET",
                 mode: 'cors'
             })
-            let data = await res.json()
-            console.log(data.emailAvailable)
-            return data.emailAvailable
+            let json = await res.json()
+            setEmailTaken(json.emailTaken)
         } catch (error) {
             console.log(error)
         }
@@ -52,15 +51,23 @@ const RegistrationForm = () => {
 
     async function registerUser() {
         try {
-            let res = await fetch("http://localhost:8080/api/v1/auth/register", {
+            let res = await fetch("http://localhost:8080/auth/register", {
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers: {
                     "Content-Type": "application/json"
                 },
-                mode: 'cors'
+                // mode: 'cors'
             })
-        } catch (error){
+            if (res.ok) {
+                const token = await res.text()
+                console.log(token)
+                localStorage.setItem('token', token)
+                alert("Account created successfully")
+                props.setShowRegistrationModal(false)
+                props.setShowLoginModal(true)
+            }
+        } catch (error) {
             console.log(error)
 
         }
