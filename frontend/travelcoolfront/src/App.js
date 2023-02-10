@@ -28,7 +28,8 @@ function App() {
 
     async function checkIfTokenValid() {
         const token = localStorage.getItem("token");
-        if (!token) {
+        console.log(token)
+        if (token === null) {
             return false;
         } else {
             let res = await fetch("http://localhost:8080/auth/tokenValid?token=" + token)
