@@ -2,6 +2,7 @@ package com.codecool.travelcool.service;
 
 import com.codecool.travelcool.model.Accommodation;
 import com.codecool.travelcool.model.AccommodationType;
+import com.codecool.travelcool.model.Account;
 import com.codecool.travelcool.repository.AccommodationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,5 +60,9 @@ public class AccommodationService {
 
     public void saveAll(List<Accommodation> accommodations) {
         accommodationRepository.saveAll(accommodations);
+    }
+
+    public List<Accommodation> getByHost(Account account) {
+        return accommodationRepository.findAccommodationsByHost(account);
     }
 }

@@ -11,11 +11,13 @@ import com.codecool.travelcool.service.AddressService;
 import com.codecool.travelcool.service.FeaturesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -114,5 +116,10 @@ public class AccommodationsController {
         accommodation.setHost(account);
 
         accommodationService.save(accommodation);
+    }
+
+    @GetMapping("/byAccount")
+    public List<Accommodation> getAccommodationsByAccount(Authentication auth) {
+        return accommodationService.getByHost((Account) auth.getPrincipal());
     }
 }

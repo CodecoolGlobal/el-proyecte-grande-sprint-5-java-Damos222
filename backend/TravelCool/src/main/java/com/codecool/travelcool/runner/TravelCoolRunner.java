@@ -86,6 +86,8 @@ public class TravelCoolRunner implements CommandLineRunner {
         accountService.save(Account.builder()
                 .email("hello@there.com")
                 .password(passwordEncoder.encode("helloThere1"))
+                .firstName("hello")
+                .lastName("there")
                 .role(Role.USER)
                 .build());
     }
