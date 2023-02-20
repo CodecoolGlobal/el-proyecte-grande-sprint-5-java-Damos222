@@ -25,7 +25,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/accommodations")
-public class AccommodationsController {
+public class  AccommodationsController {
     private final AccommodationService accommodationService;
     private final List<byte[]> images = new ArrayList<>();
     private final AccountService accountService;
