@@ -4,11 +4,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import AllAccommodations from "./AllAccommodations";
 
 
-export default function Home() {
+export default function Home({setFromDate, setToDate}) {
 
     return (
         <div className="home">
-            <AllAccommodations />
+            <AllAccommodations
+                setFromDate={setFromDate}
+                setToDate={setToDate}/>
         </div>
     );
 

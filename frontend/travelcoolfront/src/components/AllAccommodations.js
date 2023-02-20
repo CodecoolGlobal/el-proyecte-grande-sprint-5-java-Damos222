@@ -1,10 +1,12 @@
 import '../css/AllAccommodations.css';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import DatePicker from "react-datepicker";
+import {globalVars} from "../global/globalVars";
+import {Link} from "react-router-dom";
 
-export default function AllAccommodations({fromDate, toDate}) {
+export default function AllAccommodations() {
     const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(addDays(5));
+    const [endDate, setEndDate] = useState(() => addDays(5));
     const [searchTerm, setSearchTerm] = useState("");
     const [accommodations, setAccommodations] = useState([]);
 
@@ -17,10 +19,8 @@ export default function AllAccommodations({fromDate, toDate}) {
             .then((response) => response.json())
             .then(data => {
                 setAccommodations(data);
-                fromDate = startDate.toLocaleDateString("en-CA");
-                toDate = endDate.toLocaleDateString("en-CA");
-                console.log("fromDate")
-                console.log(fromDate)
+                globalVars.startDate = startDate;
+                globalVars.endDate = endDate;
             });
     }
 
@@ -38,19 +38,22 @@ export default function AllAccommodations({fromDate, toDate}) {
                 <div className="datepicker">
                     <DatePicker
                         className="start-date"
-                        dateFormat="yyyy-MM-dd"
+                        dateFormat="dd-MM-yyyy"
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}/>
 
                     <DatePicker
                         className="end-date"
-                        dateFormat="yyyy-MM-dd"
+                        dateFormat="dd-MM-yyyy"
                         selected={endDate}
                         onChange={(date) => setEndDate(date)}/>
                 </div>
-                <button id="date-button" className="see-details" onClick={() => fetchAccommodationsByDate()}>Search for date span</button>
+                <button id="date-button" className="see-details" onClick={() => fetchAccommodationsByDate()}>Search for
+                    date span
+                </button>
             </div>
             <div className="all-accommodations">
+                <span>***{JSON.stringify(globalVars.startDate)}</span>
                 {accommodations.length > 0 && <h1>Accommodations</h1>}
                 {accommodations.filter((accommodation => {
                     if (searchTerm.toLowerCase() === "") {
@@ -75,10 +78,8 @@ export default function AllAccommodations({fromDate, toDate}) {
                                     Price per night: <strong>{accommodation.pricePerNight} €</strong>
                                 </p>
                             </div>
-                            <div className="accommodation-button">
-                                <a href={"http://localhost:3000/accommodations/" + accommodation.id}>
-                                    <button className="see-details">See details</button>
-                                </a>
+                            <div className="accommodation-button see-details">
+                                <Link to={"/accommodations/" + accommodation.id}>See details</Link>
                             </div>
                         </div>
                     );

@@ -1,16 +1,12 @@
 import '../css/AccommodationDetails.css';
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
+import {globalVars} from "../global/globalVars";
 
-
-export default function AccommodationDetails({fromDate, toDate, setAcc}) {
+export default function AccommodationDetails({setAcc}) {
     const [accommodation, setAccommodation] = useState(null);
     const {id} = useParams();
     const navigate = useNavigate();
-
-    function addDays(days) {
-        return new Date(Date.now() + 864e5 * days);     // 864e5: number of milliseconds in a 24-hour day
-    }
 
     function navigateToCheckout() {
         navigate("/bookings/checkout");
@@ -28,7 +24,6 @@ export default function AccommodationDetails({fromDate, toDate, setAcc}) {
     useEffect(() => {
         fetchData();
         setAcc(accommodation);
-        console.log("*" + fromDate);
     }, [])
 
     if (accommodation == null) {
@@ -53,8 +48,7 @@ export default function AccommodationDetails({fromDate, toDate, setAcc}) {
                 </div>
                 <div className="reserve">
                     <h2>Book this accommodation</h2>
-                    <div>{fromDate}</div>
-                    <div>{toDate}</div>
+                    <span>{globalVars.startDate.toLocaleDateString("en-GB")} - {globalVars.endDate.toLocaleDateString("en-GB")}</span>
                     <button id="book-button" className="see-details" onClick={() => navigateToCheckout()}>Reserve</button>
                 </div>
             </div>
