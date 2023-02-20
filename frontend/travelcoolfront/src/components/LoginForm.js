@@ -7,20 +7,18 @@ const LoginForm = (props) => {
 
     async function login(e) {
         e.preventDefault()
-        console.log(data)
         const response = await fetch('http://localhost:8080/auth/authenticate', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data),
             mode: 'cors'
-        })
+        }) 
         if (response.ok) {
             const token = await response.text()
             console.log(token)
             localStorage.setItem('token', token)
             props.setLoggedIn(true)
             props.setShowLoginModal(false)
-            console.log(props.loggedIn)
         } else {
             alert("Wrong username or password")
         }

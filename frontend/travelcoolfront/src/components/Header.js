@@ -1,9 +1,5 @@
 import '../css/Header.css';
 import logo from "../assets/logo.png";
-import { useState } from "react";
-import Modal from "./Modal";
-import LoginForm from "./LoginForm";
-import RegistrationForm from "./RegistrationForm";
 import { Link } from "react-router-dom";
 
 const Header = (props) => {

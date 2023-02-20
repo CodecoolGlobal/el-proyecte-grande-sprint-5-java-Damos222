@@ -24,7 +24,7 @@ function App() {
         return () => {
             setLoggedIn(false)
         }
-    }, [setLoggedIn])
+    }, [])
 
     async function checkIfTokenValid() {
         const token = localStorage.getItem("token");

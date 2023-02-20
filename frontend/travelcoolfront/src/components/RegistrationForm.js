@@ -1,6 +1,5 @@
 import '../css/RegistrationForm.css';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 const RegistrationForm = (props) => {
     const INITIAL_DATA = {
@@ -11,7 +10,7 @@ const RegistrationForm = (props) => {
     }
     const [formData, setFormData] = useState(INITIAL_DATA)
     const [confirmPassword, setConfirmPassword] = useState("")
-    const [emailTaken, setEmailTaken] = useState(true)
+    // const [emailTaken, setEmailTaken] = useState(true)
 
     function updateData(newInput) {
         setFormData({
@@ -26,10 +25,13 @@ const RegistrationForm = (props) => {
 
     async function onSubmit(e) {
         e.preventDefault()
-        updateEmailTaken()
         if (formData.password !== confirmPassword) {
             alert("Passwords do not match")
-        } else if (emailTaken) {
+            return
+        }
+        const isEmailTaken = await updateEmailTaken()
+        console.log(isEmailTaken)
+        if (isEmailTaken === true) {
             alert("Account with this email already exists")
         } else {
             registerUser()
@@ -37,16 +39,13 @@ const RegistrationForm = (props) => {
     }
 
     async function updateEmailTaken() {
-        try {
-            let res = await fetch(`http://localhost:8080/auth/emailTaken/${formData.email}`, {
-                method: "GET",
-                mode: 'cors'
-            })
-            let json = await res.json()
-            setEmailTaken(json.emailTaken)
-        } catch (error) {
-            console.log(error)
-        }
+        return fetch(`http://localhost:8080/auth/emailTaken/${formData.email}`, {
+            method: "GET",
+            mode: 'cors'
+        })
+            .then(res => res.json())
+            .then(json => json.emailTaken)
+            .catch(error => console.log(error))
     }
 
     async function registerUser() {
