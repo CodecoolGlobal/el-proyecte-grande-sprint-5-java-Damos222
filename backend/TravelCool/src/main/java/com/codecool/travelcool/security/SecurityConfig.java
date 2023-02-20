@@ -38,7 +38,6 @@ import java.util.List;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-
     private RSAKey rsaKey;
     private final AccountRepository accountRepository;
 
