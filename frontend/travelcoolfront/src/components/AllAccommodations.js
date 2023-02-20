@@ -2,7 +2,7 @@ import '../css/AllAccommodations.css';
 import {useEffect, useState} from "react";
 import DatePicker from "react-datepicker";
 
-export default function AllAccommodations({setFromDate, setToDate}) {
+export default function AllAccommodations({fromDate, toDate}) {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(addDays(5));
     const [searchTerm, setSearchTerm] = useState("");
@@ -12,16 +12,15 @@ export default function AllAccommodations({setFromDate, setToDate}) {
         return new Date(Date.now() + 864e5 * days);     // 864e5: number of milliseconds in a 24-hour day
     }
 
-    console.log("setFromDate:")
-    console.log(typeof setFromDate)
-
     const fetchAccommodationsByDate = () => {
-        setFromDate(startDate.toLocaleDateString("en-CA"));
-        setToDate(endDate.toLocaleDateString("en-CA"));
         return fetch("http://localhost:8080/accommodations/byDate?startDate=" + startDate.getTime() + "&endDate=" + endDate.getTime())
             .then((response) => response.json())
             .then(data => {
                 setAccommodations(data);
+                fromDate = startDate.toLocaleDateString("en-CA");
+                toDate = endDate.toLocaleDateString("en-CA");
+                console.log("fromDate")
+                console.log(fromDate)
             });
     }
 

@@ -22,8 +22,8 @@ function App() {
                     <Routes>
                         <Route path="/" exact element={<Home/>}/>
                         <Route path="/accommodations/all" exact element={<AllAccommodations
-                            setFromDate={setFromDate}
-                            setToDate={setToDate}/>}/>
+                            fromDate={fromDate}
+                            toDate={toDate}/>}/>
                         <Route path="/accommodations/:id" exact element={<AccommodationDetails
                             fromDate={fromDate}
                             toDate={toDate}
