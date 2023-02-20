@@ -13,7 +13,6 @@ import lombok.*;
 @Entity
 public class Address {
     @Id
-    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)

@@ -23,12 +23,15 @@ public class BookingService {
         return bookingRepository.findAll().stream().map(Booking::toBookingDto).toList();
     }
 
-    public void save(BookingDto bookingDto) {
-        Booking booking = bookingDto.getBooking();
-        Accommodation accommodation = accommodationRepository.findById(booking.getAccommodation().getId()).get();
-        Account account = accountRepository.findById(booking.getBooker().getId()).get();
-        booking.setAccommodation(accommodation);
-        booking.setBooker(account);
+    public void book(BookingDto bookingDto) {
+        Accommodation accommodation = accommodationRepository.findById(bookingDto.getAccommodationDto().getId()).get();
+        Account account = accountRepository.findById(bookingDto.getBooker().getId()).get();
+        Booking booking = Booking.builder()
+                .accommodation(accommodation)
+                .booker(account)
+                .startDate(bookingDto.getStartDate())
+                .endDate(bookingDto.getEndDate())
+                .build();
         bookingRepository.save(booking);
     }
 

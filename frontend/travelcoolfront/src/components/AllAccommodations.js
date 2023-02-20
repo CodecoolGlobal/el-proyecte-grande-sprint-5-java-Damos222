@@ -2,7 +2,7 @@ import '../css/AllAccommodations.css';
 import {useEffect, useState} from "react";
 import DatePicker from "react-datepicker";
 
-export default function AllAccommodations() {
+export default function AllAccommodations({setFromDate, setToDate}) {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(addDays(5));
     const [searchTerm, setSearchTerm] = useState("");
@@ -11,26 +11,19 @@ export default function AllAccommodations() {
     function addDays(days) {
         return new Date(Date.now() + 864e5 * days);     // 864e5: number of milliseconds in a 24-hour day
     }
-    
-    const fetchAccommodations = () => {
-        return fetch("http://localhost:8080/accommodations/all")
-            .then((response) => response.json())
-            .then(data => {
-                setAccommodations(data);
-            });
-    }
+
+    console.log("setFromDate:")
+    console.log(typeof setFromDate)
 
     const fetchAccommodationsByDate = () => {
+        setFromDate(startDate.toLocaleDateString("en-CA"));
+        setToDate(endDate.toLocaleDateString("en-CA"));
         return fetch("http://localhost:8080/accommodations/byDate?startDate=" + startDate.getTime() + "&endDate=" + endDate.getTime())
             .then((response) => response.json())
             .then(data => {
                 setAccommodations(data);
             });
     }
-
-    useEffect(() => {
-        fetchAccommodations();
-    }, [])
 
     return (
         <>
@@ -59,7 +52,7 @@ export default function AllAccommodations() {
                 <button id="date-button" className="see-details" onClick={() => fetchAccommodationsByDate()}>Search for date span</button>
             </div>
             <div className="all-accommodations">
-                <h1>Accommodations</h1>
+                {accommodations.length > 0 && <h1>Accommodations</h1>}
                 {accommodations.filter((accommodation => {
                     if (searchTerm.toLowerCase() === "") {
                         return accommodation;

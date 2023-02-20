@@ -17,6 +17,7 @@ import java.util.Optional;
 @Data
 @NoArgsConstructor
 public class AccommodationDto {
+    private Long id;
     private String title;
     private String country;
     private String city;
@@ -37,6 +38,7 @@ public class AccommodationDto {
 
     public Accommodation getAccommodation() {
         Accommodation accommodation = new Accommodation();
+        accommodation.setId(id);
         accommodation.setName(title);
         accommodation.setCapacity(capacity);
         accommodation.setDescription(description);

@@ -20,7 +20,7 @@ public class BookingDto {
     private AccountDto booker;
 
 
-    public Booking getBooking() {
+    public Booking toBooking() {
         Booking booking = new Booking();
         booking.setStartDate(startDate);
         booking.setEndDate(endDate);

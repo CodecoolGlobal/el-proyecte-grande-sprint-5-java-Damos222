@@ -44,6 +44,7 @@ public class Accommodation {
 
     public AccommodationDto toAccommodationDto() {
         AccommodationDto accommodationDto = new AccommodationDto();
+        accommodationDto.setId(id);
         accommodationDto.setTitle(name);
         accommodationDto.setCapacity(capacity);
         accommodationDto.setDescription(description);

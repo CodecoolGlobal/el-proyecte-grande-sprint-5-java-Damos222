@@ -23,7 +23,7 @@ public class BookingController {
 
     @PostMapping("/checkout")
     public void checkout(@RequestBody BookingDto bookingDto) {
-        bookingService.save(bookingDto);
+        bookingService.book(bookingDto);
     }
 
     @GetMapping("/success")

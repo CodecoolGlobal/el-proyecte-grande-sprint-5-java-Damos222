@@ -1,15 +1,11 @@
 import '../css/AccommodationDetails.css';
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import DatePicker from "react-datepicker";
 
 
-export default function AccommodationDetails({setFromDate, setToDate, setAccommodationId, setAcc}) {
+export default function AccommodationDetails({fromDate, toDate, setAcc}) {
     const [accommodation, setAccommodation] = useState(null);
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(addDays(5));
     const {id} = useParams();
-    const [accId, setAccId] = useState(null);
     const navigate = useNavigate();
 
     function addDays(days) {
@@ -17,8 +13,6 @@ export default function AccommodationDetails({setFromDate, setToDate, setAccommo
     }
 
     function navigateToCheckout() {
-        setFromDate(startDate.toLocaleDateString("en-CA"));
-        setToDate(endDate.toLocaleDateString("en-CA"));
         navigate("/bookings/checkout");
     }
 
@@ -33,8 +27,8 @@ export default function AccommodationDetails({setFromDate, setToDate, setAccommo
 
     useEffect(() => {
         fetchData();
-        setAccId(parseInt(id));
-        setAccommodationId(accId);
+        setAcc(accommodation);
+        console.log("*" + fromDate);
     }, [])
 
     if (accommodation == null) {
@@ -59,18 +53,8 @@ export default function AccommodationDetails({setFromDate, setToDate, setAccommo
                 </div>
                 <div className="reserve">
                     <h2>Book this accommodation</h2>
-                    <div className="datepicker">
-                        <DatePicker
-                            className="start-date"
-                            dateFormat="yyyy-MM-dd"
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date)}/>
-                        <DatePicker
-                            className="end-date"
-                            dateFormat="yyyy-MM-dd"
-                            selected={endDate}
-                            onChange={(date) => setEndDate(date)}/>
-                    </div>
+                    <div>{fromDate}</div>
+                    <div>{toDate}</div>
                     <button id="book-button" className="see-details" onClick={() => navigateToCheckout()}>Reserve</button>
                 </div>
             </div>

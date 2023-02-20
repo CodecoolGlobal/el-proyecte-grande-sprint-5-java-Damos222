@@ -9,9 +9,9 @@ import AccommodationForm from "./components/AddAccommodationMultiStep/Accommodat
 import BookingSuccess from "./components/BookingSuccess";
 
 function App() {
+    // TODO: find other solution to avoid property drilling
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
-    const [accommodationId, setAccommodationId] = useState(null);
     const [accommodation, setAccommodation] = useState(null);
 
     return (
@@ -21,16 +21,16 @@ function App() {
                     <Header />
                     <Routes>
                         <Route path="/" exact element={<Home/>}/>
-                        <Route path="/accommodations/all" exact element={<AllAccommodations/>}/>
-                        <Route path="/accommodations/:id" exact element={<AccommodationDetails
+                        <Route path="/accommodations/all" exact element={<AllAccommodations
                             setFromDate={setFromDate}
-                            setToDate={setToDate}
-                            setAccommodationId={setAccommodationId}
-                            setAccommodation={setAccommodation}/>}/>
+                            setToDate={setToDate}/>}/>
+                        <Route path="/accommodations/:id" exact element={<AccommodationDetails
+                            fromDate={fromDate}
+                            toDate={toDate}
+                            setAcc={setAccommodation}/>}/>
                         <Route path="/bookings/checkout" exact element={<CheckoutForm
                             fromDate={fromDate}
                             toDate={toDate}
-                            accommodationId={accommodationId}
                             accommodation={accommodation}/>}/>
                         <Route path="/bookings/success" exact element={<BookingSuccess/>}/>
                         <Route path="/addAccommodation" element={<AccommodationForm />} />
