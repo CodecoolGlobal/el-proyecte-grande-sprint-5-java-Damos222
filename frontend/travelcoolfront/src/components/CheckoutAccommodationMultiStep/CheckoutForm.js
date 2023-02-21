@@ -1,6 +1,7 @@
 import '../../css/Checkout.css';
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import {globalVars} from "../../global/globalVars";
 
 const INITIAL_DATA = {
     accommodationDto: {
@@ -13,21 +14,22 @@ const INITIAL_DATA = {
     }
 }
 
-export default function CheckoutForm({fromDate, toDate, accommodationId, accommodation}) {
+export default function CheckoutForm() {
     const navigate = useNavigate();
-    const [data, setData] = useState(INITIAL_DATA);
-    const [acc, setAcc] = useState(accommodation);
+    const [data] = useState(INITIAL_DATA);
+    const [accommodation] = useState(globalVars.accommodation);
+    const BOOKER_ID = 1;
 
     function updateData() {
-        data.startDate = fromDate;
-        data.endDate = toDate;
-        data.accommodationDto.id = accommodationId;
-        data.booker.id = 1;
+        data.startDate = globalVars.startDate;
+        data.endDate = globalVars.endDate;
+        data.accommodationDto.id = globalVars.accommodationId;
+        data.booker.id = BOOKER_ID;
     }
 
-    async function onSubmit(e) {
+    async function onSubmit() {
         updateData();
-        uploadRest();
+        await uploadRest();
         navigate("/bookings/success");
     }
 
@@ -57,15 +59,14 @@ export default function CheckoutForm({fromDate, toDate, accommodationId, accommo
             <div className="checkout-area">
                 <h1>Checkout Page</h1>
                 <div className="date-area">
-                    <h3>Start Date: {fromDate}</h3>
-                    <h3>End Date: {toDate}</h3>
+                    <h3>Start Date: {globalVars.startDate.toLocaleDateString("en-GB")} End Date: {globalVars.endDate.toLocaleDateString("en-GB")}</h3>
                     <h3>Your selected accommodation:</h3>
                     <div className="details-info">
-                        <span><strong>{acc.address.street} {acc.address.houseNumber}, {acc.address.zipCode} {acc.address.city}, {acc.address.country}</strong></span>
-                        <p>{acc.description}</p>
-                        <p>Capacity: {acc.capacity} person(s)</p>
-                        <p>Type: {acc.type}</p>
-                        <p>Price per night: <strong>{acc.pricePerNight} €</strong></p>
+                        {/*<span><strong>{accommodation.address.street} {accommodation.address.houseNumber}, {accommodation.address.zipCode} {accommodation.address.city}, {accommodation.address.country}</strong></span>*/}
+                        {/*<p>{accommodation.description}</p>*/}
+                        {/*<p>Capacity: {accommodation.capacity} person(s)</p>*/}
+                        {/*<p>Type: {accommodation.type}</p>*/}
+                        {/*<p>Price per night: <strong>{accommodation.pricePerNight} €</strong></p>*/}
                     </div>
                 </div>
                 <button type="submit" onSubmit={onSubmit}>Finish</button>

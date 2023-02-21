@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {globalVars} from "../global/globalVars";
 
-export default function AccommodationDetails({setAcc}) {
+export default function AccommodationDetails() {
     const [accommodation, setAccommodation] = useState(null);
     const {id} = useParams();
     const navigate = useNavigate();
@@ -18,12 +18,13 @@ export default function AccommodationDetails({setAcc}) {
             .then((response) => response.json())
             .then(data => {
                 setAccommodation(data);
+                globalVars.accommodationId = id;
+                globalVars.accommodation = accommodation;
             });
     }
 
     useEffect(() => {
         fetchData();
-        setAcc(accommodation);
     }, [])
 
     if (accommodation == null) {

@@ -1,4 +1,6 @@
 export const globalVars = {
     startDate: {},
-    endDate: {}
+    endDate: {},
+    accommodation: {},
+    accommodationId: {}
 }

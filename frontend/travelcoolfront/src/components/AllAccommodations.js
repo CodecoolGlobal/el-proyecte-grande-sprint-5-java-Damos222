@@ -53,7 +53,6 @@ export default function AllAccommodations() {
                 </button>
             </div>
             <div className="all-accommodations">
-                <span>***{JSON.stringify(globalVars.startDate)}</span>
                 {accommodations.length > 0 && <h1>Accommodations</h1>}
                 {accommodations.filter((accommodation => {
                     if (searchTerm.toLowerCase() === "") {
