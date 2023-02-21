@@ -4,7 +4,7 @@ export default function BookingSuccess() {
 
     return(
       <>
-        <h1>You have successfully booked your accommodation {globalVars.accommodation.name}!</h1>
+        <h1>You have successfully booked your accommodation {globalVars.booking.accommodationDto.title}!</h1>
       </>
     );
 }
