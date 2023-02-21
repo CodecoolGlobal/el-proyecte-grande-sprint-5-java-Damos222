@@ -23,7 +23,7 @@ public class BookingService {
         return bookingRepository.findAll().stream().map(Booking::toBookingDto).toList();
     }
 
-    public void book(BookingDto bookingDto) {
+    public BookingDto book(BookingDto bookingDto) {
         Accommodation accommodation = accommodationRepository.findById(bookingDto.getAccommodationDto().getId()).get();
         Account account = accountRepository.findById(bookingDto.getBooker().getId()).get();
         Booking booking = Booking.builder()
@@ -32,7 +32,7 @@ public class BookingService {
                 .startDate(bookingDto.getStartDate())
                 .endDate(bookingDto.getEndDate())
                 .build();
-        bookingRepository.save(booking);
+        return bookingRepository.save(booking).toBookingDto();
     }
 
 }

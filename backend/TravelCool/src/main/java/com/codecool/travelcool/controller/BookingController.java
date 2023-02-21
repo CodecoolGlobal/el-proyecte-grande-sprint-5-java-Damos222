@@ -22,12 +22,7 @@ public class BookingController {
     }
 
     @PostMapping("/checkout")
-    public void checkout(@RequestBody BookingDto bookingDto) {
-        bookingService.book(bookingDto);
-    }
-
-    @GetMapping("/success")
-    public String getBookingSuccess() {
-        return "Your accommodation has been booked successfully!";
+    public BookingDto checkout(@RequestBody BookingDto bookingDto) {
+        return bookingService.book(bookingDto);
     }
 }

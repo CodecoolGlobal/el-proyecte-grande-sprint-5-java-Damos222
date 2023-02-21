@@ -17,13 +17,13 @@ const INITIAL_DATA = {
 export default function CheckoutForm() {
     const navigate = useNavigate();
     const [data] = useState(INITIAL_DATA);
-    const [accommodation] = useState(globalVars.accommodation);
     const BOOKER_ID = 1;
+    const globalAccommodation = globalVars.accommodation;
 
     function updateData() {
         data.startDate = globalVars.startDate;
         data.endDate = globalVars.endDate;
-        data.accommodationDto.id = globalVars.accommodationId;
+        data.accommodationDto.id = globalVars.accommodation.id;
         data.booker.id = BOOKER_ID;
     }
 
@@ -46,6 +46,7 @@ export default function CheckoutForm() {
             })
             if (res.status === 200) {
                 alert("You have successfully booked this accommodation!");
+                globalVars.booking = await res.json();
             } else {
                 alert(`Error (${res.status})`);
             }
@@ -62,14 +63,14 @@ export default function CheckoutForm() {
                     <h3>Start Date: {globalVars.startDate.toLocaleDateString("en-GB")} End Date: {globalVars.endDate.toLocaleDateString("en-GB")}</h3>
                     <h3>Your selected accommodation:</h3>
                     <div className="details-info">
-                        {/*<span><strong>{accommodation.address.street} {accommodation.address.houseNumber}, {accommodation.address.zipCode} {accommodation.address.city}, {accommodation.address.country}</strong></span>*/}
-                        {/*<p>{accommodation.description}</p>*/}
-                        {/*<p>Capacity: {accommodation.capacity} person(s)</p>*/}
-                        {/*<p>Type: {accommodation.type}</p>*/}
-                        {/*<p>Price per night: <strong>{accommodation.pricePerNight} €</strong></p>*/}
+                        <span><strong>{globalAccommodation.address.street} {globalAccommodation.address.houseNumber}, {globalAccommodation.address.zipCode} {globalAccommodation.address.city}, {globalAccommodation.address.country}</strong></span>
+                        <p>{globalAccommodation.description}</p>
+                        <p>Capacity: {globalAccommodation.capacity} person(s)</p>
+                        <p>Type: {globalAccommodation.type}</p>
+                        <p>Price per night: <strong>{globalAccommodation.pricePerNight} €</strong></p>
                     </div>
                 </div>
-                <button type="submit" onSubmit={onSubmit}>Finish</button>
+                <button type="submit" onClick={() => onSubmit()}>Finish</button>
             </div>
         </>
     );

@@ -8,19 +8,17 @@ export default function AccommodationDetails() {
     const {id} = useParams();
     const navigate = useNavigate();
 
-    function navigateToCheckout() {
-        navigate("/bookings/checkout");
-    }
-
-
     const fetchData = () => {
         fetch("http://localhost:8080/accommodations/" + id)
             .then((response) => response.json())
             .then(data => {
                 setAccommodation(data);
-                globalVars.accommodationId = id;
-                globalVars.accommodation = accommodation;
             });
+    }
+
+    function goToCheckout() {
+        globalVars.accommodation = accommodation;
+        navigate("/bookings/checkout");
     }
 
     useEffect(() => {
@@ -50,7 +48,7 @@ export default function AccommodationDetails() {
                 <div className="reserve">
                     <h2>Book this accommodation</h2>
                     <span>{globalVars.startDate.toLocaleDateString("en-GB")} - {globalVars.endDate.toLocaleDateString("en-GB")}</span>
-                    <button id="book-button" className="see-details" onClick={() => navigateToCheckout()}>Reserve</button>
+                    <button id="book-button" className="see-details" onClick={() => goToCheckout()}>Reserve</button>
                 </div>
             </div>
         </>

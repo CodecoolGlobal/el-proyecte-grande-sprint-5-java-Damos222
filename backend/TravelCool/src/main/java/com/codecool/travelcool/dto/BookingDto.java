@@ -18,17 +18,4 @@ public class BookingDto {
     private LocalDate endDate;
 
     private AccountDto booker;
-
-
-    public Booking toBooking() {
-        Booking booking = new Booking();
-        booking.setStartDate(startDate);
-        booking.setEndDate(endDate);
-        booking.setTimestamp(new Timestamp(System.currentTimeMillis()));
-        booking.setBooker(booker.getAccount());
-        Accommodation accommodation = accommodationDto.getAccommodation();
-        accommodation.setAddress(accommodationDto.getAddress());
-        booking.setAccommodation(accommodation);
-        return booking;
-    }
 }

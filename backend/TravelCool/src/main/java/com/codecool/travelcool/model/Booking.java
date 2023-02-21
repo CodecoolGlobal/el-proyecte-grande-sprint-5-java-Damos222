@@ -5,6 +5,7 @@ import com.codecool.travelcool.dto.BookingDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -24,9 +25,10 @@ public class Booking {
     @Column(nullable = false)
     private LocalDate endDate;
     @Column(nullable = false)
-    @Temporal(value = TemporalType.TIMESTAMP)
-    @GeneratedValue
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Timestamp timestamp;
+    @JoinColumn(nullable = false)
     @ManyToOne
     private Account booker;
     @ManyToOne

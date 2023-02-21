@@ -33,8 +33,8 @@ public class TravelCoolRunner implements CommandLineRunner {
     public void run(String... args) throws IOException {
         createAddresses();
         createAccommodations();
-        createBookings();
         createAccount();
+        createBookings();
     }
 
     private void createAccount() {
@@ -65,12 +65,16 @@ public class TravelCoolRunner implements CommandLineRunner {
                         .startDate(startDates.get(0))
                         .endDate(endDates.get(0))
                         .timestamp(new Timestamp(System.currentTimeMillis()))
-                        .accommodation(accommodations.get(0)).build(),
+                        .accommodation(accommodations.get(0))
+                        .booker(accounts.get(0))
+                        .build(),
                 Booking.builder()
                         .startDate(startDates.get(1))
                         .endDate(endDates.get(1))
                         .timestamp(new Timestamp(System.currentTimeMillis()))
-                        .accommodation(accommodations.get(1)).build()
+                        .accommodation(accommodations.get(1))
+                        .booker(accounts.get(0))
+                        .build()
         );
 
         bookingRepository.saveAll(bookings);

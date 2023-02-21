@@ -1,23 +1,10 @@
-import {useEffect, useState} from "react";
+import {globalVars} from "../global/globalVars";
 
 export default function BookingSuccess() {
-    const [successMessage, setSuccessMessage] = useState("");
-
-    const fetchSuccessMessage = () => {
-        fetch("http://localhost:8080/bookings/success")
-            .then(response => response.json())
-            .then(data => {
-                setSuccessMessage(data)
-            });
-    }
-
-    useEffect( () => {
-        fetchSuccessMessage();
-    }, []);
 
     return(
       <>
-        <h1>{successMessage}</h1>
+        <h1>You have successfully booked your accommodation {globalVars.accommodation.name}!</h1>
       </>
     );
 }

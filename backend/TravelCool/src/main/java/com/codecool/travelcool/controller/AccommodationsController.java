@@ -44,7 +44,6 @@ public class AccommodationsController {
 
     @GetMapping("/byDate")
     public List<Accommodation> findByDate(@RequestParam Long startDate, @RequestParam Long endDate) {
-        System.out.println(startDate + " " + endDate);
         LocalDate fromDate = Instant.ofEpochMilli(startDate).atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate toDate = Instant.ofEpochMilli(endDate).atZone(ZoneId.systemDefault()).toLocalDate();
         return accommodationService.findByBookingsStartDateAfterAndEndDateBefore(fromDate, toDate);
