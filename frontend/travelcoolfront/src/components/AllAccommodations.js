@@ -77,9 +77,8 @@ export default function AllAccommodations() {
                                     Price per night: <strong>{accommodation.pricePerNight} €</strong>
                                 </p>
                             </div>
-                            <div className="accommodation-button see-details">
-                                <Link to={"/accommodations/" + accommodation.id}>See details</Link>
-                            </div>
+                            <Link className="accommodation-button see-details"
+                                  to={"/accommodations/" + accommodation.id}>See details</Link>
                         </div>
                     );
                 })}

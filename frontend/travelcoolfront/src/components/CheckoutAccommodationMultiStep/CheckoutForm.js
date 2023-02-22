@@ -19,6 +19,7 @@ export default function CheckoutForm() {
     const [data] = useState(INITIAL_DATA);
     const BOOKER_ID = 1;
     const globalAccommodation = globalVars.accommodation;
+    const source = "data:image/jpg;base64," + globalAccommodation.image;
 
     function updateData() {
         data.startDate = globalVars.startDate;
@@ -60,17 +61,23 @@ export default function CheckoutForm() {
             <div className="checkout-area">
                 <h1>Checkout Page</h1>
                 <div className="date-area">
-                    <h3>Start Date: {globalVars.startDate.toLocaleDateString("en-GB")} End Date: {globalVars.endDate.toLocaleDateString("en-GB")}</h3>
+                    <h3>Start Date: {globalVars.startDate.toLocaleDateString("en-GB")}</h3>
+                    <h3>End Date: {globalVars.endDate.toLocaleDateString("en-GB")}</h3>
                     <h3>Your selected accommodation:</h3>
-                    <div className="details-info">
-                        <span><strong>{globalAccommodation.address.street} {globalAccommodation.address.houseNumber}, {globalAccommodation.address.zipCode} {globalAccommodation.address.city}, {globalAccommodation.address.country}</strong></span>
-                        <p>{globalAccommodation.description}</p>
-                        <p>Capacity: {globalAccommodation.capacity} person(s)</p>
-                        <p>Type: {globalAccommodation.type}</p>
-                        <p>Price per night: <strong>{globalAccommodation.pricePerNight} €</strong></p>
+                    <div className="acc-info">
+                        <div className="image-container">
+                            <img src={source} style={{width: "280px"}} alt={globalAccommodation.name + "Image"}/>
+                        </div>
+                        <div>
+                            <span><strong>{globalAccommodation.address.street} {globalAccommodation.address.houseNumber}, {globalAccommodation.address.zipCode} {globalAccommodation.address.city}, {globalAccommodation.address.country}</strong></span>
+                            <p>{globalAccommodation.description}</p>
+                            <p>Capacity: {globalAccommodation.capacity} person(s)</p>
+                            <p>Type: {globalAccommodation.type}</p>
+                            <p>Price per night: <strong>{globalAccommodation.pricePerNight} €</strong></p>
+                        </div>
                     </div>
                 </div>
-                <button type="submit" onClick={() => onSubmit()}>Finish</button>
+                <button type="submit" className="see-details" onClick={() => onSubmit()}>Book</button>
             </div>
         </>
     );

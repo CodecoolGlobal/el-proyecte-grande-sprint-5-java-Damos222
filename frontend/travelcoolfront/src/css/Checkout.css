@@ -5,18 +5,17 @@
 }
 
 .checkout-area {
-    display: flex;
-    flex-direction: column;
     background-color: #EBEBEB;
     padding: 25px;
     border-radius: 5px;
     margin: 50px;
 }
 
-.date-area {
+.acc-info {
     display: flex;
+    margin: 50px 0 50px 0;
 }
 
-.date-area h3 {
-    margin-right: 25px;
+.image-container {
+    margin-right: 50px;
 }
