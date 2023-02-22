@@ -20,6 +20,6 @@ public class BookingService {
     }
 
     public List<Booking> findByGuest(Account account) {
-        bookingRepository.findAllByBooker(account);
+        return bookingRepository.findAllByBooker(account);
     }
 }
