@@ -9,18 +9,28 @@ const MyBookings = () => {
                 Authorization: "Bearer " + localStorage.getItem('token')
             }
         })
-          .then(res => res.json())
-          .then(data => setBookings(data))
+            .then(res => res.json())
+            .then(data => setBookings(data))
     }, [])
 
-    if (bookings.length > 0) {
+    if (bookings && bookings.length > 0) {
+        console.log(bookings)
         return (
-            <div>
-                {bookings}
-            </div>
+            bookings.map((booking) => {
+                return (
+                    <div key={booking.id}>
+                        <p>id: {booking.id}</p>
+                        <p>timestamp: {booking.timestamp}</p>
+                        <p>startDate: {booking.startDate}</p>
+                        <p>endDate: {booking.endDate}</p>
+                    </div>
+                )
+            })
         )
     } else {
-        return <div>No bookings</div>
+        return (
+            <div>No bookings</div>
+        )
     }
 }
 

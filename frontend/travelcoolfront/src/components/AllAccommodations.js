@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import AccommodationOverview from './AccommodationOverview';
 import { globalVars } from "../global/globalVars";
-import { Link } from "react-router-dom";
 
 export default function AllAccommodations() {
     const [startDate, setStartDate] = useState(new Date());
@@ -19,6 +18,8 @@ export default function AllAccommodations() {
     }
 
     const fetchAccommodationsByDate = () => {
+        console.log("hello from fetchAccommodationsByDate")
+        console.log(globalVars)
         return fetch("http://localhost:8080/accommodations/byDate?startDate=" + startDate.getTime() + "&endDate=" + endDate.getTime(), {
         })
             .then((response) => response.json())
@@ -26,11 +27,14 @@ export default function AllAccommodations() {
                 setAccommodations(data);
                 globalVars.startDate = startDate;
                 globalVars.endDate = endDate;
+
             });
     }
 
     useEffect(() => {
         fetchAllAccommodations();
+        globalVars.startDate = startDate;
+        globalVars.endDate = endDate;
     }, [])
 
     function fetchAllAccommodations() {

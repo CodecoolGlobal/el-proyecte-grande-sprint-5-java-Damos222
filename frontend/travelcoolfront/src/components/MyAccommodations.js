@@ -6,7 +6,6 @@ const MyAccommodations = ({ setShowLoginModal }) => {
     const requestController = new AbortController()
 
     const fetchAccommodations = () => {
-        // return fetch("http://localhost:8080/accommodations/all", {
         return fetch("http://localhost:8080/account/accommodations", {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
@@ -31,7 +30,7 @@ const MyAccommodations = ({ setShowLoginModal }) => {
         fetchAccommodations();
     }, [])
 
-    if (accommodations.length && accommodations.length > 0) {
+    if (accommodations && accommodations.length > 0) {
         console.log(accommodations)
         return (
             <>
