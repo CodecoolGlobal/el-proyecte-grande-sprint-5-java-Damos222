@@ -1,5 +1,6 @@
 package com.codecool.travelcool.repository;
 
+import com.codecool.travelcool.model.Account;
 import com.codecool.travelcool.model.Booking;
 import org.springframework.cglib.core.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,8 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     Booking findBookingByStartDateBetween(LocalDate startDate, LocalDate endDate);
 
     List<Booking> findBookingsByAccommodation_Id(Long accommodationId);
+
+    List<Booking> findAllByBooker(Account account);
 
     List<Booking> findBookingsByAccommodation_IdAndEndDateBetweenOrStartDateBetween(Long accommodationId, LocalDate startDate, LocalDate endDate, LocalDate startDate1, LocalDate endDate1);
 

@@ -7,6 +7,7 @@ import com.codecool.travelcool.model.Role;
 import com.codecool.travelcool.service.AccountService;
 import com.codecool.travelcool.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -51,6 +52,7 @@ public class AuthenticationController {
         accountService.save(account);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.email(), request.password()));
+        System.out.println(authentication.getName());
         return tokenService.generateToken(authentication);
     }
 
@@ -58,6 +60,7 @@ public class AuthenticationController {
     public String authenticate(@RequestBody LoginRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.email(), request.password()));
+        System.out.println(authentication.getName());
         return tokenService.generateToken(authentication);
     }
 
@@ -65,11 +68,5 @@ public class AuthenticationController {
     public Map<String, Boolean> emailTaken(@PathVariable String email) {
         boolean emailTaken = accountService.existsByEmail(email);
         return Collections.singletonMap("emailTaken", emailTaken);
-    }
-
-    @GetMapping("/tokenValid")
-    public String tokenValid(@RequestParam String token) {
-        boolean tokenValid = Objects.requireNonNull(tokenService.decode(token).getExpiresAt()).isBefore(Instant.now());
-        return Boolean.toString(tokenValid);
     }
 }

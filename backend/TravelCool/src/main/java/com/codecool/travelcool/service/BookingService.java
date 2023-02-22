@@ -1,5 +1,6 @@
 package com.codecool.travelcool.service;
 
+import com.codecool.travelcool.model.Account;
 import com.codecool.travelcool.model.Booking;
 import com.codecool.travelcool.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,5 +17,9 @@ public class BookingService {
 
     public List<Booking> findAll() {
         return bookingRepository.findAll();
+    }
+
+    public List<Booking> findByGuest(Account account) {
+        bookingRepository.findAllByBooker(account);
     }
 }

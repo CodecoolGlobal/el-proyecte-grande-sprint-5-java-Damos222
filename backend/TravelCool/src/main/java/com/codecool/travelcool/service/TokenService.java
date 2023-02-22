@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class TokenService {
-
     private final JwtEncoder jwtEncoder;
     private final JwtDecoder jwtDecoder;
 
@@ -30,6 +29,7 @@ public class TokenService {
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("self")
                 .issuedAt(now)
+                .subject(authentication.getName())
                 .expiresAt(now.plus(1, ChronoUnit.HOURS))
                 .claim("scope", scope)
                 .build();
