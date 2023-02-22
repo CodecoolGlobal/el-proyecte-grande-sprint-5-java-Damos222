@@ -39,7 +39,8 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
     }
     const source = "data:image/jpg;base64," + accommodation.image;
     const name = accommodation.name;
-
+    const features = accommodation.features;
+    console.log(features);
     return (
         <>
             <div className="all-accommodations">
@@ -52,6 +53,13 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
                         <p>Capacity: {accommodation && accommodation.capacity} person(s)</p>
                         <p>Type: {accommodation && accommodation.type}</p>
                         <p>Price per night: <strong>{accommodation && accommodation.pricePerNight} €</strong></p>
+                        {Object.entries(features).map(([key, feature], i) => (
+
+                            <p key={i}>
+                                {key}: {feature.toString()}
+                            </p>
+                        ))}
+
                     </div>
                 </div>
                 <div className="reserve">

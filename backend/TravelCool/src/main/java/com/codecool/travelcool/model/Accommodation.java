@@ -28,7 +28,7 @@ public class Accommodation {
     @Lob
     @NonNull
     private byte [] image;
-    @OneToOne
+    @ManyToOne
     private AccommodationFeatures features;
     @NonNull
     private BigDecimal pricePerNight;
@@ -42,4 +42,17 @@ public class Accommodation {
     @NonNull
     @OneToMany(mappedBy = "accommodation")
     private Set<Booking> bookings = new HashSet<>();
+
+
+    public Accommodation(int capacity, String name, String description, byte[] image, AccommodationFeatures features, BigDecimal pricePerNight, AccommodationType type, Address address) {
+        this.capacity = capacity;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.features = features;
+        this.pricePerNight = pricePerNight;
+        this.type = type;
+        this.address = address;
+    }
+
 }
