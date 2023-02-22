@@ -48,7 +48,7 @@ export default function AllAccommodations() {
                     onChange={(event) => setSearchTerm(event.target.value.toLowerCase())}
                     className="search-input"
                     type="text"
-                    placeholder="Search for country"/>
+                    placeholder="Search for city or country"/>
                 <div className="datepicker">
                     <DatePicker
                         className="start-date"
@@ -83,9 +83,7 @@ export default function AllAccommodations() {
                     className="add-substract-button"
                     onClick={incrementCount}
                 >+</button>
-                <button id="date-button" className="see-details" onClick={() => fetchAccommodationsByDate()}>Search for
-                    date span
-                </button>
+                <button id="date-button" className="see-details" onClick={() => fetchAccommodationsByDate()}>Search for date span</button>
             </div>
             <div className="all-accommodations">
                 {accommodations.length > 0 && <h1>Accommodations</h1>}
@@ -94,15 +92,11 @@ export default function AllAccommodations() {
                         if (capacity === 0) {
                             return accommodation.pricePerNight <= parseInt(price, 10);
                         }
-
                         return accommodation.pricePerNight <= parseInt(price, 10)
                             && accommodation.capacity === capacity;
                     } else {
-                        return (
-                            accommodation.address.country.toLowerCase().includes(searchTerm)
-                                || accommodation.address.city.toLowerCase().includes(searchTerm))
-                            && accommodation.pricePerNight <= parseInt(price, 10)
-                            && accommodation.capacity === capacity;
+                        return accommodation.address.country.toLowerCase().includes(searchTerm)
+                            || accommodation.address.city.toLowerCase().includes(searchTerm);
                     }
                 })).map((accommodation) => {
                     const source = "data:image/jpg;base64," + accommodation.image;
