@@ -16,9 +16,8 @@ import java.util.List;
 @Entity
 @Builder
 @AllArgsConstructor
-@RequiredArgsConstructor
 @NoArgsConstructor
-public class Account {
+public class Account implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

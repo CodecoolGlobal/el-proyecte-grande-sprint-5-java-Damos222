@@ -9,6 +9,7 @@ import LoginForm from "./components/LoginForm";
 import Modal from "./components/Modal";
 import RegistrationForm from "./components/RegistrationForm";
 import BookingSuccess from "./components/BookingSuccess";
+import {useEffect, useState} from "react";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -16,9 +17,7 @@ function App() {
     const [showRegistrationModal, setShowRegistrationModal] = useState(false);
 
     useEffect(() => {
-        console.log(localStorage.getItem("token"))
         setLoggedIn(checkIfTokenValid())
-        console.log(loggedIn)
         return () => {
             setLoggedIn(false)
         }
@@ -26,18 +25,12 @@ function App() {
 
     async function checkIfTokenValid() {
         const token = localStorage.getItem("token");
-        console.log(token)
         if (token === null) {
             return false;
         } else {
             let res = await fetch("http://localhost:8080/auth/tokenValid?token=" + token)
             let valid = await res.text()
-            console.log(valid)
-            if (valid === 'true') {
-                return true;
-            } else {
-                return false;
-            }
+            return valid === 'true';
         }
     }
 

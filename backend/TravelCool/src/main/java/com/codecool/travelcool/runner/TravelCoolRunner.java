@@ -35,8 +35,8 @@ public class TravelCoolRunner implements CommandLineRunner {
     public void run(String... args) throws IOException {
         createAddresses();
         createAccommodations();
-        createBookings();
         createAccounts();
+        createBookings();
     }
 
     public void createBookings() {

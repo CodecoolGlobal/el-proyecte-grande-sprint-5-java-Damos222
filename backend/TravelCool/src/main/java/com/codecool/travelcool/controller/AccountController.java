@@ -10,7 +10,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping("/account")
 public class AccountController {
     private final AccountService accountService;
 
@@ -22,20 +22,5 @@ public class AccountController {
     @GetMapping("/all")
     public List<AccountDto> getAllAccounts() {
         return accountService.findAll();
-    }
-
-    @PostMapping("/register")
-    public void registerAccount(@RequestParam String email, @RequestParam String password) {
-        accountService.register(email, password);
-    }
-
-    @GetMapping ("/emailAvailable")
-    public boolean emailAvailable(@RequestParam String email) {
-        return accountService.emailAvailable(email);
-    }
-
-    @GetMapping("/checkLoginData")
-    public boolean login(@RequestParam String email, @RequestParam String password) {
-        return accountService.checkEmailAndPassword(email, password);
     }
 }

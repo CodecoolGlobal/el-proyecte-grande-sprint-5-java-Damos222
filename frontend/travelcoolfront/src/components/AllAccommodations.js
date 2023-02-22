@@ -17,16 +17,6 @@ export default function AllAccommodations() {
         return new Date(Date.now() + 864e5 * days);     // 864e5: number of milliseconds in a 24-hour day
     }
 
-    const fetchAccommodations = () => {
-        return fetch("http://localhost:8080/accommodations/all", {
-            mode: 'cors'
-        })
-            .then((response) => response.json())
-            .then(data => {
-                setAccommodations(data);
-            });
-    }
-
     const fetchAccommodationsByDate = () => {
         return fetch("http://localhost:8080/accommodations/byDate?startDate=" + startDate.getTime() + "&endDate=" + endDate.getTime(), {
             mode: 'cors'
@@ -38,10 +28,6 @@ export default function AllAccommodations() {
                 globalVars.endDate = endDate;
             });
     }
-
-    useEffect(() => {
-        fetchAccommodations();
-    }, [])
 
     const incrementCount = () =>{
         setCapacity(capacity + 1);
@@ -105,7 +91,6 @@ export default function AllAccommodations() {
                 {accommodations.length > 0 && <h1>Accommodations</h1>}
                 {accommodations.filter((accommodation => {
                     if (searchTerm.toLowerCase() === "") {
-
                         if (capacity === 0) {
                             return accommodation.pricePerNight <= parseInt(price, 10);
                         }
@@ -113,7 +98,6 @@ export default function AllAccommodations() {
                         return accommodation.pricePerNight <= parseInt(price, 10)
                             && accommodation.capacity === capacity;
                     } else {
-
                         return (
                             accommodation.address.country.toLowerCase().includes(searchTerm)
                                 || accommodation.address.city.toLowerCase().includes(searchTerm))
