@@ -32,10 +32,11 @@ public class TravelCoolRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws IOException {
+        createAccounts();
         createAddresses();
         createAccommodations();
         createBookings();
-        createAccounts();
+
     }
 
     public void createBookings() {
@@ -122,7 +123,15 @@ public class TravelCoolRunner implements CommandLineRunner {
                 new Accommodation(4, "Luxurious apartment", "Modern and relaxing room.", getByteArrayOfImage("images/hotels/edinburgh-3.jpg"), new BigDecimal(200), AccommodationType.APARTMENT, addresses.get(21)),
                 new Accommodation(3, "Cozy room", "Enjoy your stay in the center of Glasgow.", getByteArrayOfImage("images/hotels/glasgow-1.jpg"), new BigDecimal(230), AccommodationType.ROOM, addresses.get(22)),
                 new Accommodation(1, "Room with view", "Perfect for a relaxing stay.", getByteArrayOfImage("images/hotels/glasgow-2.jpg"), new BigDecimal(80), AccommodationType.ROOM, addresses.get(23)),
-                new Accommodation(4, "Luxurious apartment", "Modern and relaxing room.", getByteArrayOfImage("images/hotels/glasgow-3.jpg"), new BigDecimal(180), AccommodationType.APARTMENT, addresses.get(24))
+                Accommodation.builder()
+                        .address(addresses.get(24))
+                        .description("Modern and relaxing room.")
+                        .name("Luxurious apartment")
+                        .image(getByteArrayOfImage("images/hotels/glasgow-3.jpg"))
+                        .pricePerNight(new BigDecimal(180))
+                        .type(AccommodationType.APARTMENT)
+                        .host(accountService.findById(1).orElse(null))
+                        .build()
                 );
         accommodationRepository.saveAll(accommodations);
     }
