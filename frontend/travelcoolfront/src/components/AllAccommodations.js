@@ -31,11 +31,9 @@ export default function AllAccommodations() {
 
     const incrementCount = () =>{
         setCapacity(capacity + 1);
-        console.log(capacity)
     }
     const decrementCount = () =>{
         setCapacity(capacity - 1);
-        console.log(capacity)
     }
 
     return (
