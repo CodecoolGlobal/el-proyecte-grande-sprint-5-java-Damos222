@@ -28,15 +28,15 @@ public class TravelCoolRunner implements CommandLineRunner {
     private List<Accommodation> accommodations;
     private List<Address> addresses;
     private List<Booking> bookings;
+    private List<Account> accounts;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws IOException {
-        createAccounts();
         createAddresses();
+        createAccounts();
         createAccommodations();
         createBookings();
-
     }
 
     public void createBookings() {
@@ -51,99 +51,308 @@ public class TravelCoolRunner implements CommandLineRunner {
         );
 
         bookings = List.of(
-                new Booking(startDates.get(0), endDates.get(0), new Timestamp(System.currentTimeMillis()), accommodations.get(0)),
-                new Booking(startDates.get(1), endDates.get(1), new Timestamp(System.currentTimeMillis()), accommodations.get(1))
+                Booking.builder()
+                        .startDate(startDates.get(0))
+                        .endDate(endDates.get(0))
+                        .timestamp(new Timestamp(System.currentTimeMillis()))
+                        .accommodation(accommodations.get(0))
+                        .booker(accounts.get(0))
+                        .build(),
+                Booking.builder()
+                        .startDate(startDates.get(1))
+                        .endDate(endDates.get(1))
+                        .timestamp(new Timestamp(System.currentTimeMillis()))
+                        .accommodation(accommodations.get(1))
+                        .booker(accounts.get(0))
+                        .build()
         );
 
         bookingRepository.saveAll(bookings);
-        accommodations.get(0).getBookings().add(bookings.get(0));
+        accommodations.get(0).setBookings(Set.of(bookings.get(0)));
         accommodations.get(1).setBookings(Set.of(bookings.get(1)));
     }
 
     public void createAddresses() {
         addresses = List.of(
-                new Address("Spain", 11009, "Cádiz", "C. Baleares", "2"),
-                new Address("France", 13002, "Marseille", "Rue Lafon", "1"),
-                new Address("Germany", 10117, "Berlin", "Emser Straße", "55"),
-                new Address("Portugal", 6443, "Nazaré", "R. da Paz", "91"),
-                new Address("Spain", 2343, "Valencia", "Pont del Regne", "1"),
-                new Address("Spain", 2343, "Valencia", "Pont del Regne", "5"),
-                new Address("Spain", 2343, "Valencia", "Pont del Regne", "13"),
-                new Address("Portugal", 1200-224, "Lisbon","R. Capelo", "16"),
-                new Address("Portugal", 1200-224, "Lisbon","R. Capelo", "14"),
-                new Address("Portugal", 1200-224, "Lisbon","R. Capelo", "12"),
-                new Address("Germany", 10117, "Berlin", "Emser Straße", "53"),
-                new Address("Germany", 10117, "Berlin", "Emser Straße", "43"),
-                new Address("Germany", 10117, "Berlin", "Emser Straße", "33"),
-                new Address("Germany", 51065, "Cologne", "Brunner Straße", "33"),
-                new Address("Germany", 51065, "Cologne", "Brunner Straße", "33"),
-                new Address("Germany", 51065, "Cologne", "Brunner Straße", "33"),
-                new Address("France", 13002, "Marseille", "Rue Lafon", "3"),
-                new Address("France", 13002, "Marseille", "Rue Lafon", "5"),
-                new Address("France", 13002, "Marseille", "Rue Lafon", "7"),
-                new Address("France", 75001, "Paris", "Rue de Rivoli", "7"),
-                new Address("France", 75001, "Paris", "Rue de Rivoli", "7"),
-                new Address("France", 75001, "Paris", "Rue de Rivoli", "7"),
-                new Address("Scotland", 382440,"Edinburgh", "Princes Street", "121"),
-                new Address("Scotland", 382440,"Edinburgh", "Princes Street", "123"),
-                new Address("Scotland", 382440,"Edinburgh", "Princes Street", "128"),
-                new Address("Scotland", 62707,"Glasgow", "Waterloo Street", "1120"),
-                new Address("Scotland", 62707,"Glasgow", "Waterloo Street", "145"),
-                new Address("Scotland", 62707,"Glasgow", "Waterloo Street", "123")
-                );
+                Address.builder()
+                        .country("Spain")
+                        .zipCode(2343)
+                        .city("Cádiz")
+                        .street("C. Baleares")
+                        .houseNumber("2").build(),
+                Address.builder()
+                        .country("France")
+                        .zipCode(1234)
+                        .city("Marseille")
+                        .street("Rue Lafon")
+                        .houseNumber("1").build(),
+                Address.builder()
+                        .country("Germany")
+                        .zipCode(4332)
+                        .city("Berlin")
+                        .street("Emser Straße")
+                        .houseNumber("55").build(),
+                Address.builder()
+                        .country("Portugal")
+                        .zipCode(6443)
+                        .city("Nazaré")
+                        .street("R. da Paz")
+                        .houseNumber("91").build(),
+                Address.builder()
+                        .country("Spain")
+                        .zipCode(2343)
+                        .city("Valencia")
+                        .street("Pont del Regne")
+                        .houseNumber("1").build(),
+                Address.builder()
+                        .country("Spain")
+                        .zipCode(2343)
+                        .city("Valencia")
+                        .street("Pont del Regne")
+                        .houseNumber("5").build(),
+                Address.builder()
+                        .country("Spain")
+                        .zipCode(2343)
+                        .city("Valencia")
+                        .street("Pont del Regne")
+                        .houseNumber("13").build(),
+                Address.builder()
+                        .country("Portugal")
+                        .zipCode(1200-224)
+                        .city("Lisbon")
+                        .street("R. Capelo")
+                        .houseNumber("16").build(),
+                Address.builder()
+                        .country("Portugal")
+                        .zipCode(1200-224)
+                        .city("Lisbon")
+                        .street("R. Capelo")
+                        .houseNumber("14").build(),
+                Address.builder()
+                        .country("Portugal")
+                        .zipCode(1200-224)
+                        .city("Lisbon")
+                        .street("R. Capelo")
+                        .houseNumber("12").build(),
+                Address.builder()
+                        .country("Germany")
+                        .zipCode(10117)
+                        .city("Berlin")
+                        .street("Emser Straße")
+                        .houseNumber("53").build(),
+                Address.builder()
+                        .country("Germany")
+                        .zipCode(10117)
+                        .city("Berlin")
+                        .street("Emser Straße")
+                        .houseNumber("43").build(),
+                Address.builder()
+                        .country("Germany")
+                        .zipCode(10117)
+                        .city("Berlin")
+                        .street("Emser Straße")
+                        .houseNumber("33").build(),
+                Address.builder()
+                        .country("Germany")
+                        .zipCode(51065)
+                        .city("Cologne")
+                        .street("Brunner Straße")
+                        .houseNumber("1").build(),
+                Address.builder()
+                        .country("Germany")
+                        .zipCode(51065)
+                        .city("Cologne")
+                        .street("Brunner Straße")
+                        .houseNumber("2").build(),
+                Address.builder()
+                        .country("Germany")
+                        .zipCode(51065)
+                        .city("Cologne")
+                        .street("Brunner Straße")
+                        .houseNumber("3").build(),
+                Address.builder()
+                        .country("France")
+                        .zipCode(13002)
+                        .city("Marseille")
+                        .street("Rue Lafon")
+                        .houseNumber("4").build(),
+                Address.builder()
+                        .country("France")
+                        .zipCode(13002)
+                        .city("Marseille")
+                        .street("Rue Lafon")
+                        .houseNumber("5").build(),
+                Address.builder()
+                        .country("France")
+                        .zipCode(13002)
+                        .city("Marseille")
+                        .street("Rue Lafon")
+                        .houseNumber("6").build(),
+                Address.builder()
+                        .country("France")
+                        .zipCode(75001)
+                        .city("Paris")
+                        .street("Rue de Rivoli")
+                        .houseNumber("10").build(),
+                Address.builder()
+                        .country("France")
+                        .zipCode(75001)
+                        .city("Paris")
+                        .street("Rue de Rivoli")
+                        .houseNumber("20").build(),
+                Address.builder()
+                        .country("France")
+                        .zipCode(75001)
+                        .city("Paris")
+                        .street("Rue de Rivoli")
+                        .houseNumber("30").build(),
+                Address.builder()
+                        .country("Scotland")
+                        .zipCode(382440)
+                        .city("Edinburgh")
+                        .street("Princes Street")
+                        .houseNumber("121").build(),
+                Address.builder()
+                        .country("Scotland")
+                        .zipCode(382440)
+                        .city("Edinburgh")
+                        .street("Princes Street")
+                        .houseNumber("122").build(),
+                Address.builder()
+                        .country("Scotland")
+                        .zipCode(382440)
+                        .city("Edinburgh")
+                        .street("Princes Street")
+                        .houseNumber("123").build(),
+                Address.builder()
+                        .country("Scotland")
+                        .zipCode(62707)
+                        .city("Glasgow")
+                        .street("Waterloo Street")
+                        .houseNumber("5").build(),
+                Address.builder()
+                        .country("Scotland")
+                        .zipCode(62707)
+                        .city("Glasgow")
+                        .street("Waterloo Street")
+                        .houseNumber("10").build(),
+                Address.builder()
+                        .country("Scotland")
+                        .zipCode(62707)
+                        .city("Glasgow")
+                        .street("Waterloo Street")
+                        .houseNumber("15").build()
+        );
+
         addressRepository.saveAll(addresses);
     }
 
     public void createAccommodations() throws IOException {
         accommodations = List.of(
-                new Accommodation(2, "Rose Apartment", "Luxury apartment", getByteArrayOfImage("images/bedroom-1.jpg"), new BigDecimal(500), AccommodationType.APARTMENT, addresses.get(0)),
-                new Accommodation(4, "Cozy Room", "Near the beach", getByteArrayOfImage("images/bedroom-2.jpg"), new BigDecimal(100), AccommodationType.ROOM, addresses.get(1)),
-                new Accommodation(5, "City Apartment", "Apartment in the city center", getByteArrayOfImage("images/bedroom-3.jpg"), new BigDecimal(600), AccommodationType.APARTMENT, addresses.get(2)),
-                new Accommodation(1, "Sunny room", "Sunny single room for adventurous travellers", getByteArrayOfImage("images/bedroom-4.jpg"), new BigDecimal(50), AccommodationType.ROOM, addresses.get(3)),
-                new Accommodation(3, "Seaside room", "Cozy room near with seaside view", getByteArrayOfImage("images/hotels/valencia-1.jpg"), new BigDecimal(150), AccommodationType.ROOM, addresses.get(4)),
-                new Accommodation(5, "Room with balcony", "Relax at night with a glass of wine on the balcony.", getByteArrayOfImage("images/hotels/valencia-2.jpg"), new BigDecimal(180), AccommodationType.ROOM, addresses.get(3)),
-                new Accommodation(2, "Modern room", "Modern and green room", getByteArrayOfImage("images/hotels/valencia-3.jpg"), new BigDecimal(120), AccommodationType.ROOM, addresses.get(6)),
-                new Accommodation(1, "Classic room", "Enjoy your stay like one of the royals.", getByteArrayOfImage("images/hotels/lisbon-1.jpg"), new BigDecimal(50), AccommodationType.ROOM, addresses.get(7)),
-                new Accommodation(3, "Room with terrace", "Have a nice breakfast with a great view.", getByteArrayOfImage("images/hotels/lisbon-2.jpg"), new BigDecimal(80), AccommodationType.ROOM, addresses.get(8)),
-                new Accommodation(4, "Room with view", "Sit back and be amazed by any sunset or sunrise.", getByteArrayOfImage("images/hotels/lisbon-3.jpg"), new BigDecimal(100), AccommodationType.ROOM, addresses.get(9)),
-                new Accommodation(1, "Urban room", "Modern and awesome room.", getByteArrayOfImage("images/hotels/berlin-1.jpg"), new BigDecimal(200), AccommodationType.ROOM, addresses.get(10)),
-                new Accommodation(2, "Central room", "Enjoy your stay in the center of Berlin.", getByteArrayOfImage("images/hotels/berlin-2.jpg"), new BigDecimal(250), AccommodationType.ROOM, addresses.get(11)),
-                new Accommodation(3, "Modern room", "Room with a great view.", getByteArrayOfImage("images/hotels/berlin-3.jpg"), new BigDecimal(110), AccommodationType.ROOM, addresses.get(12)),
-                new Accommodation(4, "Cozy room", "Great view of the cathedral.", getByteArrayOfImage("images/hotels/cologne-1.jpg"), new BigDecimal(200), AccommodationType.ROOM, addresses.get(10)),
-                new Accommodation(5, "Central room", "Enjoy your stay in the nature of Cologne.", getByteArrayOfImage("images/hotels/cologne-2.jpg"), new BigDecimal(250), AccommodationType.ROOM, addresses.get(11)),
-                new Accommodation(1, "Modern room", "Modern and compact room.", getByteArrayOfImage("images/hotels/cologne-3.jpg"), new BigDecimal(110), AccommodationType.ROOM, addresses.get(12)),
-                new Accommodation(2, "Central room", "Enjoy your stay in the center of Marseille.", getByteArrayOfImage("images/hotels/marseille-1.jpg"), new BigDecimal(200), AccommodationType.ROOM, addresses.get(13)),
-                new Accommodation(3, "Elegant room", "Perfect for a relaxing stay.", getByteArrayOfImage("images/hotels/marseille-2.jpg"), new BigDecimal(250), AccommodationType.ROOM, addresses.get(14)),
-                new Accommodation(4, "Luxurious apartment", "Enjoy your stay like one of the royals.", getByteArrayOfImage("images/hotels/marseille-3.jpg"), new BigDecimal(110), AccommodationType.APARTMENT, addresses.get(15)),
-                new Accommodation(2, "Cozy room", "Enjoy your stay in the center of Paris.", getByteArrayOfImage("images/hotels/paris-1.jpg"), new BigDecimal(50), AccommodationType.ROOM, addresses.get(16)),
-                new Accommodation(2, "Room with view", "Perfect for a relaxing stay.", getByteArrayOfImage("images/hotels/paris-2.jpg"), new BigDecimal(100), AccommodationType.ROOM, addresses.get(17)),
-                new Accommodation(2, "Luxurious apartment", "Modern and relaxing room.", getByteArrayOfImage("images/hotels/paris-3.jpg"), new BigDecimal(150), AccommodationType.APARTMENT, addresses.get(18)),
-                new Accommodation(3, "Cozy room", "Enjoy your stay in the center of Edinburgh.", getByteArrayOfImage("images/hotels/edinburgh-1.jpg"), new BigDecimal(100), AccommodationType.ROOM, addresses.get(19)),
-                new Accommodation(1, "Room with view", "Perfect for a relaxing stay.", getByteArrayOfImage("images/hotels/edinburgh-2.jpg"), new BigDecimal(120), AccommodationType.ROOM, addresses.get(20)),
-                new Accommodation(4, "Luxurious apartment", "Modern and relaxing room.", getByteArrayOfImage("images/hotels/edinburgh-3.jpg"), new BigDecimal(200), AccommodationType.APARTMENT, addresses.get(21)),
-                new Accommodation(3, "Cozy room", "Enjoy your stay in the center of Glasgow.", getByteArrayOfImage("images/hotels/glasgow-1.jpg"), new BigDecimal(230), AccommodationType.ROOM, addresses.get(22)),
-                new Accommodation(1, "Room with view", "Perfect for a relaxing stay.", getByteArrayOfImage("images/hotels/glasgow-2.jpg"), new BigDecimal(80), AccommodationType.ROOM, addresses.get(23)),
                 Accommodation.builder()
-                        .address(addresses.get(24))
-                        .description("Modern and relaxing room.")
-                        .name("Luxurious apartment")
-                        .image(getByteArrayOfImage("images/hotels/glasgow-3.jpg"))
-                        .pricePerNight(new BigDecimal(180))
+                        .capacity(2)
+                        .name("Rose Apartment")
+                        .description("Luxury apartment")
+                        .image(getByteArrayOfImage("images/bedroom-1.jpg"))
+                        .pricePerNight(new BigDecimal(500))
                         .type(AccommodationType.APARTMENT)
+                        .address(addresses.get(0))
                         .host(accountService.findById(1).orElse(null))
-                        .build()
-                );
+                        .build(),
+                Accommodation.builder()
+                        .capacity(4)
+                        .name("Cozy Room")
+                        .description("Near the beach")
+                        .image(getByteArrayOfImage("images/bedroom-2.jpg"))
+                        .pricePerNight(new BigDecimal(100))
+                        .type(AccommodationType.ROOM)
+                        .address(addresses.get(1)).build(),
+                Accommodation.builder()
+                        .capacity(5)
+                        .name("City Apartment")
+                        .description("Apartment in the city center")
+                        .image(getByteArrayOfImage("images/bedroom-3.jpg"))
+                        .pricePerNight(new BigDecimal(600))
+                        .type(AccommodationType.APARTMENT)
+                        .address(addresses.get(2)).build(),
+                Accommodation.builder()
+                        .capacity(1)
+                        .name("Sunny room")
+                        .description("Sunny single room for adventurous travellers")
+                        .image(getByteArrayOfImage("images/bedroom-4.jpg"))
+                        .pricePerNight(new BigDecimal(50))
+                        .type(AccommodationType.ROOM)
+                        .address(addresses.get(3)).build(),
+                Accommodation.builder()
+                        .capacity(3)
+                        .name("Seaside room")
+                        .description("Cozy room near with seaside view")
+                        .image(getByteArrayOfImage("images/hotels/valencia-1.jpg"))
+                        .pricePerNight(new BigDecimal(150))
+                        .type(AccommodationType.ROOM)
+                        .address(addresses.get(4)).build(),
+                Accommodation.builder()
+                        .capacity(5)
+                        .name("Room with balcony")
+                        .description("Relax at night with a glass of wine on the balcony")
+                        .image(getByteArrayOfImage("images/hotels/valencia-2.jpg"))
+                        .pricePerNight(new BigDecimal(180))
+                        .type(AccommodationType.ROOM)
+                        .address(addresses.get(5)).build(),
+                Accommodation.builder()
+                        .capacity(2)
+                        .name("Modern room")
+                        .description("Modern and green room")
+                        .image(getByteArrayOfImage("images/hotels/valencia-3.jpg"))
+                        .pricePerNight(new BigDecimal(120))
+                        .type(AccommodationType.ROOM)
+                        .address(addresses.get(6)).build(),
+                Accommodation.builder()
+                        .capacity(1)
+                        .name("Classic room")
+                        .description("Enjoy your stay like one of the royals")
+                        .image(getByteArrayOfImage("images/hotels/lisbon-1.jpg"))
+                        .pricePerNight(new BigDecimal(50))
+                        .type(AccommodationType.ROOM)
+                        .address(addresses.get(7)).build(),
+                Accommodation.builder()
+                        .capacity(3)
+                        .name("Room with terrace")
+                        .description("Have a nice breakfast with a great view")
+                        .image(getByteArrayOfImage("images/hotels/lisbon-2.jpg"))
+                        .pricePerNight(new BigDecimal(80))
+                        .type(AccommodationType.ROOM)
+                        .address(addresses.get(8)).build(),
+                Accommodation.builder()
+                        .capacity(4)
+                        .name("Room with view")
+                        .description("Sit back and be amazed by any sunset or sunrise")
+                        .image(getByteArrayOfImage("images/hotels/lisbon-3.jpg"))
+                        .pricePerNight(new BigDecimal(100))
+                        .type(AccommodationType.ROOM)
+                        .address(addresses.get(9)).build(),
+                Accommodation.builder()
+                        .capacity(1)
+                        .name("Urban room")
+                        .description("Modern and awesome room")
+                        .image(getByteArrayOfImage("images/hotels/berlin-1.jpg"))
+                        .pricePerNight(new BigDecimal(200))
+                        .type(AccommodationType.ROOM)
+                        .address(addresses.get(10)).build()
+        );
         accommodationRepository.saveAll(accommodations);
     }
 
     public void createAccounts() {
-        accountService.save(Account.builder()
+        accounts = List.of(Account.builder()
                 .email("hello@there.com")
                 .password(passwordEncoder.encode("helloThere1"))
                 .firstName("hello")
                 .lastName("there")
+                .address(addresses.get(0))
                 .role(Role.USER)
                 .build());
+        accountRepository.saveAll(accounts);
     }
 
     public byte[] getByteArrayOfImage(String imagePath) throws IOException {

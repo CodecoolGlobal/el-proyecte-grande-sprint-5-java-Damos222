@@ -1,14 +1,9 @@
 package com.codecool.travelcool.controller;
 
 import com.codecool.travelcool.dto.AccommodationDto;
-import com.codecool.travelcool.model.Accommodation;
-import com.codecool.travelcool.model.AccommodationFeatures;
-import com.codecool.travelcool.model.Account;
-import com.codecool.travelcool.model.Address;
-import com.codecool.travelcool.service.AccommodationService;
-import com.codecool.travelcool.service.AccountService;
-import com.codecool.travelcool.service.AddressService;
-import com.codecool.travelcool.service.FeaturesService;
+import com.codecool.travelcool.dto.BookingDto;
+import com.codecool.travelcool.model.*;
+import com.codecool.travelcool.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -25,20 +20,23 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/accommodations")
-public class  AccommodationsController {
+public class AccommodationsController {
     private final AccommodationService accommodationService;
     private final List<byte[]> images = new ArrayList<>();
     private final AccountService accountService;
     private final FeaturesService featuresService;
     private final AddressService addressService;
+    private final BookingService bookingService;
 
 
     @Autowired
-    public AccommodationsController(AccommodationService accommodationService, AccountService accountService, FeaturesService featuresService, AddressService addressService) {
+    public AccommodationsController(AccommodationService accommodationService, AccountService accountService,
+                                    FeaturesService featuresService, AddressService addressService, BookingService bookingService) {
         this.accommodationService = accommodationService;
         this.accountService = accountService;
         this.featuresService = featuresService;
         this.addressService = addressService;
+        this.bookingService = bookingService;
     }
 
     @GetMapping("/all")
@@ -48,12 +46,9 @@ public class  AccommodationsController {
 
     @GetMapping("/byDate")
     public List<Accommodation> findByDate(@RequestParam Long startDate, @RequestParam Long endDate) {
-        System.out.println(startDate + " " + endDate);
         LocalDate fromDate = Instant.ofEpochMilli(startDate).atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate toDate = Instant.ofEpochMilli(endDate).atZone(ZoneId.systemDefault()).toLocalDate();
-        List<Accommodation> a = accommodationService.findByBookingsStartDateAfterAndEndDateBefore(fromDate, toDate);
-        System.out.println(a);
-        return a;
+        return accommodationService.findByBookingsStartDateAfterAndEndDateBefore(fromDate, toDate);
     }
 
     @GetMapping("/priceBetween")

@@ -1,37 +1,48 @@
 package com.codecool.travelcool.model;
 
+import com.codecool.travelcool.dto.AccommodationDto;
+import com.codecool.travelcool.dto.BookingDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id;
-    @NonNull
+    @Column(nullable = false)
     private LocalDate startDate;
-    @NonNull
+    @Column(nullable = false)
     private LocalDate endDate;
-    @NonNull
-    @Temporal(value = TemporalType.TIMESTAMP)
-    @GeneratedValue
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Timestamp timestamp;
+    @JoinColumn(nullable = false)
     @ManyToOne
     private Account booker;
-    private int adults;
-    private int children;
-    @NonNull
     @ManyToOne
-    @JoinColumn(name = "accommodation_id")
+    @JoinColumn(name = "accommodation_id", nullable = false)
     @JsonIgnore
     private Accommodation accommodation;
+
+    public BookingDto toBookingDto() {
+        BookingDto bookingDto = new BookingDto();
+        bookingDto.setStartDate(startDate);
+        bookingDto.setEndDate(endDate);
+        bookingDto.setBooker(booker.toAccountDto());
+        AccommodationDto accommodationDto = accommodation.toAccommodationDto();
+        bookingDto.setAccommodationDto(accommodationDto);
+        return bookingDto;
+    }
 }

@@ -1,0 +1,12 @@
+.success-area {
+    background-color: #EBEBEB;
+    padding: 25px;
+    border-radius: 5px;
+    margin: 50px;
+}
+
+.success-button {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}

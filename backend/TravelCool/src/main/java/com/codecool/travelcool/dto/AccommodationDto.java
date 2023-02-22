@@ -17,6 +17,7 @@ import java.util.Optional;
 @Data
 @NoArgsConstructor
 public class AccommodationDto {
+    private Long id;
     private String title;
     private String country;
     private String city;
@@ -32,17 +33,17 @@ public class AccommodationDto {
     private boolean sauna;
     private int capacity;
     private String description;
-    private Double pricePerNight;
+    private BigDecimal pricePerNight;
     private AccommodationType type;
 
     public Accommodation getAccommodation() {
         Accommodation accommodation = new Accommodation();
+        accommodation.setId(id);
         accommodation.setName(title);
         accommodation.setCapacity(capacity);
         accommodation.setDescription(description);
         accommodation.setType(type);
-        accommodation.setPricePerNight(BigDecimal.valueOf(pricePerNight));
-
+        accommodation.setPricePerNight(pricePerNight);
         return accommodation;
     }
 

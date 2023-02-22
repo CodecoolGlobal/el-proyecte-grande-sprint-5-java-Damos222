@@ -1,34 +1,28 @@
 package com.codecool.travelcool.model;
 
+import com.codecool.travelcool.dto.AddressDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class Address {
     @Id
-    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
+    @Column(nullable = false)
     private String country;
-    @NonNull
+    @Column(nullable = false)
     private int zipCode;
-    @NonNull
-    private String City;
-    @NonNull
+    @Column(nullable = false)
+    private String city;
+    @Column(nullable = false)
     private String street;
-    @NonNull
+    @Column(nullable = false)
     private String houseNumber;
 }

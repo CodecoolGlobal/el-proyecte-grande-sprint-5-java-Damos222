@@ -14,7 +14,6 @@ import lombok.Setter;
 public class AccommodationFeatures {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id;
     boolean parking;
     boolean pool;

@@ -33,6 +33,11 @@ export default function AccountMenu() {
         navigate("/account/bookings")
     }
 
+    function goToAddAccommodation() {
+        handleClose()
+        navigate("/addAccommodation")
+    }
+
     return (
         <div>
             <Button id="demo-positioned-button"
@@ -61,6 +66,7 @@ export default function AccountMenu() {
             >
                 <MenuItem onClick={goToMyAccommodations}>My Accommodations</MenuItem>
                 <MenuItem onClick={goToMyBookings}>My Bookings</MenuItem>
+                <MenuItem onClick={goToAddAccommodation}>Add Accommodation</MenuItem>
                 <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
         </div>
