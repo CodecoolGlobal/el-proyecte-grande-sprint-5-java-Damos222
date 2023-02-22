@@ -3,14 +3,13 @@ import React, { useState } from 'react'
 
 const RegistrationForm = (props) => {
     const INITIAL_DATA = {
-        email: "default",
+        email: "",
         password: "",
         firstName: "",
         lastName: ""
     }
     const [formData, setFormData] = useState(INITIAL_DATA)
     const [confirmPassword, setConfirmPassword] = useState("")
-    // const [emailTaken, setEmailTaken] = useState(true)
 
     function updateData(newInput) {
         setFormData({
@@ -29,16 +28,15 @@ const RegistrationForm = (props) => {
             alert("Passwords do not match")
             return
         }
-        const isEmailTaken = await updateEmailTaken()
-        console.log(isEmailTaken)
-        if (isEmailTaken === true) {
+        const emailTaken = await isEmailTaken()
+        if (emailTaken === true) {
             alert("Account with this email already exists")
         } else {
             registerUser()
         }
     }
 
-    async function updateEmailTaken() {
+    async function isEmailTaken() {
         return fetch(`http://localhost:8080/auth/emailTaken/${formData.email}`, {
             method: "GET",
             mode: 'cors'
@@ -56,7 +54,6 @@ const RegistrationForm = (props) => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                // mode: 'cors'
             })
             if (res.ok) {
                 const token = await res.text()
@@ -64,7 +61,6 @@ const RegistrationForm = (props) => {
                 localStorage.setItem('token', token)
                 alert("Account created successfully")
                 props.setShowRegistrationModal(false)
-                props.setShowLoginModal(true)
             }
         } catch (error) {
             console.log(error)

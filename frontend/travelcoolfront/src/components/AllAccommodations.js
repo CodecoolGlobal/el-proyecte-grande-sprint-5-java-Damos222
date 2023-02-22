@@ -1,6 +1,7 @@
 import '../css/AllAccommodations.css';
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
+import AccommodationOverview from './AccommodationOverview';
 
 export default function AllAccommodations() {
     const [startDate, setStartDate] = useState(new Date());
@@ -39,11 +40,11 @@ export default function AllAccommodations() {
         fetchAccommodations();
     }, [])
 
-    const incrementCount = () =>{
+    const incrementCount = () => {
         setCapacity(capacity + 1);
         console.log(capacity)
     }
-    const decrementCount = () =>{
+    const decrementCount = () => {
         setCapacity(capacity - 1);
         console.log(capacity)
     }
@@ -58,27 +59,27 @@ export default function AllAccommodations() {
                     onChange={(event) => setSearchTerm(event.target.value.toLowerCase())}
                     className="search-input"
                     type="text"
-                    placeholder="Search for country"/>
+                    placeholder="Search for country" />
                 <div className="datepicker">
                     <DatePicker
                         className="start-date"
                         dateFormat="yyyy-MM-dd"
                         selected={startDate}
-                        onChange={(date) => setStartDate(date)}/>
+                        onChange={(date) => setStartDate(date)} />
 
                     <DatePicker
                         className="end-date"
                         dateFormat="yyyy-MM-dd"
                         selected={endDate}
-                        onChange={(date) => setEndDate(date)}/>
+                        onChange={(date) => setEndDate(date)} />
                 </div>
-                    <input
-                        className="max-price-per-night"
-                        onChange={(e) => setPrice(e.target.value)}
+                <input
+                    className="max-price-per-night"
+                    onChange={(e) => setPrice(e.target.value)}
 
-                        type="text"
-                        placeholder="max. price per night"
-                    />
+                    type="text"
+                    placeholder="max. price per night"
+                />
                 <button
                     className="add-substract-button"
                     onClick={decrementCount}
@@ -86,7 +87,7 @@ export default function AllAccommodations() {
                 <input
                     className="capacity"
                     value={capacity.toString()}
-                onChange={(e) => setCapacity(parseInt(e.target.value))}
+                    onChange={(e) => setCapacity(parseInt(e.target.value))}
                 />
 
                 <button
@@ -114,35 +115,38 @@ export default function AllAccommodations() {
 
                         return (
                             accommodation.address.country.toLowerCase().includes(searchTerm)
-                                || accommodation.address.city.toLowerCase().includes(searchTerm))
+                            || accommodation.address.city.toLowerCase().includes(searchTerm))
                             && accommodation.pricePerNight <= parseInt(price, 10)
                             && accommodation.capacity === capacity;
                     }
 
 
+
                 })).map((accommodation) => {
                     const source = "data:image/jpg;base64," + accommodation.image;
                     return (
-                        <div className="list-accommodations" key={accommodation.id}>
-                            <div className="accommodation-image">
-                                <img src={source} style={{width: "350px"}} alt={accommodation.name + "Image"}/>
-                            </div>
-                            <div className="accommodation-info">
-                                <p><strong>{accommodation.name}</strong></p>
-                                <span>{accommodation.address.street} {accommodation.address.houseNumber}, {accommodation.address.zipCode} {accommodation.address.city}, {accommodation.address.country}</span>
-                                <p>{accommodation.description}</p>
-                                <p>Capacity: {accommodation.capacity} person(s)</p>
-                                <p>Type: {accommodation.type}</p>
-                                <p>
-                                    Price per night: <strong>{accommodation.pricePerNight} €</strong>
-                                </p>
-                            </div>
-                            <div className="accommodation-button">
-                                <a href={"http://localhost:3000/accommodations/" + accommodation.id}>
-                                    <button className="see-details">See details</button>
-                                </a>
-                            </div>
-                        </div>
+                        <AccommodationOverview accommodation={accommodation}></AccommodationOverview>
+
+                        // <div className="list-accommodations" key={accommodation.id}>
+                        //     <div className="accommodation-image">
+                        //         <img src={source} style={{width: "350px"}} alt={accommodation.name + "Image"}/>
+                        //     </div>
+                        //     <div className="accommodation-info">
+                        //         <p><strong>{accommodation.name}</strong></p>
+                        //         <span>{accommodation.address.street} {accommodation.address.houseNumber}, {accommodation.address.zipCode} {accommodation.address.city}, {accommodation.address.country}</span>
+                        //         <p>{accommodation.description}</p>
+                        //         <p>Capacity: {accommodation.capacity} person(s)</p>
+                        //         <p>Type: {accommodation.type}</p>
+                        //         <p>
+                        //             Price per night: <strong>{accommodation.pricePerNight} €</strong>
+                        //         </p>
+                        //     </div>
+                        //     <div className="accommodation-button">
+                        //         <a href={"http://localhost:3000/accommodations/" + accommodation.id}>
+                        //             <button className="see-details">See details</button>
+                        //         </a>
+                        //     </div>
+                        // </div>
                     );
                 })}
             </div>

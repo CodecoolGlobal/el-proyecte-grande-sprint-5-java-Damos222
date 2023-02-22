@@ -17,7 +17,6 @@ const LoginForm = (props) => {
             const token = await response.text()
             console.log(token)
             localStorage.setItem('token', token)
-            props.setLoggedIn(true)
             props.setShowLoginModal(false)
         } else {
             alert("Wrong username or password")
