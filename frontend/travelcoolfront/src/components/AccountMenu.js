@@ -1,10 +1,14 @@
 import * as React from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Button from './Button';
+import { useNavigate } from 'react-router-dom';
 
-export default function PositionedMenu() {
+export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
+    const navigate = useNavigate()
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -13,28 +17,33 @@ export default function PositionedMenu() {
     };
 
     function logout() {
-        localStorage.setItem("token", null)
+        handleClose()
+        localStorage.removeItem("token")
+        navigate("/")
+        window.location.reload()
     }
 
     function goToMyAccommodations() {
-        
+        handleClose()
+        navigate("/account/accommodations")
     }
 
     function goToMyBookings() {
-        
+        handleClose()
+        navigate("/account/bookings")
     }
 
     return (
         <div>
-            <button className='light'
-                id="demo-positioned-button"
+            <Button id="demo-positioned-button"
                 aria-controls={open ? 'demo-positioned-menu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
-            >
-                My Account
-            </button>
+                type={"light"}
+                size={"medium"}
+                content={"My Account"}>
+            </Button>
             <Menu
                 id="demo-positioned-menu"
                 aria-labelledby="demo-positioned-button"

@@ -9,6 +9,8 @@ import AccommodationForm from "./components/AddAccommodationMultiStep/Accommodat
 import LoginForm from "./components/LoginForm";
 import Modal from "./components/Modal";
 import RegistrationForm from "./components/RegistrationForm";
+import MyAccommodations from "./components/MyAccommodations";
+import MyBookings from "./components/MyBookings";
 
 function App() {
     const [fromDate, setFromDate] = useState("");
@@ -40,6 +42,8 @@ function App() {
                         <Route path="/accommodations/:id" exact element={<AccommodationDetails setFromDate={setFromDate} setToDate={setToDate} />} />
                         <Route path="/accommodations/checkout" exact element={<Checkout fromDate={fromDate} toDate={toDate} />} />
                         <Route path="/addAccommodation" element={<AccommodationForm />} />
+                        <Route path="/account/accommodations" element={<MyAccommodations setShowLoginModal={setShowLoginModal} />} />
+                        <Route path="/account/bookings" element={<MyBookings />} />
                     </Routes>
                 </div>
             </div>

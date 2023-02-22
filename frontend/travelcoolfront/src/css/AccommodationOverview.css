@@ -1,0 +1,24 @@
+.list-accommodations {
+    display: flex;
+    background-color: #EBEBEB;
+    border-radius: 5px;
+    margin: 25px 0 25px 0;
+    padding: 25px;
+}
+
+.list-accommodations p, span {
+    margin: 10px 0 10px 0;
+}
+
+.accommodation-image {
+    margin: 0 25px 0 0;
+}
+
+.accommodation-button {
+    margin-left: auto;
+    align-self: flex-end;
+}
+
+.accommodation-button button {
+    cursor: pointer;
+}
