@@ -17,6 +17,7 @@ const MyBookings = () => {
         console.log(bookings)
         return (
             bookings.map((booking) => {
+                //this is provisional. Needs styling.
                 return (
                     <div key={booking.id}>
                         <p>id: {booking.id}</p>
