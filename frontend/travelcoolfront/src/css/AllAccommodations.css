@@ -23,9 +23,17 @@
 .accommodation-button {
     margin-left: auto;
     align-self: flex-end;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 .accommodation-button button {
     cursor: pointer;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}

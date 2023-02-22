@@ -1,17 +1,17 @@
 package com.codecool.travelcool.model;
 
+import com.codecool.travelcool.dto.AccommodationDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
+@Builder
 @Getter
 @Setter
 @Entity
@@ -19,27 +19,41 @@ public class Accommodation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
+    @Column(nullable = false)
     private int capacity;
-    @NonNull
+    @Column(nullable = false)
     private String name;
-    @NonNull
+    @Column(nullable = false)
     private String description;
     @Lob
-    @NonNull
+    @Column(nullable = false)
     private byte [] image;
     @OneToOne
     private AccommodationFeatures features;
-    @NonNull
+    @Column(nullable = false)
     private BigDecimal pricePerNight;
-    @NonNull
+    @Column(nullable = false)
     private AccommodationType type;
     @ManyToOne
+    @JsonIgnore
     private Account host;
-    @NonNull
     @ManyToOne
     private Address address;
-    @NonNull
     @OneToMany(mappedBy = "accommodation")
     private Set<Booking> bookings = new HashSet<>();
+
+    public AccommodationDto toAccommodationDto() {
+        AccommodationDto accommodationDto = new AccommodationDto();
+        accommodationDto.setId(id);
+        accommodationDto.setTitle(name);
+        accommodationDto.setCapacity(capacity);
+        accommodationDto.setDescription(description);
+        accommodationDto.setType(type);
+        accommodationDto.setPricePerNight(pricePerNight);
+        accommodationDto.setCountry(address.getCountry());
+        accommodationDto.setZipCode(address.getZipCode());
+        accommodationDto.setCity(address.getCity());
+        accommodationDto.setHouseNumber(address.getHouseNumber());
+        return accommodationDto;
+    }
 }

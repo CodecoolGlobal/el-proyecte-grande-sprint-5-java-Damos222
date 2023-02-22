@@ -3,24 +3,21 @@ import Header from "./components/Header";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AllAccommodations from "./components/AllAccommodations";
 import AccommodationDetails from "./components/AccommodationDetails";
-import Checkout from "./components/Checkout";
-import { useEffect, useState } from "react";
+import CheckoutForm from "./components/CheckoutAccommodationMultiStep/CheckoutForm";
 import AccommodationForm from "./components/AddAccommodationMultiStep/AccommodationForm";
 import LoginForm from "./components/LoginForm";
 import Modal from "./components/Modal";
 import RegistrationForm from "./components/RegistrationForm";
+import BookingSuccess from "./components/BookingSuccess";
+import {useEffect, useState} from "react";
 
 function App() {
-    const [fromDate, setFromDate] = useState("");
-    const [toDate, setToDate] = useState("");
     const [loggedIn, setLoggedIn] = useState(false);
-    const [showLoginModal, setShowLoginModal] = useState(false)
-    const [showRegistrationModal, setShowRegistrationModal] = useState(false)
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showRegistrationModal, setShowRegistrationModal] = useState(false);
 
     useEffect(() => {
-        console.log(localStorage.getItem("token"))
         setLoggedIn(checkIfTokenValid())
-        console.log(loggedIn)
         return () => {
             setLoggedIn(false)
         }
@@ -28,18 +25,12 @@ function App() {
 
     async function checkIfTokenValid() {
         const token = localStorage.getItem("token");
-        console.log(token)
         if (token === null) {
             return false;
         } else {
             let res = await fetch("http://localhost:8080/auth/tokenValid?token=" + token)
             let valid = await res.text()
-            console.log(valid)
-            if (valid === 'true') {
-                return true;
-            } else {
-                return false;
-            }
+            return valid === 'true';
         }
     }
 
@@ -63,10 +54,11 @@ function App() {
                         />
                     </Modal>
                     <Routes>
-                        <Route path="/" exact element={<Home />} />
-                        <Route path="/accommodations/all" exact element={<AllAccommodations />} />
-                        <Route path="/accommodations/:id" exact element={<AccommodationDetails setFromDate={setFromDate} setToDate={setToDate} />} />
-                        <Route path="/accommodations/checkout" exact element={<Checkout fromDate={fromDate} toDate={toDate} />} />
+                        <Route path="/" exact element={<Home/>}/>
+                        <Route path="/accommodations/all" exact element={<AllAccommodations/>}/>
+                        <Route path="/accommodations/:id" exact element={<AccommodationDetails/>}/>
+                        <Route path="/bookings/checkout" exact element={<CheckoutForm/>}/>
+                        <Route path="/bookings/success" exact element={<BookingSuccess/>}/>
                         <Route path="/addAccommodation" element={<AccommodationForm />} />
                     </Routes>
                 </div>

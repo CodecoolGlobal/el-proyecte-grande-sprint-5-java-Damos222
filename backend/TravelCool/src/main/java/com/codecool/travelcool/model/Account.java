@@ -1,5 +1,6 @@
 package com.codecool.travelcool.model;
 
+import com.codecool.travelcool.dto.AccountDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,19 +15,34 @@ import java.util.List;
 @Setter
 @Entity
 @Builder
-@RequiredArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Account implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
+    @ManyToOne
+    @JsonIgnore
+    private Address address;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public AccountDto toAccountDto() {
+        AccountDto accountDto = new AccountDto();
+        accountDto.setEmail(email);
+        accountDto.setPassword(password);
+        accountDto.setPassword(firstName);
+        accountDto.setPassword(lastName);
+        return accountDto;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

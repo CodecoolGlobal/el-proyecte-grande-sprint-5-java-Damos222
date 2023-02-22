@@ -1,19 +1,26 @@
 package com.codecool.travelcool.controller;
 
+import com.codecool.travelcool.dto.AccountDto;
 import com.codecool.travelcool.model.Account;
+import com.codecool.travelcool.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/account")
 public class AccountController {
-    @GetMapping("/greeting")
-    public String greeting(Authentication authentication) {
-//        Account account = (Account) authentication;
-        return "Hello, " + authentication.getName();
+    private final AccountService accountService;
+
+    @Autowired
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
+    }
+
+    @GetMapping("/all")
+    public List<AccountDto> getAllAccounts() {
+        return accountService.findAll();
     }
 }

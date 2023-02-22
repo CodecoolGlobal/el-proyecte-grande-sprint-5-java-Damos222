@@ -1,5 +1,6 @@
 package com.codecool.travelcool.controller;
 
+import com.codecool.travelcool.dto.BookingDto;
 import com.codecool.travelcool.model.Booking;
 import com.codecool.travelcool.service.BookingService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,12 @@ public class BookingController {
     private final BookingService bookingService;
 
     @GetMapping("/all")
-    public List<Booking> getAllBookings() {
+    public List<BookingDto> getAllBookings() {
         return bookingService.findAll();
+    }
+
+    @PostMapping("/checkout")
+    public BookingDto checkout(@RequestBody BookingDto bookingDto) {
+        return bookingService.book(bookingDto);
     }
 }

@@ -1,10 +1,12 @@
 import '../css/AllAccommodations.css';
 import React, {useEffect, useState} from "react";
 import DatePicker from "react-datepicker";
+import {globalVars} from "../global/globalVars";
+import {Link} from "react-router-dom";
 
 export default function AllAccommodations() {
     const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(addDays(5));
+    const [endDate, setEndDate] = useState(() => addDays(5));
     const [searchTerm, setSearchTerm] = useState("");
     const [accommodations, setAccommodations] = useState([]);
     const [price, setPrice] = useState("10000");
@@ -15,16 +17,6 @@ export default function AllAccommodations() {
         return new Date(Date.now() + 864e5 * days);     // 864e5: number of milliseconds in a 24-hour day
     }
 
-    const fetchAccommodations = () => {
-        return fetch("http://localhost:8080/accommodations/all", {
-            mode: 'cors'
-        })
-            .then((response) => response.json())
-            .then(data => {
-                setAccommodations(data);
-            });
-    }
-
     const fetchAccommodationsByDate = () => {
         return fetch("http://localhost:8080/accommodations/byDate?startDate=" + startDate.getTime() + "&endDate=" + endDate.getTime(), {
             mode: 'cors'
@@ -32,20 +24,16 @@ export default function AllAccommodations() {
             .then((response) => response.json())
             .then(data => {
                 setAccommodations(data);
+                globalVars.startDate = startDate;
+                globalVars.endDate = endDate;
             });
     }
 
-    useEffect(() => {
-        fetchAccommodations();
-    }, [])
-
     const incrementCount = () =>{
         setCapacity(capacity + 1);
-        console.log(capacity)
     }
     const decrementCount = () =>{
         setCapacity(capacity - 1);
-        console.log(capacity)
     }
 
     return (
@@ -58,27 +46,27 @@ export default function AllAccommodations() {
                     onChange={(event) => setSearchTerm(event.target.value.toLowerCase())}
                     className="search-input"
                     type="text"
-                    placeholder="Search for country"/>
+                    placeholder="Search for city or country"/>
                 <div className="datepicker">
                     <DatePicker
                         className="start-date"
-                        dateFormat="yyyy-MM-dd"
+                        dateFormat="dd-MM-yyyy"
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}/>
 
                     <DatePicker
                         className="end-date"
-                        dateFormat="yyyy-MM-dd"
+                        dateFormat="dd-MM-yyyy"
                         selected={endDate}
                         onChange={(date) => setEndDate(date)}/>
                 </div>
-                    <input
-                        className="max-price-per-night"
-                        onChange={(e) => setPrice(e.target.value)}
+                <input
+                    className="max-price-per-night"
+                    onChange={(e) => setPrice(e.target.value)}
 
-                        type="text"
-                        placeholder="max. price per night"
-                    />
+                    type="text"
+                    placeholder="max. price per night"
+                />
                 <button
                     className="add-substract-button"
                     onClick={decrementCount}
@@ -86,40 +74,28 @@ export default function AllAccommodations() {
                 <input
                     className="capacity"
                     value={capacity.toString()}
-                onChange={(e) => setCapacity(parseInt(e.target.value))}
+                    onChange={(e) => setCapacity(parseInt(e.target.value))}
                 />
 
                 <button
                     className="add-substract-button"
                     onClick={incrementCount}
                 >+</button>
-
-
                 <button id="date-button" className="see-details" onClick={() => fetchAccommodationsByDate()}>Search for date span</button>
             </div>
-
-
             <div className="all-accommodations">
-                <h1>Accommodations</h1>
+                {accommodations.length > 0 && <h1>Accommodations</h1>}
                 {accommodations.filter((accommodation => {
                     if (searchTerm.toLowerCase() === "") {
-
                         if (capacity === 0) {
                             return accommodation.pricePerNight <= parseInt(price, 10);
                         }
-
                         return accommodation.pricePerNight <= parseInt(price, 10)
                             && accommodation.capacity === capacity;
                     } else {
-
-                        return (
-                            accommodation.address.country.toLowerCase().includes(searchTerm)
-                                || accommodation.address.city.toLowerCase().includes(searchTerm))
-                            && accommodation.pricePerNight <= parseInt(price, 10)
-                            && accommodation.capacity === capacity;
+                        return accommodation.address.country.toLowerCase().includes(searchTerm)
+                            || accommodation.address.city.toLowerCase().includes(searchTerm);
                     }
-
-
                 })).map((accommodation) => {
                     const source = "data:image/jpg;base64," + accommodation.image;
                     return (
@@ -137,11 +113,8 @@ export default function AllAccommodations() {
                                     Price per night: <strong>{accommodation.pricePerNight} €</strong>
                                 </p>
                             </div>
-                            <div className="accommodation-button">
-                                <a href={"http://localhost:3000/accommodations/" + accommodation.id}>
-                                    <button className="see-details">See details</button>
-                                </a>
-                            </div>
+                            <Link className="accommodation-button see-details"
+                                  to={"/accommodations/" + accommodation.id}>See details</Link>
                         </div>
                     );
                 })}

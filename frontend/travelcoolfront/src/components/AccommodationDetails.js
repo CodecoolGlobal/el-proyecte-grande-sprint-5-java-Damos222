@@ -1,26 +1,12 @@
 import '../css/AccommodationDetails.css';
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import DatePicker from "react-datepicker";
+import {globalVars} from "../global/globalVars";
 
-
-export default function AccommodationDetails({setFromDate, setToDate}) {
+export default function AccommodationDetails() {
     const [accommodation, setAccommodation] = useState(null);
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(addDays(5));
     const {id} = useParams();
     const navigate = useNavigate();
-
-    function addDays(days) {
-        return new Date(Date.now() + 864e5 * days);     // 864e5: number of milliseconds in a 24-hour day
-    }
-
-    function navigateToCheckout() {
-        setFromDate(startDate.toLocaleDateString("en-CA"));
-        setToDate(endDate.toLocaleDateString("en-CA"));
-        navigate("/accommodations/checkout");
-    }
-
 
     const fetchData = () => {
         fetch("http://localhost:8080/accommodations/" + id)
@@ -28,6 +14,11 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
             .then(data => {
                 setAccommodation(data);
             });
+    }
+
+    function goToCheckout() {
+        globalVars.accommodation = accommodation;
+        navigate("/bookings/checkout");
     }
 
     useEffect(() => {
@@ -56,19 +47,8 @@ export default function AccommodationDetails({setFromDate, setToDate}) {
                 </div>
                 <div className="reserve">
                     <h2>Book this accommodation</h2>
-                    <div className="datepicker">
-                        <DatePicker
-                            className="start-date"
-                            dateFormat="yyyy-MM-dd"
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date)}/>
-                        <DatePicker
-                            className="end-date"
-                            dateFormat="yyyy-MM-dd"
-                            selected={endDate}
-                            onChange={(date) => setEndDate(date)}/>
-                    </div>
-                    <button id="book-button" className="see-details" onClick={() => navigateToCheckout()}>Reserve</button>
+                    <span>{globalVars.startDate.toLocaleDateString("en-GB")} - {globalVars.endDate.toLocaleDateString("en-GB")}</span>
+                    <button id="book-button" className="see-details" onClick={() => goToCheckout()}>Reserve</button>
                 </div>
             </div>
         </>
