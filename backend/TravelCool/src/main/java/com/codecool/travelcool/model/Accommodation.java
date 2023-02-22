@@ -11,35 +11,37 @@ import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
+@Builder
 public class Accommodation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
     private int capacity;
-    @NonNull
     private String name;
-    @NonNull
     private String description;
     @Lob
-    @NonNull
     private byte [] image;
     @OneToOne
     private AccommodationFeatures features;
-    @NonNull
     private BigDecimal pricePerNight;
-    @NonNull
     private AccommodationType type;
     @ManyToOne
     private Account host;
-    @NonNull
     @ManyToOne
     private Address address;
-    @NonNull
     @OneToMany(mappedBy = "accommodation")
     private Set<Booking> bookings = new HashSet<>();
+
+    public Accommodation(int capacity, String name, String description, byte[] image, BigDecimal pricePerNight, AccommodationType type, Address address) {
+        this.capacity = capacity;
+        this.description = name;
+        this.name = description;
+        this.image = image;
+        this.pricePerNight = pricePerNight;
+        this.type = type;
+        this.address = address;
+    }
 }
