@@ -5,15 +5,61 @@ import AllAccommodations from "./components/AllAccommodations";
 import AccommodationDetails from "./components/AccommodationDetails";
 import CheckoutForm from "./components/CheckoutAccommodationMultiStep/CheckoutForm";
 import AccommodationForm from "./components/AddAccommodationMultiStep/AccommodationForm";
+import LoginForm from "./components/LoginForm";
+import Modal from "./components/Modal";
+import RegistrationForm from "./components/RegistrationForm";
 import BookingSuccess from "./components/BookingSuccess";
 
 function App() {
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+
+    useEffect(() => {
+        console.log(localStorage.getItem("token"))
+        setLoggedIn(checkIfTokenValid())
+        console.log(loggedIn)
+        return () => {
+            setLoggedIn(false)
+        }
+    }, [])
+
+    async function checkIfTokenValid() {
+        const token = localStorage.getItem("token");
+        console.log(token)
+        if (token === null) {
+            return false;
+        } else {
+            let res = await fetch("http://localhost:8080/auth/tokenValid?token=" + token)
+            let valid = await res.text()
+            console.log(valid)
+            if (valid === 'true') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
     return (
         <Router>
             <div className="App">
                 <div className="content">
-                    <Header />
+                    <Header setShowLoginModal={setShowLoginModal}
+                        setShowRegistrationModal={setShowRegistrationModal} />
+                    <Modal open={showLoginModal} onClose={() => setShowLoginModal(false)}>
+                        <LoginForm
+                            setLoggedIn={setLoggedIn}
+                            setShowLoginModal={setShowLoginModal}
+                            loggedIn={loggedIn}
+                        />
+                    </Modal>
+                    <Modal open={showRegistrationModal} onClose={() => setShowRegistrationModal(false)}>
+                        <RegistrationForm
+                            setShowRegistrationModal={setShowRegistrationModal}
+                            setShowLoginModal={setShowLoginModal}
+                        />
+                    </Modal>
                     <Routes>
                         <Route path="/" exact element={<Home/>}/>
                         <Route path="/accommodations/all" exact element={<AllAccommodations/>}/>

@@ -5,18 +5,20 @@ import com.codecool.travelcool.dto.BookingDto;
 import com.codecool.travelcool.model.*;
 import com.codecool.travelcool.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
 @RestController
-@CrossOrigin // TODO: remove this in all Controllers when security is added
 @RequestMapping("/accommodations")
 public class AccommodationsController {
     private final AccommodationService accommodationService;
@@ -96,7 +98,7 @@ public class AccommodationsController {
         accommodation.setFeatures(features);
         accommodation.setAddress(address);
 
-        //todo: find better solution
+        //todo: find better solution to save all images
         accommodation.setImage(images.get(0));
 
         images.clear();
@@ -109,5 +111,10 @@ public class AccommodationsController {
         accommodation.setHost(account);
 
         accommodationService.save(accommodation);
+    }
+
+    @GetMapping("/byAccount")
+    public List<Accommodation> getAccommodationsByAccount(Authentication auth) {
+        return accommodationService.getByHost((Account) auth.getPrincipal());
     }
 }

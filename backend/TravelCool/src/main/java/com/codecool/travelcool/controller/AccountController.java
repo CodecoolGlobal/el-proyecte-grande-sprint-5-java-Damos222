@@ -5,11 +5,11 @@ import com.codecool.travelcool.model.Account;
 import com.codecool.travelcool.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.core.Authentication;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
-@CrossOrigin    // TODO: remove this in all Controllers when security is added
 @RequestMapping("/accounts")
 public class AccountController {
     private final AccountService accountService;
