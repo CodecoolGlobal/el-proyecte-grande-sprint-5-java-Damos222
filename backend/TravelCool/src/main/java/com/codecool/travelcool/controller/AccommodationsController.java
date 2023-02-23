@@ -85,7 +85,6 @@ public class AccommodationsController {
 
     @PostMapping("/add")
     public void add(@RequestBody AccommodationDto formData) {
-        System.out.println("accommodations/add: " + formData);
         Accommodation accommodation = formData.getAccommodation();
         Address address = formData.getAddress();
         AccommodationFeatures features = formData.getFeatures();

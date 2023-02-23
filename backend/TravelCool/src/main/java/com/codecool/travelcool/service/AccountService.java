@@ -31,7 +31,6 @@ public class AccountService {
         account.setEmail(email);
         account.setPassword(password);
         save(account);
-        System.out.println("account with email " + email + "password " + password + "registered");
     }
 
     public Optional<Account> findById(long id) {

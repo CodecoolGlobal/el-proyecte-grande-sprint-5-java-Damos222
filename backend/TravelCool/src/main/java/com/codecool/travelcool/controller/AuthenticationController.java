@@ -52,7 +52,6 @@ public class AuthenticationController {
         accountService.save(account);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.email(), request.password()));
-        System.out.println(authentication.getName());
         return tokenService.generateToken(authentication);
     }
 
@@ -60,7 +59,6 @@ public class AuthenticationController {
     public String authenticate(@RequestBody LoginRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.email(), request.password()));
-        System.out.println(authentication.getName());
         return tokenService.generateToken(authentication);
     }
 
