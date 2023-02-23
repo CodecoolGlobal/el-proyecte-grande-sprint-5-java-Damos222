@@ -18,3 +18,8 @@ nav {
     align-items: center;
     justify-content: right;
 }
+
+.loggedInUser {
+    margin: auto;
+    width: 100%;
+}
