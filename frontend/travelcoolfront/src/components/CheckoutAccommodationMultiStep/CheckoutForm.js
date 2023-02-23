@@ -26,12 +26,11 @@ export default function CheckoutForm() {
     async function onSubmit() {
         updateData();
         await uploadRest();
-        navigate("/bookings/success");
+        
     }
 
     async function uploadRest() {
         console.log(data);
-
         try {
             let res = await fetch("http://localhost:8080/bookings/checkout", {
                 method: 'POST',
@@ -44,8 +43,9 @@ export default function CheckoutForm() {
             if (res.status === 200) {
                 alert("You have successfully booked this accommodation!");
                 globalVars.booking = await res.json();
+                navigate("/bookings/success");
             } else {
-                alert(`Error (${res.status})`);
+                alert(`You have to log in or register`);
             }
         } catch (err) {
             console.log(err);

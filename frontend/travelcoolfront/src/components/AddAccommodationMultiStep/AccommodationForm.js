@@ -79,27 +79,26 @@ const AccommodationForm = () => {
     async function onSubmit(e) {
         e.preventDefault()
         if (!isLastStep) return next()
-        uploadFiles()
-        uploadRest()
+        await uploadFiles()
+        await uploadRest()
         navigate("/")
     }
 
     async function uploadRest() {
         console.log(data)
-
         try {
-            let res = await fetch("http://localhost:8080/accommodations/add", {
+            let res = await fetch("http://localhost:8080/accommodations/secured/add", {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
-                    'Content-Type': 'application/json',  
-                },
-                mode: 'cors'
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
             if (res.status === 200) {
                 alert("You successfully published your accommodation!")
             } else {
-                alert(`Error (${res.status})`)
+                alert(`Error uploading form data(${res.status})`)
             }
         } catch (err) {
             console.log(err)
@@ -107,18 +106,21 @@ const AccommodationForm = () => {
     }
 
     async function uploadFiles() {
+        console.log(files)
         const formData = new FormData()
         for (let i = 0; i < files.length; i++) {
-            formData.append(`image-${i}`, files[i], files[i].name)   
+            formData.append(`image-${i}`, files[i], files[i].name)
         }
 
         console.log(formData.get('image-0'))
 
         try {
-            let res = await fetch("http://localhost:8080/accommodations/addImages", {
+            let res = await fetch("http://localhost:8080/accommodations/secured/addImages", {
                 method: 'POST',
                 body: formData,
-                mode: 'cors'
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
             console.log(res.status)
             if (res.status !== 200) {

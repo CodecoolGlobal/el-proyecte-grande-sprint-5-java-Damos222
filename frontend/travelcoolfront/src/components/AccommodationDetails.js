@@ -9,7 +9,7 @@ export default function AccommodationDetails() {
     const navigate = useNavigate();
 
     const fetchData = () => {
-        fetch("http://localhost:8080/accommodations/" + id)
+        fetch("http://localhost:8080/accommodations/public/" + id)
             .then((response) => response.json())
             .then(data => {
                 setAccommodation(data);

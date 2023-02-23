@@ -20,7 +20,7 @@ export default function AllAccommodations() {
     const fetchAccommodationsByDate = () => {
         console.log("hello from fetchAccommodationsByDate")
         console.log(globalVars)
-        return fetch("http://localhost:8080/accommodations/byDate?startDate=" + startDate.getTime() + "&endDate=" + endDate.getTime(), {
+        return fetch("http://localhost:8080/accommodations/public/byDate?startDate=" + startDate.getTime() + "&endDate=" + endDate.getTime(), {
         })
             .then((response) => response.json())
             .then(data => {
@@ -38,7 +38,7 @@ export default function AllAccommodations() {
     }, [])
 
     function fetchAllAccommodations() {
-        return fetch("http://localhost:8080/accommodations/all")
+        return fetch("http://localhost:8080/accommodations/public/all")
             .then(res => res.json())
             .then(data => setAccommodations(data))
     }
