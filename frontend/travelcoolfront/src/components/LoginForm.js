@@ -12,12 +12,13 @@ const LoginForm = (props) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data),
             mode: 'cors'
-        }) 
+        })
         if (response.ok) {
             const token = await response.text()
             console.log(token)
             localStorage.setItem('token', token)
             props.setShowLoginModal(false)
+            localStorage.setItem('loggedInUserEmail', JSON.stringify(data.email));
         } else {
             alert("Wrong username or password")
         }

@@ -3,8 +3,18 @@ import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import AccountMenu from './AccountMenu.js';
 import Button from './Button';
+import {useEffect, useState} from "react";
 
 const Header = (props) => {
+    const [loggedInUserEmail, setLoggedInUserEmail] = useState("");
+
+    useEffect(() => {
+        const email = JSON.parse(localStorage.getItem('loggedInUserEmail'));
+        if (email) {
+            setLoggedInUserEmail(email);
+        }
+    },[]);
+
     if (localStorage.getItem("token") === null) {
         return (
             <nav>
@@ -22,6 +32,9 @@ const Header = (props) => {
                 <Link to="/" className='logo'>
                     <img src={logo} alt="logo" width="300" />
                 </Link>
+                <div className="loggedInUser">
+                    <p>Welcome <strong>{loggedInUserEmail}</strong></p>
+                </div>
                 <div className='link-container'>
                     <AccountMenu></AccountMenu>
                 </div>

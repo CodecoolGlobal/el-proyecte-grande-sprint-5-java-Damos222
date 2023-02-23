@@ -347,8 +347,8 @@ public class TravelCoolRunner implements CommandLineRunner {
         accounts = List.of(Account.builder()
                 .email("hello@there.com")
                 .password(passwordEncoder.encode("helloThere1"))
-                .firstName("hello")
-                .lastName("there")
+                .firstName("Anna")
+                .lastName("Miller")
                 .address(addresses.get(0))
                 .role(Role.USER)
                 .build());
