@@ -79,7 +79,7 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults()) //should search for the bean named corsConfigurationSource
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers( "/auth/**", "/accommodations/**").permitAll()
+                        .requestMatchers( "/auth/**", "/accommodations/public/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
