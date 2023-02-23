@@ -16,6 +16,4 @@ public class BookingDto {
 
     private LocalDate startDate;
     private LocalDate endDate;
-
-    private AccountDto booker;
 }
