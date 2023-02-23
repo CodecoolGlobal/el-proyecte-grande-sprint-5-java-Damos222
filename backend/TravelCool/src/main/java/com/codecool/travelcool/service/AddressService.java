@@ -23,4 +23,13 @@ public class AddressService {
     public Optional<Address> findById(long id) {
         return addressRepository.findById(id);
     }
+
+    public Optional<Address> findAddress(Address address) {
+        return addressRepository.findByCountryAndCityAndZipCodeAndStreetAndHouseNumber(
+                address.getCountry(),
+                address.getCity(),
+                address.getZipCode(),
+                address.getStreet(),
+                address.getHouseNumber());
+    }
 }

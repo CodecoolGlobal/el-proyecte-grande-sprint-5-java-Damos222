@@ -39,82 +39,75 @@ public class AccommodationsController {
         this.bookingService = bookingService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/public/all")
     public List<Accommodation> findAll() {
         return accommodationService.findAll();
     }
 
-    @GetMapping("/byDate")
+    @GetMapping("/public/byDate")
     public List<Accommodation> findByDate(@RequestParam Long startDate, @RequestParam Long endDate) {
         LocalDate fromDate = Instant.ofEpochMilli(startDate).atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate toDate = Instant.ofEpochMilli(endDate).atZone(ZoneId.systemDefault()).toLocalDate();
         return accommodationService.findByBookingsStartDateAfterAndEndDateBefore(fromDate, toDate);
     }
 
-    @GetMapping("/priceBetween")
+    @GetMapping("/public/priceBetween")
     public List<Accommodation> findBetweenPrices(@RequestParam double min, @RequestParam double max) {
         return accommodationService.findByPriceBetween(BigDecimal.valueOf(min), BigDecimal.valueOf(max));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/{id}")
     public Accommodation findById(@PathVariable Long id) {
         return accommodationService.findById(id).orElse(null);
     }
 
-    @GetMapping("/host/{hostId}")
+    @GetMapping("/public/host/{hostId}")
     public List<Accommodation> findByHost(@PathVariable Long hostId) {
         return accommodationService.findByHost(hostId);
     }
 
-    @GetMapping("/filterByCountry/{country}")
+    @GetMapping("/public/filterByCountry/{country}")
     public List<Accommodation> findByCountry(@PathVariable String country) {
         return accommodationService.findByCountry(country);
     }
 
-    @GetMapping("/capacity/{min}")
+    @GetMapping("/public/capacity/{min}")
     public List<Accommodation> findByMinCapacity(@PathVariable int min) {
         return accommodationService.findByMinimumCapacity(min);
     }
 
-    @PostMapping("/addImages")
+    @PostMapping("/secured/addImages")
     public void getImages(@RequestParam Map<String, MultipartFile> formData) throws IOException {
-        System.out.println("hi from addImages");
         for (Map.Entry<String, MultipartFile> entry : formData.entrySet()) {
             images.add(entry.getValue().getBytes());
         }
     }
 
-    @PostMapping("/add")
-    public void add(@RequestBody AccommodationDto formData) {
-        System.out.println("accommodations/add: " + formData);
+    @PostMapping("/secured/add")
+    public void add(Authentication authentication, @RequestBody AccommodationDto formData) {
         Accommodation accommodation = formData.getAccommodation();
         Address address = formData.getAddress();
         AccommodationFeatures features = formData.getFeatures();
-
         featuresService.save(features);
-
-        //todo: check if address already in db
-        addressService.save(address);
-
+        //check if address already in db
+        Optional<Address> optionalAddress = addressService.findAddress(address);
+        if (optionalAddress.isEmpty()) {
+            addressService.save(address);
+        } else {
+            address = optionalAddress.get();
+        }
         accommodation.setFeatures(features);
         accommodation.setAddress(address);
-
-        //todo: find better solution to save all images
         accommodation.setImage(images.get(0));
-
         images.clear();
-
-        //todo: get account id from request and account from db
-        Account account = new Account();
-        account.setEmail("mail@emample.com");
-        account.setPassword("password");
-        accountService.save(account);
-        accommodation.setHost(account);
+        String accountEmail = authentication.getName();
+        Optional<Account> optionalAccount = accountService.findByEmail(accountEmail);
+        accommodation.setHost(optionalAccount.orElseThrow());
 
         accommodationService.save(accommodation);
     }
 
-    @GetMapping("/byAccount")
+    @GetMapping("/secured/byAccount")
     public List<Accommodation> getAccommodationsByAccount(Authentication auth) {
         return accommodationService.getByHost((Account) auth.getPrincipal());
     }

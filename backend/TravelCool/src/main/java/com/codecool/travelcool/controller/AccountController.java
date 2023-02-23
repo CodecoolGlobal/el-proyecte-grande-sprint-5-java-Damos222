@@ -1,22 +1,20 @@
 package com.codecool.travelcool.controller;
 
+import com.codecool.travelcool.dto.AccountDto;
 import com.codecool.travelcool.model.Accommodation;
 import com.codecool.travelcool.model.Account;
 import com.codecool.travelcool.model.Booking;
 import com.codecool.travelcool.service.AccommodationService;
 import com.codecool.travelcool.service.AccountService;
 import com.codecool.travelcool.service.BookingService;
-import com.codecool.travelcool.dto.AccountDto;
-import com.codecool.travelcool.model.Account;
-import com.codecool.travelcool.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.List;
 
 @RestController
 @RequestMapping("/account")
