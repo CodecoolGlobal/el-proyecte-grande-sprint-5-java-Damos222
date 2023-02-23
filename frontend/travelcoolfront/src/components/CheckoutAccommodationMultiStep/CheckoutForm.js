@@ -8,16 +8,12 @@ const INITIAL_DATA = {
         id: ""
     },
     startDate: "",
-    endDate: "",
-    booker: {
-        id: ""
-    }
+    endDate: ""
 }
 
 export default function CheckoutForm() {
     const navigate = useNavigate();
     const [data] = useState(INITIAL_DATA);
-    const BOOKER_ID = 1;
     const globalAccommodation = globalVars.accommodation;
     const source = "data:image/jpg;base64," + globalAccommodation.image;
 
@@ -25,7 +21,6 @@ export default function CheckoutForm() {
         data.startDate = globalVars.startDate;
         data.endDate = globalVars.endDate;
         data.accommodationDto.id = globalVars.accommodation.id;
-        data.booker.id = BOOKER_ID;
     }
 
     async function onSubmit() {
@@ -42,6 +37,7 @@ export default function CheckoutForm() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: "Bearer " + localStorage.getItem("token")
                 },
                 body: JSON.stringify(data)
             })

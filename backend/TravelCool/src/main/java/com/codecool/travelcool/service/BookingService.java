@@ -27,9 +27,9 @@ public class BookingService {
         return bookingRepository.findAllByBooker(account);
     }
 
-    public BookingDto book(BookingDto bookingDto) {
-        Accommodation accommodation = accommodationRepository.findById(bookingDto.getAccommodationDto().getId()).get();
-        Account account = accountRepository.findById(bookingDto.getBooker().getId()).get();
+    public BookingDto book(BookingDto bookingDto, String bookerEmail) {
+        Accommodation accommodation = accommodationRepository.findById(bookingDto.getAccommodationDto().getId()).orElseThrow();
+        Account account = accountRepository.findByEmail(bookerEmail).orElseThrow();
         Booking booking = Booking.builder()
                 .accommodation(accommodation)
                 .booker(account)

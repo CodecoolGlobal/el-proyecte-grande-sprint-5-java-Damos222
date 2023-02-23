@@ -30,7 +30,7 @@ public class TokenService {
                 .issuer("self")
                 .issuedAt(now)
                 .subject(authentication.getName())
-                .expiresAt(now.plus(1, ChronoUnit.HOURS))
+                .expiresAt(now.plus(365, ChronoUnit.DAYS))
                 .claim("scope", scope)
                 .build();
         return this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();

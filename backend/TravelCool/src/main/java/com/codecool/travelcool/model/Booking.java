@@ -40,7 +40,6 @@ public class Booking {
         BookingDto bookingDto = new BookingDto();
         bookingDto.setStartDate(startDate);
         bookingDto.setEndDate(endDate);
-        bookingDto.setBooker(booker.toAccountDto());
         AccommodationDto accommodationDto = accommodation.toAccommodationDto();
         bookingDto.setAccommodationDto(accommodationDto);
         return bookingDto;
