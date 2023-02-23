@@ -6,6 +6,7 @@ import com.codecool.travelcool.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,7 +22,8 @@ public class BookingController {
     }
 
     @PostMapping("/checkout")
-    public BookingDto checkout(@RequestBody BookingDto bookingDto) {
-        return bookingService.book(bookingDto);
+    public BookingDto checkout(Principal principal, @RequestBody BookingDto bookingDto) {
+        String bookerEmail = principal.getName();
+        return bookingService.book(bookingDto, bookerEmail);
     }
 }
