@@ -78,6 +78,7 @@ public class AccommodationsController {
 
     @PostMapping("/addImages")
     public void getImages(@RequestParam Map<String, MultipartFile> formData) throws IOException {
+        System.out.println("hi from addImages");
         for (Map.Entry<String, MultipartFile> entry : formData.entrySet()) {
             images.add(entry.getValue().getBytes());
         }
