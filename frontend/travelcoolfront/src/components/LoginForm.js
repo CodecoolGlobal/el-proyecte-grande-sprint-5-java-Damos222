@@ -19,6 +19,7 @@ const LoginForm = (props) => {
             localStorage.setItem('token', token)
             props.setShowLoginModal(false)
             localStorage.setItem('loggedInUserEmail', JSON.stringify(data.email));
+            window.location.reload()
         } else {
             alert("Wrong username or password")
         }
