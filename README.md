@@ -23,7 +23,10 @@ accommodations. You can sign-up and log-in to your account where you can see det
   npm install
   npm start
 ```
-* In backend run TravelCoolApplication.java
+* In backend run:
+```
+mvn spring-boot:run
+```
 * The application should run on localhost:3000
 ## Screenshots
 ### Homepage with List of all Accommodations
